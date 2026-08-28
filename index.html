@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT Matcher - Corporate Enterprise Platform</title>
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+  <div class="container">
+ 
+    <header>
+      <div>
+        <div class="brand-title">
+          <span>IT Matcher</span> Enterprise
+        </div>
+        <div class="brand-subtitle">Plataforma Automática de Triagem e Compatibilidade T.I</div>
+      </div>
+      <div class="team-tag">Equipe 1</div>
+    </header>
+
+    <div class="main-grid">
+   
+      <div>
+       
+        <section class="card">
+          <div class="card-header">
+            <div class="card-title">1. Parâmetros da Vaga</div>
+          </div>
+
+          <div class="form-group">
+            <label for="jobTitle">Título da Vaga / Requisitante</label>
+            <input type="text" id="jobTitle" placeholder="Ex: Senior Full Stack Engineer (Node/React)">
+          </div>
+
+          <div class="form-group">
+            <label>Tech Skills & Pesos Críticos</label>
+            <div class="inline-group">
+              <input type="text" id="skillName" placeholder="Ex: Docker, TypeScript">
+              <select id="skillWeight" style="width: 150px;">
+                <option value="1">Peso 1 (Desejável)</option>
+                <option value="3" selected>Peso 3 (Importante)</option>
+                <option value="5">Peso 5 (Mandatório)</option>
+              </select>
+              <button type="button" class="btn btn-icon" onclick="addSkillToJob()">+</button>
+            </div>
+            <div id="jobSkillsList" class="tag-cloud"></div>
+          </div>
+
+          <button class="btn btn-primary" onclick="saveJob()">
+            Salvar Especificação da Vaga
+          </button>
+        </section>
+
+   
+        <section class="card">
+          <div class="card-header">
+            <div class="card-title">2. Ingestão de Currículo</div>
+          </div>
+
+          <div class="form-group">
+            <label for="candidateName">Nome do Candidato</label>
+            <input type="text" id="candidateName" placeholder="Ex: Roberto Almeida">
+          </div>
+
+          <div class="form-group">
+            <label for="candidateSkills">Habilidades Extraídas (separadas por vírgula)</label>
+            <textarea id="candidateSkills" rows="3" placeholder="Ex: React, TypeScript, Node.js, Git, Docker"></textarea>
+          </div>
+
+          <button class="btn btn-success" onclick="processMatch()">
+            Executar Smart Match Engine
+          </button>
+        </section>
+      </div>
+
+    
+      <div>
+        <section class="card" style="min-height: 520px;">
+          <div class="card-header">
+            <div class="card-title">Relatório de Match em Tempo Real</div>
+          </div>
+          <div id="resultsContainer">
+            <div class="empty-state">
+              Aguardando configuração de vaga e ingestão de candidatos para gerar telemetria de compatibilidade.
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+  <script src="script.js"></script>
+    
+</body>
+</html>
