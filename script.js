@@ -1,0 +1,304 @@
+const JOBS_DATA = [
+  {
+    id: 'job-1',
+    title: 'Desenvolvedor Frontend Next.js & React',
+    company: 'TechFlow Solutions',
+    location: 'São Paulo, SP',
+    workModel: 'Remoto',
+    level: 'Pleno',
+    salary: 'R$ 7.500 - R$ 9.500',
+    description: 'Buscamos desenvolvedor(a) frontend com sólida experiência em React, Next.js e TypeScript para atuar na criação de aplicações web de alto desempenho e interfaces modernas.',
+    skills: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Git'],
+    postedAt: 'Há 1 dia'
+  },
+  {
+    id: 'job-2',
+    title: 'Desenvolvedor Full Stack Node & TypeScript',
+    company: 'Nexus Digital',
+    location: 'Belo Horizonte, MG',
+    workModel: 'Remoto',
+    level: 'Sênior',
+    salary: 'R$ 11.000 - R$ 14.000',
+    description: 'Oportunidade para atuar em arquitetura de microserviços escaláveis, APIs REST/GraphQL em Node.js e interfaces integradas em React.',
+    skills: ['Node.js', 'TypeScript', 'React', 'PostgreSQL', 'Docker', 'AWS'],
+    postedAt: 'Há 2 dias'
+  },
+  {
+    id: 'job-3',
+    title: 'Engenheiro de Software Backend (Python / Django)',
+    company: 'CloudScale Data',
+    location: 'Curitiba, PR',
+    workModel: 'Híbrido',
+    level: 'Pleno',
+    salary: 'R$ 8.000 - R$ 10.500',
+    description: 'Venha desenvolver pipelines de dados e APIs robustas utilizando Python, FastAPI/Django e bancos relacionais em infraestrutura de nuvem.',
+    skills: ['Python', 'SQL', 'Django', 'Docker', 'Git'],
+    postedAt: 'Há 3 dias'
+  },
+  {
+    id: 'job-4',
+    title: 'Desenvolvedor Mobile (Flutter / React Native)',
+    company: 'Appfy Mobile',
+    location: 'Florianópolis, SC',
+    workModel: 'Remoto',
+    level: 'Júnior / Pleno',
+    salary: 'R$ 5.500 - R$ 7.500',
+    description: 'Desenvolvimento e publicação de aplicativos móveis iOS e Android com foco em excelente experiência de usuário e consumo de APIs REST.',
+    skills: ['Flutter', 'Dart', 'Git', 'Firebase', 'REST APIs'],
+    postedAt: 'Há 4 dias'
+  }
+];
+
+let candidateProfile = {
+  name: 'Carlos Eduardo Silva',
+  email: 'carlos.silva@email.com',
+  skills: 'React, TypeScript, Node.js, Next.js, Git, SQL, Tailwind CSS'
+};
+
+let myApplications = [];
+let currentFilterModel = 'Todos';
+let activeApplyingJob = null;
+
+function toggleTheme() {
+  const isDark = document.body.classList.toggle('dark');
+  const icon = document.getElementById('themeIcon');
+  const text = document.getElementById('themeText');
+  if (isDark) {
+    icon.className = 'fa-solid fa-sun';
+    text.textContent = 'Modo Claro';
+  } else {
+    icon.className = 'fa-solid fa-moon';
+    text.textContent = 'Modo Escuro';
+  }
+}
+
+function switchTab(tabId, el) {
+  document.querySelectorAll('.tab-btn').forEach((btn) => btn.classList.remove('active'));
+  if (el) el.classList.add('active');
+
+  document.querySelectorAll('.tab-content').forEach((tab) => (tab.style.display = 'none'));
+  const target = document.getElementById(`tab-${tabId}`);
+  if (target) target.style.display = 'block';
+
+  if (tabId === 'applications') {
+    renderApplications();
+  }
+}
+
+function calculateScore(candidateSkillsStr, jobSkillsArr) {
+  if (!candidateSkillsStr.trim()) return 0;
+  const cSkills = candidateSkillsStr.split(',').map((s) => s.trim().toLowerCase()).filter(Boolean);
+  let matched = 0;
+  jobSkillsArr.forEach((s) => {
+    const sLower = s.toLowerCase();
+    if (cSkills.some((cs) => cs === sLower || cs.includes(sLower) || sLower.includes(cs))) {
+      matched++;
+    }
+  });
+  return Math.round((matched / jobSkillsArr.length) * 100);
+}
+
+function renderJobs() {
+  const container = document.getElementById('jobsListContainer');
+  const search = (document.getElementById('jobSearchInput')?.value || '').toLowerCase();
+
+  const filtered = JOBS_DATA.filter((job) => {
+    const matchesSearch =
+      job.title.toLowerCase().includes(search) ||
+      job.company.toLowerCase().includes(search) ||
+      job.skills.some((s) => s.toLowerCase().includes(search));
+
+    const matchesModel = currentFilterModel === 'Todos' || job.workModel === currentFilterModel;
+    return matchesSearch && matchesModel;
+  });
+
+  if (filtered.length === 0) {
+    container.innerHTML = '<div style="text-align:center; padding:3rem; color:var(--text-muted); font-size:0.85rem;">Nenhuma vaga encontrada com os filtros selecionados.</div>';
+    return;
+  }
+
+  container.innerHTML = filtered
+    .map((job) => {
+      const score = calculateScore(candidateProfile.skills, job.skills);
+      const isApplied = myApplications.some((a) => a.jobId === job.id);
+
+      return `
+        <div class="job-card">
+          <div class="job-header">
+            <div>
+              <span class="job-company">${job.company}</span>
+              <h3 class="job-title">${job.title}</h3>
+              <div class="job-meta">📍 ${job.location} • <strong>${job.workModel}</strong> • ${job.level}</div>
+            </div>
+            <div class="job-salary-badge">${job.salary}</div>
+          </div>
+
+          <p class="job-desc">${job.description}</p>
+
+          <div class="job-skills">
+            ${job.skills.map((s) => `<span class="skill-tag">${s}</span>`).join('')}
+          </div>
+
+          <div class="job-footer">
+            <span class="match-pill">${score}% de Match com seu perfil</span>
+            ${
+              isApplied
+                ? '<span style="font-size:0.75rem; font-weight:bold; color:var(--primary);">✓ Já Candidatado</span>'
+                : `<button class="btn-apply" onclick="openApplyModal('${job.id}')">Ver Detalhes & Candidatar-se &rarr;</button>`
+            }
+          </div>
+        </div>
+      `;
+    })
+    .join('');
+}
+
+function filterJobs() {
+  renderJobs();
+}
+
+function filterByModel(model, el) {
+  currentFilterModel = model;
+  document.querySelectorAll('.filter-btn').forEach((b) => b.classList.remove('active'));
+  if (el) el.classList.add('active');
+  renderJobs();
+}
+
+function openApplyModal(jobId) {
+  const job = JOBS_DATA.find((j) => j.id === jobId);
+  if (!job) return;
+
+  activeApplyingJob = job;
+  const score = calculateScore(candidateProfile.skills, job.skills);
+
+  const modal = document.getElementById('applyModal');
+  const content = document.getElementById('modalContent');
+
+  content.innerHTML = `
+    <div style="margin-bottom:1rem;">
+      <span style="font-size:0.75rem; font-weight:800; color:var(--primary); text-transform:uppercase;">${job.company}</span>
+      <h2 style="font-size:1.25rem; font-weight:900; margin-top:2px;">${job.title}</h2>
+      <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">📍 ${job.location} • ${job.workModel} • ${job.salary}</p>
+    </div>
+
+    <div style="padding:0.75rem; background:var(--input-bg); border-radius:10px; font-size:0.8rem; color:var(--text-muted); margin-bottom:1rem;">
+      ${job.description}
+    </div>
+
+    <form onsubmit="submitApplication(event)">
+      <div class="form-group">
+        <label>Seu Nome Completo</label>
+        <input type="text" id="applyName" value="${candidateProfile.name}" required />
+      </div>
+
+      <div class="form-group">
+        <label>Seu E-mail</label>
+        <input type="email" id="applyEmail" value="${candidateProfile.email}" required />
+      </div>
+
+      <div class="form-group">
+        <label>Suas Habilidades (separadas por vírgula)</label>
+        <textarea id="applySkills" rows="3" required oninput="updateModalScore()">${candidateProfile.skills}</textarea>
+      </div>
+
+      <div id="modalScoreBox" style="padding:0.75rem; background:var(--primary-light); border:1px solid var(--primary-border); border-radius:10px; margin-bottom:1rem; display:flex; justify-content:space-between; align-items:center; font-size:0.8rem; font-weight:bold;">
+        <span>Seu Match com a vaga:</span>
+        <span style="color:var(--primary);">${score}% Compatível</span>
+      </div>
+
+      <button type="submit" class="btn-block">Enviar Minha Candidatura &rarr;</button>
+    </form>
+  `;
+
+  modal.style.display = 'flex';
+}
+
+function updateModalScore() {
+  if (!activeApplyingJob) return;
+  const skills = document.getElementById('applySkills').value;
+  const score = calculateScore(skills, activeApplyingJob.skills);
+  const box = document.getElementById('modalScoreBox');
+  if (box) {
+    box.innerHTML = `
+      <span>Seu Match com a vaga:</span>
+      <span style="color:var(--primary);">${score}% Compatível</span>
+    `;
+  }
+}
+
+function closeApplyModal() {
+  document.getElementById('applyModal').style.display = 'none';
+  activeApplyingJob = null;
+}
+
+function submitApplication(e) {
+  e.preventDefault();
+  if (!activeApplyingJob) return;
+
+  const name = document.getElementById('applyName').value;
+  const email = document.getElementById('applyEmail').value;
+  const skills = document.getElementById('applySkills').value;
+  const score = calculateScore(skills, activeApplyingJob.skills);
+
+  myApplications.unshift({
+    id: `app-${Date.now()}`,
+    jobId: activeApplyingJob.id,
+    jobTitle: activeApplyingJob.title,
+    company: activeApplyingJob.company,
+    score,
+    appliedAt: new Date().toLocaleDateString('pt-BR')
+  });
+
+  const countBadge = document.getElementById('appCountBadge');
+  if (countBadge) countBadge.textContent = myApplications.length;
+
+  alert(`🎉 Candidatura enviada com sucesso para a vaga de "${activeApplyingJob.title}" na empresa ${activeApplyingJob.company}!`);
+  closeApplyModal();
+  renderJobs();
+}
+
+function renderApplications() {
+  const container = document.getElementById('applicationsContainer');
+  if (myApplications.length === 0) {
+    container.innerHTML = `
+      <div class="card" style="text-align:center; padding:3rem;">
+        <p style="font-size:1.1rem; font-weight:800; margin-bottom:0.5rem;">Você ainda não se candidatou a nenhuma vaga</p>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:1rem;">Navegue pelas vagas abertas e envie seu perfil em 1 clique!</p>
+        <button class="btn btn-primary" onclick="switchTab('jobs')">Ver Vagas Abertas</button>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = myApplications
+    .map(
+      (app) => `
+      <div class="card" style="margin-bottom:0.75rem; display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <span style="font-size:0.75rem; font-weight:bold; color:var(--primary);">${app.company}</span>
+          <h4 style="font-size:1rem; font-weight:800; margin-top:2px;">${app.jobTitle}</h4>
+          <p style="font-size:0.75rem; color:var(--text-muted);">Enviada em ${app.appliedAt}</p>
+        </div>
+        <span class="match-pill">${app.score}% Match</span>
+      </div>
+    `
+    )
+    .join('');
+}
+
+function saveProfile(e) {
+  e.preventDefault();
+  candidateProfile.name = document.getElementById('profileName').value;
+  candidateProfile.email = document.getElementById('profileEmail').value;
+  candidateProfile.skills = document.getElementById('profileSkills').value;
+
+  const preview = document.getElementById('currentSkillsPreview');
+  if (preview) preview.textContent = candidateProfile.skills;
+
+  alert('Perfil atualizado com sucesso! Todas as vagas foram recalculadas.');
+  switchTab('jobs');
+  renderJobs();
+}
+
+// Inicialização
+renderJobs();
