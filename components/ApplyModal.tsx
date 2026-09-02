@@ -75,7 +75,7 @@ export const ApplyModal: React.FC<ApplyModalProps> = ({
 
         {isSuccess ? (
           <div className="text-center py-10">
-            <div className="w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center text-2xl mx-auto mb-4 shadow-lg shadow-blue-500/30">
+            <div className="w-14 h-14 rounded-full bg-blue-700 text-white flex items-center justify-center text-2xl mx-auto mb-4 shadow-lg shadow-blue-600/30">
               ✓
             </div>
             <h3 className="text-xl font-black text-slate-900 dark:text-white mb-2">
@@ -89,7 +89,7 @@ export const ApplyModal: React.FC<ApplyModalProps> = ({
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Header da vaga */}
             <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-              <span className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
+              <span className="text-xs font-bold text-blue-700 dark:text-blue-400 uppercase tracking-wider">
                 {job.company}
               </span>
               <h2 className="text-xl font-black text-slate-900 dark:text-white mt-0.5">
@@ -126,7 +126,7 @@ export const ApplyModal: React.FC<ApplyModalProps> = ({
                     value={candidateName}
                     onChange={(e) => setCandidateName(e.target.value)}
                     placeholder="Ex: Carlos Eduardo Silva"
-                    className="w-full px-3.5 py-2.5 text-xs bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3.5 py-2.5 text-xs bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600"
                   />
                 </div>
 
@@ -139,7 +139,7 @@ export const ApplyModal: React.FC<ApplyModalProps> = ({
                     value={candidateEmail}
                     onChange={(e) => setCandidateEmail(e.target.value)}
                     placeholder="Ex: carlos.silva@email.com"
-                    className="w-full px-3.5 py-2.5 text-xs bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3.5 py-2.5 text-xs bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600"
                   />
                 </div>
               </div>
@@ -153,39 +153,39 @@ export const ApplyModal: React.FC<ApplyModalProps> = ({
                   value={candidateSkills}
                   onChange={(e) => setCandidateSkills(e.target.value)}
                   placeholder="Ex: React, TypeScript, Node.js, Next.js, Git, Tailwind CSS"
-                  className="w-full px-3.5 py-2.5 text-xs bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                  className="w-full px-3.5 py-2.5 text-xs bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 resize-none"
                 />
               </div>
             </div>
 
             {/* Prévia do Match em tempo real */}
             {previewApp && (
-              <div className="p-4 bg-blue-50/50 dark:bg-blue-950/20 rounded-2xl border border-blue-200 dark:border-blue-900/60 space-y-3">
+              <div className="p-4 bg-blue-50/50 dark:bg-blue-950/20 rounded-2xl border border-blue-200 dark:border-blue-950/60 space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-blue-900 dark:text-blue-300">
+                  <span className="text-xs font-bold text-blue-950 dark:text-blue-300">
                     Sua Compatibilidade com esta Vaga:
                   </span>
-                  <span className="px-3 py-1 rounded-full bg-blue-600 text-white text-xs font-black">
+                  <span className="px-3 py-1 rounded-full bg-blue-700 text-white text-xs font-black">
                     {previewApp.score}% Match
                   </span>
                 </div>
 
                 <div className="w-full bg-slate-200 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-blue-600 transition-all duration-300"
+                    className="h-full bg-blue-700 transition-all duration-300"
                     style={{ width: `${previewApp.score}%` }}
                   />
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs pt-2">
                   <div>
-                    <span className="font-bold text-blue-700 dark:text-blue-300 block mb-1">
+                    <span className="font-bold text-blue-800 dark:text-blue-300 block mb-1">
                       ✓ Habilidades que você possui ({previewApp.matchedSkills.length}):
                     </span>
                     <div className="flex flex-wrap gap-1">
                       {previewApp.matchedSkills.length > 0 ? (
                         previewApp.matchedSkills.map((s, idx) => (
-                          <span key={idx} className="px-2 py-0.5 rounded bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-800 text-[10px] font-bold text-blue-700 dark:text-blue-300">
+                          <span key={idx} className="px-2 py-0.5 rounded bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-900 text-[10px] font-bold text-blue-800 dark:text-blue-300">
                             {s}
                           </span>
                         ))
@@ -207,7 +207,7 @@ export const ApplyModal: React.FC<ApplyModalProps> = ({
                           </span>
                         ))
                       ) : (
-                        <span className="text-[10px] text-blue-600 font-bold">100% de cobertura!</span>
+                        <span className="text-[10px] text-blue-700 font-bold">100% de cobertura!</span>
                       )}
                     </div>
                   </div>
@@ -226,7 +226,7 @@ export const ApplyModal: React.FC<ApplyModalProps> = ({
               </button>
               <button
                 type="submit"
-                className="flex-[2] py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl shadow-md shadow-blue-500/20 transition-all flex items-center justify-center gap-2"
+                className="flex-[2] py-3 px-4 bg-blue-700 hover:bg-blue-800 text-white text-xs font-bold rounded-xl shadow-md shadow-blue-600/20 transition-all flex items-center justify-center gap-2"
               >
                 <span>Enviar Minha Candidatura</span>
                 <span>&rarr;</span>

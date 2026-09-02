@@ -31,6 +31,11 @@ export const CandidateHeader: React.FC<CandidateHeaderProps> = ({
           title: 'Meu Perfil Profissional',
           subtitle: 'Gerencie suas habilidades para calcular o match automaticamente'
         };
+      case 'about':
+        return {
+          title: 'Sobre o ItMatcher',
+          subtitle: 'Conheça nosso propósito e como simplificamos a busca por empregos em tecnologia'
+        };
     }
   };
 
@@ -50,7 +55,7 @@ export const CandidateHeader: React.FC<CandidateHeaderProps> = ({
       {/* Botão de Tema no Canto Superior Direito */}
       <button
         onClick={onToggleTheme}
-        className="flex items-center gap-2 px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0c111d] hover:border-blue-500 dark:hover:border-blue-600 text-xs font-bold text-slate-700 dark:text-slate-300 shadow-sm transition-all shrink-0"
+        className="flex items-center gap-2 px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0c111d] hover:border-blue-600 dark:hover:border-blue-700 text-xs font-bold text-slate-700 dark:text-slate-300 shadow-sm transition-all shrink-0"
         title="Alternar tema claro/escuro"
       >
         {isDarkMode ? (
@@ -62,7 +67,7 @@ export const CandidateHeader: React.FC<CandidateHeaderProps> = ({
           </>
         ) : (
           <>
-            <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
             </svg>
             <span>Modo Escuro</span>

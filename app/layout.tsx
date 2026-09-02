@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'TalentMatch - Smart Recruiting & IT Matcher',
+  title: 'ItMatcher - Smart Recruiting & IT Matcher',
   description: 'Sistema inteligente de triagem ponderada de candidatos e correspondência de competências técnicas.',
   icons: {
     icon: '/favicon.ico'

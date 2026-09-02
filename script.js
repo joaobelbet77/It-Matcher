@@ -73,15 +73,34 @@ function toggleTheme() {
 }
 
 function switchTab(tabId, el) {
-  document.querySelectorAll('.tab-btn').forEach((btn) => btn.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach((btn) => btn.classList.remove('active'));
   if (el) el.classList.add('active');
 
   document.querySelectorAll('.tab-content').forEach((tab) => (tab.style.display = 'none'));
   const target = document.getElementById(`tab-${tabId}`);
   if (target) target.style.display = 'block';
 
-  if (tabId === 'applications') {
-    renderApplications();
+  const titleEl = document.getElementById('pageTitle');
+  const subtitleEl = document.getElementById('pageSubtitle');
+
+  switch (tabId) {
+    case 'jobs':
+      titleEl.textContent = 'Vagas em Tecnologia';
+      subtitleEl.textContent = 'Descubra oportunidades e veja sua compatibilidade em tempo real';
+      break;
+    case 'applications':
+      titleEl.textContent = 'Minhas Candidaturas';
+      subtitleEl.textContent = 'Acompanhe as vagas para as quais você enviou seu perfil';
+      renderApplications();
+      break;
+    case 'profile':
+      titleEl.textContent = 'Meu Perfil Profissional';
+      subtitleEl.textContent = 'Gerencie suas habilidades para calcular o match automaticamente';
+      break;
+    case 'about':
+      titleEl.textContent = 'Sobre o ItMatcher';
+      subtitleEl.textContent = 'Conheça nosso propósito e como simplificamos a busca por empregos em tecnologia';
+      break;
   }
 }
 
@@ -286,19 +305,117 @@ function renderApplications() {
     .join('');
 }
 
-function saveProfile(e) {
+let currentAuthMode = 'register';
+
+function openAuthModal(mode = 'register') {
+  currentAuthMode = mode;
+  setAuthMode(mode);
+  document.getElementById('authModal').style.display = 'flex';
+}
+
+function closeAuthModal() {
+  document.getElementById('authModal').style.display = 'none';
+}
+
+function setAuthMode(mode) {
+  currentAuthMode = mode;
+  const isReg = mode === 'register';
+  document.getElementById('tabAuthRegister').className = isReg ? 'filter-btn active' : 'filter-btn';
+  document.getElementById('tabAuthLogin').className = isReg ? 'filter-btn' : 'filter-btn active';
+
+  document.getElementById('authNameGroup').style.display = isReg ? 'block' : 'none';
+  document.getElementById('authRoleGroup').style.display = isReg ? 'block' : 'none';
+  document.getElementById('authModalTitle').textContent = isReg ? 'Criar Nova Conta no ItMatcher' : 'Entrar na Minha Conta';
+  document.getElementById('authSubmitBtn').textContent = isReg ? 'Criar Conta e Acessar' : 'Entrar na Conta';
+}
+
+function handleAuthSubmit(e) {
   e.preventDefault();
-  candidateProfile.name = document.getElementById('profileName').value;
-  candidateProfile.email = document.getElementById('profileEmail').value;
-  candidateProfile.skills = document.getElementById('profileSkills').value;
+  const name = document.getElementById('authInputName').value.trim();
+  const email = document.getElementById('authInputEmail').value.trim();
+  const role = document.getElementById('authInputRole').value.trim();
+
+  if (currentAuthMode === 'register') {
+    candidateProfile.name = name || 'Novo Candidato';
+    candidateProfile.email = email;
+    candidateProfile.role = role || 'Desenvolvedor de Software';
+  } else {
+    candidateProfile.email = email;
+    if (name) candidateProfile.name = name;
+  }
+
+  updateProfileUI();
+  closeAuthModal();
+  alert(currentAuthMode === 'register' ? '🎉 Conta criada com sucesso!' : '✅ Login realizado com sucesso!');
+  renderJobs();
+}
+
+function logoutAccount() {
+  if (confirm('Deseja realmente sair da sua conta?')) {
+    candidateProfile = {
+      name: 'Visitante',
+      email: '',
+      role: 'Sem conta',
+      skills: ''
+    };
+    updateProfileUI();
+    alert('Você saiu da sua conta.');
+    switchTab('jobs');
+    renderJobs();
+  }
+}
+
+function updateProfileUI() {
+  const name = candidateProfile.name || 'Minha Conta';
+  const role = candidateProfile.role || 'Ver Perfil';
+  const firstLetter = name.charAt(0).toUpperCase() || '👤';
+
+  // Sidebar
+  const sbName = document.getElementById('sidebarName');
+  const sbRole = document.getElementById('sidebarRole');
+  const avatarLetter = document.getElementById('avatarLetter');
+  if (sbName) sbName.textContent = name;
+  if (sbRole) sbRole.textContent = role;
+  if (avatarLetter) avatarLetter.textContent = firstLetter;
+
+  // Header no profile
+  const pName = document.getElementById('profileDisplayName');
+  const pRole = document.getElementById('profileDisplayRole');
+  const pEmail = document.getElementById('profileDisplayEmail');
+  const pAvatar = document.getElementById('profileHeaderAvatar');
+  const pAppsCount = document.getElementById('profileAppsCount');
+  if (pName) pName.textContent = name;
+  if (pRole) pRole.textContent = role;
+  if (pEmail) pEmail.textContent = `📧 ${candidateProfile.email || 'sem e-mail'} • 📍 São Paulo, SP`;
+  if (pAvatar) pAvatar.textContent = firstLetter;
+  if (pAppsCount) pAppsCount.textContent = `${myApplications.length} vagas`;
+
+  // Form fields
+  const inpName = document.getElementById('profileName');
+  const inpEmail = document.getElementById('profileEmail');
+  const inpRole = document.getElementById('profileRole');
+  const inpSkills = document.getElementById('profileSkills');
+  if (inpName) inpName.value = candidateProfile.name || '';
+  if (inpEmail) inpEmail.value = candidateProfile.email || '';
+  if (inpRole) inpRole.value = candidateProfile.role || '';
+  if (inpSkills) inpSkills.value = candidateProfile.skills || '';
 
   const preview = document.getElementById('currentSkillsPreview');
-  if (preview) preview.textContent = candidateProfile.skills;
+  if (preview) preview.textContent = candidateProfile.skills || 'Nenhuma habilidade adicionada';
+}
 
-  alert('Perfil atualizado com sucesso! Todas as vagas foram recalculadas.');
-  switchTab('jobs');
+function saveProfile(e) {
+  e.preventDefault();
+  candidateProfile.name = document.getElementById('profileName').value.trim();
+  candidateProfile.email = document.getElementById('profileEmail').value.trim();
+  candidateProfile.role = document.getElementById('profileRole').value.trim();
+  candidateProfile.skills = document.getElementById('profileSkills').value.trim();
+
+  updateProfileUI();
+  alert('Perfil atualizado com sucesso! Todas as vagas foram recalculadas com seu novo match.');
   renderJobs();
 }
 
 // Inicialização
+updateProfileUI();
 renderJobs();

@@ -20,12 +20,12 @@ export const JobCard: React.FC<JobCardProps> = ({
   const matchScore = getQuickScore(candidateSkills, job);
 
   return (
-    <div className="bg-white dark:bg-[#0c111d] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm hover:border-blue-400 dark:hover:border-blue-600 transition-all flex flex-col justify-between">
+    <div className="bg-white dark:bg-[#0c111d] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm hover:border-blue-400 dark:hover:border-blue-700 transition-all flex flex-col justify-between">
       <div>
         {/* Top Header */}
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-3">
           <div>
-            <span className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
+            <span className="text-xs font-bold text-blue-700 dark:text-blue-400 uppercase tracking-wider">
               {job.company}
             </span>
             <h3 className="text-lg font-bold text-slate-900 dark:text-white mt-0.5">
@@ -48,8 +48,8 @@ export const JobCard: React.FC<JobCardProps> = ({
             {candidateSkills.trim() && (
               <span className={`text-[11px] font-black px-2 py-0.5 rounded-md border ${
                 matchScore >= 70
-                  ? 'bg-blue-600 text-white border-blue-600'
-                  : 'bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800'
+                  ? 'bg-blue-700 text-white border-blue-700'
+                  : 'bg-blue-50 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 border-blue-200 dark:border-blue-900'
               }`}>
                 {matchScore}% de Match com você
               </span>
@@ -87,13 +87,13 @@ export const JobCard: React.FC<JobCardProps> = ({
         </span>
 
         {hasApplied ? (
-          <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-900 text-xs font-bold">
+          <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 border border-blue-200 dark:border-blue-950 text-xs font-bold">
             <span>✓</span> Já Candidatado
           </span>
         ) : (
           <button
             onClick={() => onApply(job)}
-            className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-xs font-bold shadow-md shadow-blue-500/20 transition-all flex items-center gap-1.5"
+            className="px-4 py-2 rounded-xl bg-blue-700 hover:bg-blue-800 active:bg-blue-900 text-white text-xs font-bold shadow-md shadow-blue-600/20 transition-all flex items-center gap-1.5"
           >
             <span>Ver Detalhes & Candidatar-se</span>
             <span>&rarr;</span>

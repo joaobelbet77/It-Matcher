@@ -68,7 +68,7 @@ export const CandidateForm: React.FC<CandidateFormProps> = ({
         {/* Step Header */}
         <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-100 dark:border-slate-800">
           <div className="flex items-center gap-2.5">
-            <span className="w-7 h-7 rounded-full bg-blue-600 text-white font-black text-xs flex items-center justify-center">
+            <span className="w-7 h-7 rounded-full bg-blue-700 text-white font-black text-xs flex items-center justify-center">
               2
             </span>
             <div>
@@ -85,7 +85,7 @@ export const CandidateForm: React.FC<CandidateFormProps> = ({
               <select
                 value={selectedJobId || (currentJob ? currentJob.id : '')}
                 onChange={(e) => onSelectJobId(e.target.value)}
-                className="text-xs bg-blue-50 dark:bg-slate-900 border border-blue-200 dark:border-slate-700 rounded-lg px-2.5 py-1 text-blue-900 dark:text-blue-300 font-bold focus:outline-none focus:ring-2 focus:ring-blue-500 max-w-[170px] truncate"
+                className="text-xs bg-blue-50 dark:bg-slate-900 border border-blue-200 dark:border-slate-700 rounded-lg px-2.5 py-1 text-blue-950 dark:text-blue-300 font-bold focus:outline-none focus:ring-2 focus:ring-blue-600 max-w-[170px] truncate"
               >
                 {jobs.map((job) => (
                   <option key={job.id} value={job.id}>
@@ -107,7 +107,7 @@ export const CandidateForm: React.FC<CandidateFormProps> = ({
             value={candidateName}
             onChange={(e) => setCandidateName(e.target.value)}
             placeholder="Ex: Maria Silva ou João Santos"
-            className="w-full px-3.5 py-2.5 text-sm bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3.5 py-2.5 text-sm bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
         </div>
 
@@ -121,7 +121,7 @@ export const CandidateForm: React.FC<CandidateFormProps> = ({
             value={candidateSkills}
             onChange={(e) => setCandidateSkills(e.target.value)}
             placeholder="Ex: React, JavaScript, Node.js, Git, TypeScript (separe por vírgula)"
-            className="w-full px-3.5 py-2.5 text-sm bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+            className="w-full px-3.5 py-2.5 text-sm bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 resize-none"
           />
 
           {/* Sugestões de clique */}
@@ -132,7 +132,7 @@ export const CandidateForm: React.FC<CandidateFormProps> = ({
                 key={sk}
                 type="button"
                 onClick={() => handleAddQuickSkill(sk)}
-                className="text-[10px] bg-blue-50 dark:bg-slate-800 hover:bg-blue-100 dark:hover:bg-blue-950/60 text-blue-700 dark:text-blue-300 font-semibold px-2 py-0.5 rounded-md border border-blue-200 dark:border-slate-700 transition-colors"
+                className="text-[10px] bg-blue-50 dark:bg-slate-800 hover:bg-blue-100 dark:hover:bg-blue-950/60 text-blue-800 dark:text-blue-300 font-semibold px-2 py-0.5 rounded-md border border-blue-200 dark:border-slate-700 transition-colors"
               >
                 + {sk}
               </button>
@@ -146,7 +146,7 @@ export const CandidateForm: React.FC<CandidateFormProps> = ({
             <span>
               Vaga comparada: <strong className="text-slate-900 dark:text-white font-bold">{currentJob.title}</strong>
             </span>
-            <span className="bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-900 px-2 py-0.5 rounded text-[10px] font-bold">
+            <span className="bg-blue-50 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 border border-blue-200 dark:border-blue-950 px-2 py-0.5 rounded text-[10px] font-bold">
               {currentJob.skills.length} requisitos
             </span>
           </div>
@@ -154,7 +154,7 @@ export const CandidateForm: React.FC<CandidateFormProps> = ({
 
         <button
           type="submit"
-          className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold text-sm rounded-xl shadow-md shadow-blue-500/20 transition-all flex items-center justify-center gap-2"
+          className="w-full py-3 px-4 bg-blue-700 hover:bg-blue-800 active:bg-blue-900 text-white font-bold text-sm rounded-xl shadow-md shadow-blue-600/20 transition-all flex items-center justify-center gap-2"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />

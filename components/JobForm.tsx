@@ -78,7 +78,7 @@ export const JobForm: React.FC<JobFormProps> = ({ onSaveJob, activeJob }) => {
         {/* Step Header */}
         <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-100 dark:border-slate-800">
           <div className="flex items-center gap-2.5">
-            <span className="w-7 h-7 rounded-full bg-blue-600 text-white font-black text-xs flex items-center justify-center">
+            <span className="w-7 h-7 rounded-full bg-blue-700 text-white font-black text-xs flex items-center justify-center">
               1
             </span>
             <div>
@@ -90,14 +90,14 @@ export const JobForm: React.FC<JobFormProps> = ({ onSaveJob, activeJob }) => {
           </div>
 
           {activeJob && (
-            <span className="text-[11px] bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-900 px-2.5 py-1 rounded-full font-bold truncate max-w-[170px]">
+            <span className="text-[11px] bg-blue-50 text-blue-800 border border-blue-200 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-950 px-2.5 py-1 rounded-full font-bold truncate max-w-[170px]">
               Vaga ativa: {activeJob.title}
             </span>
           )}
         </div>
 
         {feedback && (
-          <div className="mb-4 p-3 bg-blue-50 border border-blue-200 text-blue-900 dark:bg-blue-950/60 dark:border-blue-800 dark:text-blue-200 text-xs font-semibold rounded-xl flex items-center gap-2">
+          <div className="mb-4 p-3 bg-blue-50 border border-blue-200 text-blue-950 dark:bg-blue-950/60 dark:border-blue-900 dark:text-blue-200 text-xs font-semibold rounded-xl flex items-center gap-2">
             <span>{feedback}</span>
           </div>
         )}
@@ -112,7 +112,7 @@ export const JobForm: React.FC<JobFormProps> = ({ onSaveJob, activeJob }) => {
             value={jobTitle}
             onChange={(e) => setJobTitle(e.target.value)}
             placeholder="Ex: Desenvolvedor Frontend Júnior, Analista de Dados..."
-            className="w-full px-3.5 py-2.5 text-sm bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3.5 py-2.5 text-sm bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
         </div>
 
@@ -133,13 +133,13 @@ export const JobForm: React.FC<JobFormProps> = ({ onSaveJob, activeJob }) => {
                 }
               }}
               placeholder="Digite uma habilidade (ex: React, Inglês, Excel)"
-              className="flex-1 px-3.5 py-2 text-sm bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex-1 px-3.5 py-2 text-sm bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600"
             />
 
             <select
               value={skillWeight}
               onChange={(e) => setSkillWeight(Number(e.target.value))}
-              className="px-3 py-2 text-xs font-bold bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 text-xs font-bold bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-600"
             >
               <option value={5}>Obrigatória (Peso 5)</option>
               <option value={4}>Muito Importante (Peso 4)</option>
@@ -151,7 +151,7 @@ export const JobForm: React.FC<JobFormProps> = ({ onSaveJob, activeJob }) => {
             <button
               type="button"
               onClick={() => handleAddSkill()}
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition-colors shrink-0 shadow-sm"
+              className="px-4 py-2 bg-blue-700 hover:bg-blue-800 text-white text-xs font-bold rounded-xl transition-colors shrink-0 shadow-sm"
             >
               + Adicionar
             </button>
@@ -165,7 +165,7 @@ export const JobForm: React.FC<JobFormProps> = ({ onSaveJob, activeJob }) => {
                 key={sug}
                 type="button"
                 onClick={() => handleAddSkill(sug)}
-                className="text-[10px] bg-slate-100 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950/60 hover:text-blue-600 dark:hover:text-blue-400 text-slate-700 dark:text-slate-300 font-semibold px-2 py-0.5 rounded-md border border-slate-200 dark:border-slate-700 transition-colors"
+                className="text-[10px] bg-slate-100 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950/60 hover:text-blue-700 dark:hover:text-blue-400 text-slate-700 dark:text-slate-300 font-semibold px-2 py-0.5 rounded-md border border-slate-200 dark:border-slate-700 transition-colors"
               >
                 + {sug}
               </button>
@@ -214,7 +214,7 @@ export const JobForm: React.FC<JobFormProps> = ({ onSaveJob, activeJob }) => {
       <button
         type="button"
         onClick={handleSaveJob}
-        className="w-full mt-3 py-3 px-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold text-sm rounded-xl shadow-md shadow-blue-500/20 transition-all flex items-center justify-center gap-2"
+        className="w-full mt-3 py-3 px-4 bg-blue-700 hover:bg-blue-800 active:bg-blue-900 text-white font-bold text-sm rounded-xl shadow-md shadow-blue-600/20 transition-all flex items-center justify-center gap-2"
       >
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />

@@ -68,17 +68,17 @@ export const QuickTemplates: React.FC<QuickTemplatesProps> = ({ onLoadTemplate }
   ];
 
   return (
-    <div className="bg-blue-50/40 dark:bg-blue-950/20 border border-blue-200/80 dark:border-blue-900/60 rounded-2xl p-4 mb-6">
+    <div className="bg-blue-50/40 dark:bg-blue-950/20 border border-blue-200/80 dark:border-blue-950/60 rounded-2xl p-4 mb-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-3">
         <div className="flex items-center gap-2">
-          <span className="text-sm font-bold text-blue-900 dark:text-blue-300 flex items-center gap-1.5">
-            <svg className="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <span className="text-sm font-bold text-blue-950 dark:text-blue-300 flex items-center gap-1.5">
+            <svg className="w-4 h-4 text-blue-700 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
             Quer testar agora mesmo sem digitar nada?
           </span>
         </div>
-        <span className="text-xs text-blue-700/80 dark:text-blue-400 font-medium">
+        <span className="text-xs text-blue-800/80 dark:text-blue-400 font-medium">
           Clique em qualquer modelo abaixo para carregar:
         </span>
       </div>
@@ -88,11 +88,11 @@ export const QuickTemplates: React.FC<QuickTemplatesProps> = ({ onLoadTemplate }
           <button
             key={i}
             onClick={() => onLoadTemplate(tpl.job, tpl.candidateName, tpl.candidateSkills)}
-            className="flex flex-col justify-between p-3.5 bg-white dark:bg-[#0c111d] hover:bg-blue-50/50 dark:hover:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-left transition-all group shadow-sm hover:shadow hover:border-blue-400 dark:hover:border-blue-600"
+            className="flex flex-col justify-between p-3.5 bg-white dark:bg-[#0c111d] hover:bg-blue-50/50 dark:hover:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-left transition-all group shadow-sm hover:shadow hover:border-blue-400 dark:hover:border-blue-700"
           >
             <div>
               <div className="flex items-center justify-between gap-1 mb-1">
-                <span className="text-xs font-bold text-slate-800 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                <span className="text-xs font-bold text-slate-800 dark:text-slate-100 group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors">
                   {tpl.title}
                 </span>
               </div>
@@ -100,7 +100,7 @@ export const QuickTemplates: React.FC<QuickTemplatesProps> = ({ onLoadTemplate }
                 {tpl.description}
               </p>
             </div>
-            <div className="mt-3 text-xs font-bold text-blue-600 dark:text-blue-400 flex items-center gap-1">
+            <div className="mt-3 text-xs font-bold text-blue-700 dark:text-blue-400 flex items-center gap-1">
               <span>Carregar teste</span>
               <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
             </div>

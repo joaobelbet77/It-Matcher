@@ -33,10 +33,21 @@ export interface Application {
 }
 
 export interface CandidateProfile {
+  id?: string;
   name: string;
   email: string;
+  phone?: string;
+  location?: string;
   roleTitle: string;
+  seniority?: 'Júnior' | 'Pleno' | 'Sênior' | 'Especialista';
+  workPreference?: 'Remoto' | 'Híbrido' | 'Presencial' | 'Indiferente';
+  salaryExpectation?: string;
+  linkedinUrl?: string;
+  githubUrl?: string;
+  portfolioUrl?: string;
   skills: string; // comma separated
+  bio?: string;
+  isLoggedIn?: boolean;
 }
 
-export type CandidateTabType = 'jobs' | 'applications' | 'profile';
+export type CandidateTabType = 'jobs' | 'applications' | 'profile' | 'about';

@@ -44,8 +44,8 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, isDarkMode, onToggleT
           <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
             {title}
           </h1>
-          <span className="bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 text-xs font-bold px-2.5 py-0.5 rounded-full border border-blue-200 dark:border-blue-900">
-            TalentMatch
+          <span className="bg-blue-50 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 text-xs font-bold px-2.5 py-0.5 rounded-full border border-blue-200 dark:border-blue-950">
+            ItMatcher
           </span>
         </div>
         <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
@@ -56,7 +56,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, isDarkMode, onToggleT
       {/* Botão de Tema no Canto Superior Direito */}
       <button
         onClick={onToggleTheme}
-        className="flex items-center gap-2 px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0c111d] hover:border-blue-500 dark:hover:border-blue-600 text-xs font-bold text-slate-700 dark:text-slate-300 shadow-sm transition-all"
+        className="flex items-center gap-2 px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0c111d] hover:border-blue-600 dark:hover:border-blue-700 text-xs font-bold text-slate-700 dark:text-slate-300 shadow-sm transition-all"
         title="Alternar tema claro/escuro"
       >
         {isDarkMode ? (
@@ -68,7 +68,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, isDarkMode, onToggleT
           </>
         ) : (
           <>
-            <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
             </svg>
             <span>Modo Escuro</span>
