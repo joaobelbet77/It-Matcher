@@ -4,116 +4,124 @@ import React from 'react';
 
 export const AboutUsTab: React.FC = () => {
   return (
-    <div className="max-w-4xl mx-auto space-y-8 animate-fadeIn">
+    <div className="max-w-4xl mx-auto space-y-8 animate-fadeIn font-sans">
       {/* Hero Section */}
-      <section className="bg-white dark:bg-[#0c111d] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-10 shadow-sm relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />
+      <section className="bg-white dark:bg-[#0c121e] border border-slate-200/90 dark:border-slate-800/90 rounded-3xl p-7 sm:p-10 shadow-xs relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-950 text-blue-800 dark:text-blue-300 text-xs font-bold mb-4">
-          <span>🌱</span>
-          <span>Nossa História & Propósito</span>
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-900 text-blue-700 dark:text-blue-300 text-xs font-bold mb-4 font-heading">
+          <span className="w-2 h-2 rounded-full bg-blue-600"></span>
+          <span>Manifesto & Metodologia de Compatibilidade</span>
         </div>
 
-        <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight leading-tight mb-4">
-          Por que o <span className="text-blue-700 dark:text-blue-400">ItMatcher</span> nasceu?
+        <h2 className="font-heading font-extrabold text-2xl sm:text-3xl text-slate-900 dark:text-white tracking-tight leading-tight mb-4">
+          Por que o <span className="text-blue-700 dark:text-blue-400">ItMatcher</span> foi concebido?
         </h2>
 
-        <div className="space-y-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+        <div className="space-y-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-3xl">
           <p>
-            O mercado de tecnologia cresce em um ritmo acelerado, mas o processo de encontrar um emprego continua sendo burocrático, desgastante e pouco transparente. Quantas vezes você já se candidatou a dezenas de vagas sem saber se o seu perfil realmente atendia aos requisitos ou por que não foi chamado para uma entrevista?
+            O mercado global de tecnologia evolui em ritmo exponencial, mas os métodos tradicionais de recrutamento ainda dependem de formulários genéricos, triagens opacas e ausência de retorno assertivo para o candidato.
           </p>
           <p>
-            O <strong>ItMatcher</strong> surgiu com uma missão clara: <strong>simplificar, agilizar e humanizar a busca por empregos em tecnologia</strong>. Acreditamos que o talento técnico não deve se perder em processos seletivos confusos. Criamos uma ponte direta e inteligente entre desenvolvedores e oportunidades reais.
+            O <strong>ItMatcher Enterprise</strong> foi desenvolvido para solucionar essa assimetria. Através de um algoritmo de ponderação técnica em tempo real, eliminamos a subjetividade dos processos seletivos e conectamos profissionais qualificados diretamente aos requisitos essenciais das empresas.
           </p>
         </div>
       </section>
 
-      {/* Pilares / Diferenciais */}
+      {/* Pilares Corporativos */}
       <section className="space-y-4">
-        <h3 className="text-base font-bold text-slate-900 dark:text-white">
-          O que nos move e faz a diferença:
+        <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-heading">
+          Pilares Estratégicos da Plataforma
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Card 1 */}
-          <div className="bg-white dark:bg-[#0c111d] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+          <div className="bg-white dark:bg-[#0c121e] border border-slate-200/90 dark:border-slate-800/90 rounded-2xl p-6 shadow-xs flex flex-col justify-between group hover:border-blue-500/40 transition-colors">
             <div>
-              <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-950 text-blue-700 dark:text-blue-400 flex items-center justify-center text-lg font-black mb-3">
-                🎯
+              <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-900 text-blue-700 dark:text-blue-400 flex items-center justify-center font-bold mb-4">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
               </div>
-              <h4 className="text-sm font-bold text-slate-900 dark:text-white mb-2">
-                Match Transparente e Sem Segredos
+              <h4 className="text-sm font-heading font-bold text-slate-900 dark:text-white mb-2">
+                Triagem Ponderada e Transparente
               </h4>
               <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Você visualiza na hora o seu percentual de compatibilidade com cada vaga, sabendo exatamente quais requisitos já domina antes mesmo de enviar seu currículo.
+                Métricas auditáveis de correspondência técnica calculadas a partir da relevância de cada stack para o projeto.
               </p>
             </div>
           </div>
 
           {/* Card 2 */}
-          <div className="bg-white dark:bg-[#0c111d] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+          <div className="bg-white dark:bg-[#0c121e] border border-slate-200/90 dark:border-slate-800/90 rounded-2xl p-6 shadow-xs flex flex-col justify-between group hover:border-blue-500/40 transition-colors">
             <div>
-              <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-950 text-blue-700 dark:text-blue-400 flex items-center justify-center text-lg font-black mb-3">
-                ⚡
+              <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-900 text-blue-700 dark:text-blue-400 flex items-center justify-center font-bold mb-4">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
               </div>
-              <h4 className="text-sm font-bold text-slate-900 dark:text-white mb-2">
-                Economia de Tempo e Foco
+              <h4 className="text-sm font-heading font-bold text-slate-900 dark:text-white mb-2">
+                Eficiência Operacional & Zero Fricção
               </h4>
               <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Chega de preencher formulários intermináveis de 10 páginas. Com o ItMatcher, você aplica em 1 clique e foca apenas nas vagas que fazem sentido para seu momento profissional.
+                Aplicação instantânea sem questionários redundantes. Submissão direta do perfil com análise imediata de compatibilidade.
               </p>
             </div>
           </div>
 
           {/* Card 3 */}
-          <div className="bg-white dark:bg-[#0c111d] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+          <div className="bg-white dark:bg-[#0c121e] border border-slate-200/90 dark:border-slate-800/90 rounded-2xl p-6 shadow-xs flex flex-col justify-between group hover:border-blue-500/40 transition-colors">
             <div>
-              <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-950 text-blue-700 dark:text-blue-400 flex items-center justify-center text-lg font-black mb-3">
-                🧭
+              <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-900 text-blue-700 dark:text-blue-400 flex items-center justify-center font-bold mb-4">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                </svg>
               </div>
-              <h4 className="text-sm font-bold text-slate-900 dark:text-white mb-2">
-                Direcionamento de Carreira
+              <h4 className="text-sm font-heading font-bold text-slate-900 dark:text-white mb-2">
+                Direcionamento e Upskilling Técnico
               </h4>
               <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Caso você não tenha 100% de aderência a uma vaga desejada, o sistema aponta claramente quais tecnologias você pode estudar para alcançar o cargo dos seus sonhos.
+                Diagnóstico claro das competências complementares necessárias para preencher gaps técnicos em cada oportunidade.
               </p>
             </div>
           </div>
 
           {/* Card 4 */}
-          <div className="bg-white dark:bg-[#0c111d] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+          <div className="bg-white dark:bg-[#0c121e] border border-slate-200/90 dark:border-slate-800/90 rounded-2xl p-6 shadow-xs flex flex-col justify-between group hover:border-blue-500/40 transition-colors">
             <div>
-              <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-950 text-blue-700 dark:text-blue-400 flex items-center justify-center text-lg font-black mb-3">
-                🤝
+              <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-900 text-blue-700 dark:text-blue-400 flex items-center justify-center font-bold mb-4">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
               </div>
-              <h4 className="text-sm font-bold text-slate-900 dark:text-white mb-2">
-                Foco no Desenvolvedor
+              <h4 className="text-sm font-heading font-bold text-slate-900 dark:text-white mb-2">
+                Foco no Profissional de Engenharia
               </h4>
               <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Nascemos de quem vive a tecnologia para quem constrói a tecnologia. Respeitamos seu tempo, valorizamos sua senioridade e simplificamos sua jornada.
+                Valorização da senioridade e domínio real de ferramentas, conectando desenvolvedores a líderes de engenharia.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Missão e Visão */}
-      <section className="bg-blue-50/40 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-950/60 rounded-3xl p-6 sm:p-8 space-y-4">
+      {/* Missão & Visão Corporativas */}
+      <section className="bg-slate-50 dark:bg-[#0c121e] border border-slate-200/90 dark:border-slate-800/90 rounded-3xl p-6 sm:p-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <span className="text-xs font-bold text-blue-700 dark:text-blue-400 uppercase tracking-wider block mb-1">
-              Nossa Missão
+            <span className="text-xs font-bold text-blue-700 dark:text-blue-400 uppercase tracking-wider block mb-2 font-heading">
+              Missão Corporativa
             </span>
-            <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
-              Conectar talentos de tecnologia às melhores oportunidades do mercado através de tecnologia precisa, eliminando ruídos e acelerando contratações justas.
+            <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+              Otimizar a alocação de talentos técnicos em organizações de tecnologia através de inteligência algorítmica e transparência de competências.
             </p>
           </div>
           <div>
-            <span className="text-xs font-bold text-blue-700 dark:text-blue-400 uppercase tracking-wider block mb-1">
-              Nossa Visão
+            <span className="text-xs font-bold text-blue-700 dark:text-blue-400 uppercase tracking-wider block mb-2 font-heading">
+              Visão de Longo Prazo
             </span>
-            <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
-              Ser o ecossistema de recrutamento técnico mais confiável e intuitivo, onde cada profissional encontra seu próximo desafio em segundos.
+            <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+              Consolidar-se como a infraestrutura de referência para avaliação e contratação técnica nas principais empresas de tecnologia do Brasil e exterior.
             </p>
           </div>
         </div>
