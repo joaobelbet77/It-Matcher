@@ -57,14 +57,14 @@
     --input: 217.2 32.6% 17.5%;
     --ring: 224.3 76.3% 48%;
 
-    --bg-main: #030712;
-    --bg-card: #0c111d;
-    --bg-sidebar: #050811;
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --border-color: #1e293b;
-    --primary-color: #3b82f6;
-    --primary-light: #0f1d40;
+    --bg-main: #09090b;
+    --bg-card: #121215;
+    --bg-sidebar: #0c0c0e;
+    --text-primary: #f4f4f5;
+    --text-secondary: #a1a1aa;
+    --border-color: #27272a;
+    --primary-color: #2563eb;
+    --primary-light: #1e3a8a33;
   }
 }
 
@@ -77,8 +77,8 @@ body {
 }
 
 .dark body {
-  background-color: #030712;
-  color: #f8fafc;
+  background-color: #09090b;
+  color: #f4f4f5;
 }
 
 /* Custom scrollbars */
@@ -92,7 +92,7 @@ body {
 }
 
 .dark ::-webkit-scrollbar-track {
-  background: #0b0f19;
+  background: #09090b;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -101,7 +101,7 @@ body {
 }
 
 .dark ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: #27272a;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -109,7 +109,7 @@ body {
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #3f3f46;
 }
 
 /* Glassmorphism & Modern SaaS touches */
@@ -120,13 +120,13 @@ body {
 }
 
 .dark .glass-panel {
-  background: rgba(12, 17, 29, 0.95);
+  background: rgba(18, 18, 21, 0.95);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(39, 39, 42, 0.8);
 }
 
 .gradient-header {
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  background: linear-gradient(135deg, #18181b 0%, #09090b 100%);
 }
 
 .badge-high {

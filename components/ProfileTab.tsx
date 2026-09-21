@@ -166,10 +166,10 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
       )}
 
       {/* Header Corporativo do Usuário */}
-      <div className="bg-white dark:bg-[#0c121e] border border-slate-200/90 dark:border-slate-800/90 rounded-3xl p-7 sm:p-8 shadow-xs">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-6 border-b border-slate-100 dark:border-slate-800">
+      <div className="bg-white dark:bg-[#0f1a36] border border-slate-200/90 dark:border-[#1b2f5d] rounded-3xl p-7 sm:p-8 shadow-xs">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-6 border-b border-slate-100 dark:border-[#1b2f5d]">
           <div className="flex items-center gap-4">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-blue-700 via-blue-800 to-slate-900 text-white font-heading font-black text-2xl flex items-center justify-center shadow-md shadow-blue-900/20 shrink-0 border border-blue-600/30">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-900 text-white font-heading font-black text-2xl flex items-center justify-center shadow-md shadow-blue-900/20 shrink-0 border border-blue-400/30">
               {name ? name.charAt(0).toUpperCase() : '👤'}
             </div>
             <div>
@@ -182,7 +182,7 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
                   Conta Verificada
                 </span>
               </div>
-              <p className="text-xs font-semibold text-blue-700 dark:text-blue-400 mt-1 font-heading">
+              <p className="text-xs font-semibold text-blue-600 dark:text-blue-400 mt-1 font-heading">
                 {roleTitle || 'Engenheiro de Software'} • {seniority}
               </p>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 flex items-center gap-3 flex-wrap">
@@ -199,7 +199,7 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
                 setAuthMode('register');
                 setShowAuthModal(true);
               }}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition-colors flex items-center gap-1.5"
+              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-100 dark:bg-[#15244e] hover:bg-slate-200 dark:hover:bg-[#1b2f5d] text-slate-700 dark:text-blue-200 border border-slate-200 dark:border-[#1b2f5d] transition-colors flex items-center gap-1.5"
             >
               <span>➕</span>
               <span>Cadastrar Nova Conta</span>
@@ -220,28 +220,28 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
 
         {/* Métricas do Perfil */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6">
-          <div className="p-4 rounded-2xl bg-slate-50/70 dark:bg-[#080d17] border border-slate-200/80 dark:border-slate-800/80">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 block mb-1 font-heading">
+          <div className="p-4 rounded-2xl bg-slate-50/70 dark:bg-[#091124] border border-slate-200/80 dark:border-[#1b2f5d]">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-blue-300/60 block mb-1 font-heading">
               Aderência do Perfil
             </span>
             <div className="flex items-center justify-between mb-1.5">
               <span className="text-lg font-heading font-extrabold text-slate-900 dark:text-white tabular-nums">
                 {completeness}%
               </span>
-              <span className="text-[10px] font-bold text-blue-700 dark:text-blue-400">
+              <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400">
                 {completeness === 100 ? 'Auditado' : 'Em progresso'}
               </span>
             </div>
-            <div className="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+            <div className="w-full bg-slate-200 dark:bg-[#080f24] h-2 rounded-full overflow-hidden">
               <div
-                className="h-full bg-blue-700 transition-all duration-500 rounded-full"
+                className="h-full bg-blue-600 transition-all duration-500 rounded-full"
                 style={{ width: `${completeness}%` }}
               />
             </div>
           </div>
 
-          <div className="p-4 rounded-2xl bg-slate-50/70 dark:bg-[#080d17] border border-slate-200/80 dark:border-slate-800/80">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 block mb-1 font-heading">
+          <div className="p-4 rounded-2xl bg-slate-50/70 dark:bg-[#091124] border border-slate-200/80 dark:border-[#1b2f5d]">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-blue-300/60 block mb-1 font-heading">
               Candidaturas Submetidas
             </span>
             <span className="text-lg font-heading font-extrabold text-slate-900 dark:text-white block tabular-nums">
@@ -252,11 +252,11 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
             </span>
           </div>
 
-          <div className="p-4 rounded-2xl bg-slate-50/70 dark:bg-[#080d17] border border-slate-200/80 dark:border-slate-800/80">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 block mb-1 font-heading">
+          <div className="p-4 rounded-2xl bg-slate-50/70 dark:bg-[#091124] border border-slate-200/80 dark:border-[#1b2f5d]">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-blue-300/60 block mb-1 font-heading">
               Regime de Trabalho
             </span>
-            <span className="text-lg font-heading font-extrabold text-blue-700 dark:text-blue-400 block">
+            <span className="text-lg font-heading font-extrabold text-blue-600 dark:text-blue-400 block">
               {workPreference}
             </span>
             <span className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 block">

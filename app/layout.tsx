@@ -31,7 +31,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR" className={`h-full ${plusJakartaSans.variable} ${inter.variable}`}>
-      <body className="min-h-screen bg-[#f8fafc] dark:bg-[#030712] text-slate-900 dark:text-slate-100 antialiased font-sans selection:bg-blue-600 selection:text-white">
+      <body className="min-h-screen bg-[#f8fafc] dark:bg-[#09090b] text-slate-900 dark:text-zinc-100 antialiased font-sans selection:bg-blue-600 selection:text-white">
         {children}
       </body>
     </html>

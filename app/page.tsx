@@ -124,7 +124,7 @@ export default function CandidatePortalPage() {
   });
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen bg-[#f8fafc] dark:bg-[#030712] text-slate-900 dark:text-slate-100 transition-colors">
+    <div className="flex flex-col lg:flex-row min-h-screen bg-[#f8fafc] dark:bg-[#09090b] text-slate-900 dark:text-zinc-100 transition-colors">
       {/* Barra Lateral com Abas na Esquerda e Perfil na Parte Inferior Esquerda */}
       <CandidateSidebar
         activeTab={activeTab}
@@ -153,7 +153,7 @@ export default function CandidatePortalPage() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Buscar vagas corporativas por cargo ou stack (ex: React, Next.js, Node, Python, AWS...)"
-                  className="w-full pl-10 pr-4 py-3 bg-white dark:bg-[#0c121e] border border-slate-200/90 dark:border-slate-800/90 rounded-2xl text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-700 shadow-xs"
+                  className="w-full pl-10 pr-4 py-3 bg-white dark:bg-[#121215] border border-slate-200/90 dark:border-zinc-800 rounded-2xl text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 shadow-xs"
                 />
                 <svg className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -168,8 +168,8 @@ export default function CandidatePortalPage() {
                     onClick={() => setSelectedModel(model)}
                     className={`px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all shrink-0 ${
                       selectedModel === model
-                        ? 'bg-blue-700 text-white shadow-xs'
-                        : 'bg-white dark:bg-[#0c121e] text-slate-600 dark:text-slate-400 border border-slate-200/90 dark:border-slate-800/90 hover:border-slate-300'
+                        ? 'bg-blue-600 text-white shadow-xs'
+                        : 'bg-white dark:bg-[#121215] text-slate-600 dark:text-zinc-400 border border-slate-200/90 dark:border-zinc-800 hover:border-slate-300 dark:hover:border-zinc-700'
                     }`}
                   >
                     {model}
@@ -180,25 +180,25 @@ export default function CandidatePortalPage() {
 
             {/* Informação do Match do Perfil Corporativo */}
             {profile.skills.trim() && (
-              <div className="p-4 sm:p-4.5 bg-blue-50/50 dark:bg-[#080e1a] border border-blue-200/80 dark:border-blue-900/50 rounded-2xl flex items-center justify-between gap-4 text-xs shadow-xs">
+              <div className="p-4 sm:p-4.5 bg-blue-50/70 dark:bg-[#121215] border border-blue-200/80 dark:border-zinc-800 rounded-2xl flex items-center justify-between gap-4 text-xs shadow-xs">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-xl bg-blue-700 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-xs">
+                  <div className="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-xs">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
                   <div>
-                    <span className="font-heading font-bold text-slate-900 dark:text-slate-100 block">
+                    <span className="font-heading font-bold text-slate-900 dark:text-zinc-100 block">
                       Triagem em tempo real ativa com a sua stack:
                     </span>
-                    <span className="text-slate-500 dark:text-slate-400 text-[11px] truncate max-w-lg block mt-0.5">
+                    <span className="text-slate-500 dark:text-zinc-400 text-[11px] truncate max-w-lg block mt-0.5">
                       {profile.skills}
                     </span>
                   </div>
                 </div>
                 <button
                   onClick={() => setActiveTab('profile')}
-                  className="text-xs font-bold text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors shrink-0 flex items-center gap-1 font-heading"
+                  className="text-xs font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors shrink-0 flex items-center gap-1 font-heading"
                 >
                   <span>Gerenciar Stack</span>
                   <span>&rarr;</span>
@@ -208,13 +208,13 @@ export default function CandidatePortalPage() {
 
             {/* Lista de Vagas */}
             <div className="space-y-4">
-              <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 px-1 font-heading">
+              <div className="flex items-center justify-between text-xs text-slate-500 dark:text-zinc-400 px-1 font-heading">
                 <span className="font-bold uppercase tracking-wider">Oportunidades Auditadas ({filteredJobs.length})</span>
                 <span>Filtro por Aderência Técnica</span>
               </div>
 
               {filteredJobs.length === 0 ? (
-                <div className="bg-white dark:bg-[#0c121e] border border-slate-200/90 dark:border-slate-800/90 rounded-3xl p-12 text-center text-xs sm:text-sm text-slate-500 dark:text-slate-400 shadow-xs">
+                <div className="bg-white dark:bg-[#121215] border border-slate-200/90 dark:border-zinc-800 rounded-3xl p-12 text-center text-xs sm:text-sm text-slate-500 dark:text-zinc-400 shadow-xs">
                   Nenhuma oportunidade encontrada com os critérios selecionados.
                 </div>
               ) : (

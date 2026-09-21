@@ -46,14 +46,14 @@ export const CandidateHeader: React.FC<CandidateHeaderProps> = ({
   const { breadcrumb, title, subtitle } = getHeaderInfo();
 
   return (
-    <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-8 border-b border-slate-200/80 dark:border-slate-800/80 font-sans">
+    <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-8 border-b border-slate-200/80 dark:border-zinc-800 font-sans">
       <div>
         <div className="flex items-center gap-2 mb-1">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-blue-700 dark:text-blue-400 font-heading">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 font-heading">
             {breadcrumb}
           </span>
           <span className="text-slate-300 dark:text-slate-700">•</span>
-          <span className="inline-flex items-center gap-1.5 text-[11px] text-slate-500 dark:text-slate-400 font-medium">
+          <span className="inline-flex items-center gap-1.5 text-[11px] text-slate-500 dark:text-zinc-400 font-medium">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
             Plataforma Ativa
           </span>
@@ -61,7 +61,7 @@ export const CandidateHeader: React.FC<CandidateHeaderProps> = ({
         <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-slate-900 dark:text-white tracking-tight">
           {title}
         </h1>
-        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-2xl leading-relaxed">
+        <p className="text-xs sm:text-sm text-slate-500 dark:text-zinc-400 mt-1 max-w-2xl leading-relaxed">
           {subtitle}
         </p>
       </div>
@@ -70,7 +70,7 @@ export const CandidateHeader: React.FC<CandidateHeaderProps> = ({
       <div className="flex items-center gap-3 self-start sm:self-center shrink-0">
         <button
           onClick={onToggleTheme}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0c121e] hover:border-slate-300 dark:hover:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-300 shadow-xs hover:shadow-sm transition-all"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-[#121215] hover:border-slate-300 dark:hover:border-zinc-700 text-xs font-bold text-slate-700 dark:text-zinc-200 shadow-xs hover:shadow-sm transition-all"
           title="Alternar modo claro / escuro"
         >
           {isDarkMode ? (
@@ -82,7 +82,7 @@ export const CandidateHeader: React.FC<CandidateHeaderProps> = ({
             </>
           ) : (
             <>
-              <svg className="w-4 h-4 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
               </svg>
               <span>Modo Escuro</span>
