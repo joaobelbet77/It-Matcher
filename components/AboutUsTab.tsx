@@ -109,7 +109,7 @@ export const AboutUsTab: React.FC = () => {
       <section className="bg-slate-50 dark:bg-[#0c121e] border border-slate-200/90 dark:border-slate-800/90 rounded-3xl p-6 sm:p-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <span className="text-xs font-bold text-blue-700 dark:text-blue-400 uppercase tracking-wider block mb-2 font-heading">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-zinc-100 block mb-2 font-heading">
               Missão Corporativa
             </span>
             <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
@@ -117,7 +117,7 @@ export const AboutUsTab: React.FC = () => {
             </p>
           </div>
           <div>
-            <span className="text-xs font-bold text-blue-700 dark:text-blue-400 uppercase tracking-wider block mb-2 font-heading">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-zinc-100 block mb-2 font-heading">
               Visão de Longo Prazo
             </span>
             <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
