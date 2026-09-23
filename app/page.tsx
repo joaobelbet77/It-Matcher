@@ -8,11 +8,13 @@ import { ApplyModal } from '../components/ApplyModal';
 import { MyApplications } from '../components/MyApplications';
 import { ProfileTab } from '../components/ProfileTab';
 import { AboutUsTab } from '../components/AboutUsTab';
+import { HomeTab } from '../components/HomeTab';
+import { CandidateFooter } from '../components/CandidateFooter';
 import { Job, Application, CandidateProfile, CandidateTabType } from '../types';
 import { INITIAL_CANDIDATE_JOBS } from '../lib/mockJobs';
 
 export default function CandidatePortalPage() {
-  const [activeTab, setActiveTab] = useState<CandidateTabType>('jobs');
+  const [activeTab, setActiveTab] = useState<CandidateTabType>('home');
   const [jobs, setJobs] = useState<Job[]>(INITIAL_CANDIDATE_JOBS);
   const [applications, setApplications] = useState<Application[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -28,6 +30,9 @@ export default function CandidatePortalPage() {
 
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [showLanding, setShowLanding] = useState(true);
+
 
   useEffect(() => {
     try {
@@ -124,27 +129,90 @@ export default function CandidatePortalPage() {
   });
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen bg-[#f8fafc] dark:bg-[#09090b] text-slate-900 dark:text-zinc-100 transition-colors">
-      {/* Barra Lateral com Abas na Esquerda e Perfil na Parte Inferior Esquerda */}
+    <div className="min-h-screen bg-[#f8fafc] dark:bg-[#09090b] text-slate-900 dark:text-zinc-100 transition-colors">
+      {/* Sidebar hambúrguer (overlay) */}
       <CandidateSidebar
         activeTab={activeTab}
         onTabChange={setActiveTab}
         applicationsCount={applications.length}
         profile={profile}
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
       />
 
-      {/* Conteúdo Principal à Direita */}
-      <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto max-w-6xl mx-auto w-full">
-        {/* Header com Título e Botão de Tema no Canto Superior Direito */}
-        <CandidateHeader
-          activeTab={activeTab}
-          isDarkMode={isDarkMode}
-          onToggleTheme={toggleTheme}
-        />
+      {/* Header fixo no topo */}
+      <CandidateHeader
+        activeTab={activeTab}
+        isDarkMode={isDarkMode}
+        onToggleTheme={toggleTheme}
+        onMenuOpen={() => setIsSidebarOpen(true)}
+        profile={profile}
+        onProfileClick={() => setActiveTab('profile')}
+        onTabChange={setActiveTab}
+      />
+
+      {/* Conteúdo Principal — 100% largura sem cortes laterais */}
+      <main className="pt-24 px-4 sm:px-8 lg:px-12 pb-24 w-full">
+
+        {/* ABA 0: INÍCIO & VISÃO GERAL */}
+        {activeTab === 'home' && (
+          <HomeTab
+            onNavigate={setActiveTab}
+            featuredJobs={jobs}
+            userSkills={profile.skills}
+          />
+        )}
 
         {/* ABA 1: VAGAS DISPONÍVEIS */}
         {activeTab === 'jobs' && (
-          <div className="space-y-6">
+          <div className="space-y-8">
+            {/* Hero Banner Maior e Informativo sobre ItMatcher */}
+            <div className="relative w-full rounded-3xl overflow-hidden min-h-[360px] md:min-h-[420px] shadow-xl border border-slate-200/80 dark:border-zinc-800/80 flex items-center">
+              <img
+                src="/tech-banner.jpg"
+                alt="ItMatcher Tecnologia"
+                className="absolute inset-0 w-full h-full object-cover object-center scale-105"
+              />
+              {/* Overlay gradiente cinematográfico para contraste perfeito */}
+              <div className="absolute inset-0 bg-gradient-to-r from-[#09090b]/95 via-[#09090b]/80 to-[#09090b]/40" />
+              
+              {/* Conteúdo sobre a ItMatcher */}
+              <div className="relative z-10 w-full p-8 sm:p-12 lg:p-16 flex flex-col justify-center">
+                <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-blue-600/20 border border-blue-500/40 text-blue-400 text-xs font-bold font-heading mb-4 w-fit backdrop-blur-md">
+                  <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+                  <span>Plataforma Oficial ItMatcher Enterprise</span>
+                </div>
+
+                <h1 className="font-heading font-black text-3xl sm:text-4xl md:text-5xl text-white leading-tight mb-4 max-w-2xl tracking-tight">
+                  A plataforma definitiva de <span className="text-blue-400">match técnico</span> para profissionais de tecnologia.
+                </h1>
+
+                <p className="text-sm sm:text-base text-zinc-300 max-w-2xl leading-relaxed mb-8">
+                  A <strong>ItMatcher</strong> nasceu para eliminar formulários cansativos e processos opacos. Nosso algoritmo inteligente avalia suas competências em tempo real e calcula com precisão matemática sua compatibilidade com as maiores vagas do mercado.
+                </p>
+
+                {/* Destaques e Métricas em Linha */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl pt-4 border-t border-white/10">
+                  <div className="bg-white/5 backdrop-blur-md rounded-2xl p-3.5 border border-white/10">
+                    <div className="font-heading font-black text-xl sm:text-2xl text-white">100%</div>
+                    <div className="text-[11px] font-semibold text-zinc-400 mt-0.5">Triagem Algorítmica</div>
+                  </div>
+                  <div className="bg-white/5 backdrop-blur-md rounded-2xl p-3.5 border border-white/10">
+                    <div className="font-heading font-black text-xl sm:text-2xl text-blue-400">Tempo Real</div>
+                    <div className="text-[11px] font-semibold text-zinc-400 mt-0.5">Cálculo de Aderência</div>
+                  </div>
+                  <div className="bg-white/5 backdrop-blur-md rounded-2xl p-3.5 border border-white/10">
+                    <div className="font-heading font-black text-xl sm:text-2xl text-white">0% Fricção</div>
+                    <div className="text-[11px] font-semibold text-zinc-400 mt-0.5">Candidatura Direta</div>
+                  </div>
+                  <div className="bg-white/5 backdrop-blur-md rounded-2xl p-3.5 border border-white/10">
+                    <div className="font-heading font-black text-xl sm:text-2xl text-emerald-400">Auditadas</div>
+                    <div className="text-[11px] font-semibold text-zinc-400 mt-0.5">Vagas Verificadas</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* Barra de Busca e Filtros Corporativos */}
             <div className="flex flex-col sm:flex-row gap-3">
               <div className="relative flex-1">
@@ -269,6 +337,10 @@ export default function CandidatePortalPage() {
           />
         )}
       </main>
+
+      {/* Rodapé Corporativo ItMatcher */}
+      <CandidateFooter onTabChange={setActiveTab} />
     </div>
   );
 }
+

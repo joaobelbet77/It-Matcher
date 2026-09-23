@@ -50,4 +50,4 @@ export interface CandidateProfile {
   isLoggedIn?: boolean;
 }
 
-export type CandidateTabType = 'jobs' | 'applications' | 'profile' | 'about';
+export type CandidateTabType = 'home' | 'jobs' | 'applications' | 'profile' | 'about';

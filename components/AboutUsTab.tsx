@@ -4,9 +4,9 @@ import React from 'react';
 
 export const AboutUsTab: React.FC = () => {
   return (
-    <div className="max-w-4xl mx-auto space-y-8 animate-fadeIn font-sans">
+    <div className="w-full space-y-8 animate-fadeIn font-sans">
       {/* Hero Section */}
-      <section className="bg-white dark:bg-[#0c121e] border border-slate-200/90 dark:border-slate-800/90 rounded-3xl p-7 sm:p-10 shadow-xs relative overflow-hidden">
+      <section className="bg-white dark:bg-[#121215] border border-slate-200/90 dark:border-zinc-800 rounded-3xl p-7 sm:p-10 shadow-xs relative overflow-hidden">
         <div className="absolute top-0 right-0 w-80 h-80 bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />
 
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-900 text-blue-700 dark:text-blue-300 text-xs font-bold mb-4 font-heading">

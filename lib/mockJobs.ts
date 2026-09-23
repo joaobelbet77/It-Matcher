@@ -62,7 +62,7 @@ export const INITIAL_CANDIDATE_JOBS: Job[] = [
     company: 'Appfy Mobile',
     location: 'Florianópolis, SC',
     workModel: 'Remoto',
-    level: 'Júnior / Pleno',
+    level: 'Pleno',
     salary: 'R$ 5.500 - R$ 7.500',
     description: 'Desenvolvimento e publicação de aplicativos móveis iOS e Android com foco em excelente experiência de usuário e consumo de APIs REST.',
     skills: [

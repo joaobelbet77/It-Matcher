@@ -153,7 +153,7 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
   const completeness = calculateCompleteness();
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6 animate-fadeIn pb-12 font-sans">
+    <div className="w-full space-y-6 animate-fadeIn pb-12 font-sans">
       {/* Toast Feedback */}
       {feedback && (
         <div className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-900 dark:bg-emerald-950/60 dark:border-emerald-800 dark:text-emerald-200 text-xs font-bold rounded-2xl flex items-center justify-between shadow-xs">
