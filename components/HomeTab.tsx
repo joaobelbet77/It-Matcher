@@ -235,7 +235,7 @@ export const HomeTab: React.FC<HomeTabProps> = ({ onNavigate, featuredJobs, user
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-2">
                       <span className="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 font-heading">
-                        {job.company}
+                        {job.company || job.companyName || 'Empresa Parceira'}
                       </span>
                       <span className="text-[11px] font-bold text-slate-500 dark:text-zinc-400">
                         {job.workModel}

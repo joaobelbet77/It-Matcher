@@ -1,21 +1,10 @@
-export interface Skill {
-  id: string;
-  name: string;
-  weight: number; // 1 a 5
-}
-
-export interface Job {
-  id: string;
-  title: string;
-  company: string;
-  location: string;
-  workModel: 'Remoto' | 'Híbrido' | 'Presencial';
-  level: 'Júnior' | 'Pleno' | 'Sênior' | 'Especialista';
-  salary: string;
-  description: string;
-  skills: Skill[];
-  postedAt: string;
-}
+export * from './skill';
+export * from './job';
+export * from './candidate';
+export * from './matching';
+export * from './review';
+export * from './audit';
+export * from './user';
 
 export interface Application {
   id: string;

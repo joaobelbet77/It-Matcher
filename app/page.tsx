@@ -119,8 +119,9 @@ export default function CandidatePortalPage() {
   const filteredJobs = jobs.filter((j) => {
     const matchesSearch =
       j.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      j.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (j.company || j.companyName || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
       j.skills.some((s) => s.name.toLowerCase().includes(searchQuery.toLowerCase()));
+
 
     const matchesModel =
       selectedModel === 'Todos' || j.workModel === selectedModel;

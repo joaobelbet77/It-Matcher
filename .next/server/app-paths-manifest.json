@@ -1,3 +1,12 @@
 {
-  "/page": "app/page.js"
+  "/_not-found/page": "app/_not-found/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/page": "app/page.js",
+  "/login/page": "app/login/page.js",
+  "/api/perfil/route": "app/api/perfil/route.js",
+  "/empresa/page": "app/empresa/page.js",
+  "/api/empresa/route": "app/api/empresa/route.js",
+  "/vagas/page": "app/vagas/page.js",
+  "/candidatos/page": "app/candidatos/page.js",
+  "/matching/page": "app/matching/page.js"
 }

@@ -154,8 +154,25 @@ export const CandidateSidebar: React.FC<CandidateSidebarProps> = ({
                 <span>Sobre o ItMatcher</span>
               </div>
             </button>
+
+            {/* Divisor & Acesso Recrutador */}
+            <div className="pt-2 mt-2 border-t border-slate-100 dark:border-zinc-800">
+              <a
+                href="/dashboard"
+                className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold text-slate-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400 bg-slate-50/70 dark:bg-zinc-900/50 hover:bg-blue-50/70 dark:hover:bg-blue-950/40 border border-slate-200/80 dark:border-zinc-800 transition-all group"
+              >
+                <div className="flex items-center gap-3">
+                  <svg className="w-4 h-4 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
+                  <span>Portal da Empresa</span>
+                </div>
+                <span className="text-[10px] text-slate-400 dark:text-zinc-500 font-mono">&rarr;</span>
+              </a>
+            </div>
           </nav>
         </div>
+
 
         {/* Perfil no canto inferior */}
         <div className="pt-4 border-t border-slate-200/80 dark:border-zinc-800">

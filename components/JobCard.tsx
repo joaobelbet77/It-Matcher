@@ -54,12 +54,12 @@ export const JobCard: React.FC<JobCardProps> = ({
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4">
           <div className="flex items-start gap-3.5">
             <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 flex items-center justify-center text-slate-700 dark:text-zinc-200 font-heading font-black text-base shadow-xs shrink-0">
-              {job.company.substring(0, 2).toUpperCase()}
+              {(job.company || job.companyName || 'IT').substring(0, 2).toUpperCase()}
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 font-heading">
-                  {job.company}
+                  {job.company || job.companyName || 'Empresa Confidencial'}
                 </span>
                 <span className="text-slate-300 dark:text-zinc-700">•</span>
                 <span className="text-[11px] text-slate-500 dark:text-zinc-400">

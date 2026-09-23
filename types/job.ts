@@ -1,0 +1,146 @@
+import { JobSkill } from './skill';
+
+export type ProfessionalLevel = 'Estágio' | 'Júnior' | 'Pleno' | 'Sênior' | 'Especialista' | 'Tech Lead';
+
+export type JobArea = 
+  | 'Frontend'
+  | 'Backend'
+  | 'Full Stack'
+  | 'DevOps / Cloud'
+  | 'Data & Analytics'
+  | 'Mobile'
+  | 'QA / Testes'
+  | 'Segurança da Informação'
+  | 'Outros';
+
+export type CompanyType =
+  | 'Empresa de Tecnologia'
+  | 'Startup'
+  | 'Incubadora'
+  | 'Aceleradora'
+  | 'Agência de Tecnologia'
+  | 'Consultoria de TI'
+  | 'Software House'
+  | 'Empresa tradicional'
+  | 'Instituição de Ensino'
+  | 'Órgão Público'
+  | 'Organização sem fins lucrativos'
+  | 'Outro';
+
+export type CompanyIndustry =
+  | 'Desenvolvimento de Software'
+  | 'Dados / BI'
+  | 'Cybersecurity'
+  | 'Cloud'
+  | 'Infraestrutura'
+  | 'Suporte Técnico'
+  | 'Inteligência Artificial / Machine Learning'
+  | 'DevOps'
+  | 'Redes'
+  | 'Desenvolvimento Web'
+  | 'Desenvolvimento Mobile'
+  | 'Banco de Dados'
+  | 'Outro';
+
+export type CompanySize =
+  | '1–10 funcionários'
+  | '11–50 funcionários'
+  | '51–200 funcionários'
+  | '201–500 funcionários'
+  | '500+ funcionários';
+
+export type WorkModel = 'Presencial' | 'Híbrido' | 'Remoto';
+
+export type ContractType =
+  | 'CLT'
+  | 'PJ'
+  | 'Estágio'
+  | 'Jovem Aprendiz'
+  | 'Temporário'
+  | 'Freelancer'
+  | 'Outro';
+
+export interface Job {
+  id: string;
+  title: string;
+  area?: JobArea | string;
+  level?: ProfessionalLevel | string;
+  minExperienceYears?: number;
+  description: string;
+  skills: JobSkill[];
+  status?: 'ativa' | 'pausada' | 'fechada' | 'Aguardando análise do recrutador' | 'Em análise pelo recrutador' | string;
+  createdAt?: string;
+  updatedAt?: string;
+
+  // Identificação e Vinculação da Empresa
+  company?: string;
+  companyId?: string;
+  companyName?: string;
+  companyEmail?: string;
+  cnpj?: string;
+
+  // Informações da Empresa / Organização
+  companyType?: CompanyType | string;
+  companyIndustry?: CompanyIndustry | string;
+  companySize?: CompanySize | string;
+  companyCity?: string;
+  companyState?: string;
+  companyCountry?: string;
+  companyLocation?: string;
+  companyWebsite?: string;
+  companyDescription?: string;
+
+  // Informações Complementares da Vaga
+  workModel?: WorkModel | string;
+  location?: string;
+  salary?: string;
+  salaryMin?: string | number;
+  salaryMax?: string | number;
+  salaryRange?: string;
+  contractType?: ContractType | string;
+  mandatoryRequirements?: string;
+  desirableRequirements?: string;
+  benefits?: string;
+  postedAt?: string;
+}
+
+
+export interface CreateJobInput {
+  title: string;
+  area: string;
+  level: ProfessionalLevel;
+  minExperienceYears: number;
+  description: string;
+  skills: {
+    name: string;
+    weight: number;
+    required?: boolean;
+    nome?: string;
+    peso?: number;
+    obrigatoria?: boolean;
+  }[];
+
+  companyId?: string;
+  companyName?: string;
+  companyEmail?: string;
+  cnpj?: string;
+  companyType?: string;
+  companyIndustry?: string;
+  companySize?: string;
+  companyCity?: string;
+  companyState?: string;
+  companyCountry?: string;
+  companyLocation?: string;
+  companyWebsite?: string;
+  companyDescription?: string;
+
+  workModel?: string;
+  location?: string;
+  salaryMin?: string | number;
+  salaryMax?: string | number;
+  salaryRange?: string;
+  contractType?: string;
+  mandatoryRequirements?: string;
+  desirableRequirements?: string;
+  benefits?: string;
+}

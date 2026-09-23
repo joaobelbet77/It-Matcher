@@ -1,20 +1,11 @@
 import type { Metadata } from 'next';
-import { Plus_Jakarta_Sans, Inter } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import './globals.css';
+import { ToastProvider } from '@/components/layout/Toast';
+import { AuthProvider } from '@/components/auth/AuthContext';
+import { AppLayoutContent } from '@/components/layout/AppLayoutContent';
 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-heading',
-  display: 'swap',
-});
-
-const inter = Inter({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-sans',
-  display: 'swap',
-});
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'ItMatcher Enterprise | Recrutamento Inteligente & Match de Competências',
@@ -30,9 +21,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR" className={`h-full ${plusJakartaSans.variable} ${inter.variable}`}>
-      <body className="min-h-screen bg-[#f8fafc] dark:bg-[#09090b] text-slate-900 dark:text-zinc-100 antialiased font-sans selection:bg-blue-600 selection:text-white">
-        {children}
+    <html lang="pt-BR" className="h-full">
+      <body className={`${inter.className} min-h-screen bg-[#f8fafc] dark:bg-[#09090b] text-slate-900 dark:text-zinc-100 antialiased font-sans selection:bg-blue-600 selection:text-white`}>
+        <ToastProvider>
+          <AuthProvider>
+            <AppLayoutContent>{children}</AppLayoutContent>
+          </AuthProvider>
+        </ToastProvider>
       </body>
     </html>
   );

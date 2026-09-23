@@ -3,335 +3,172 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ItMatcher - Vagas em Tecnologia</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <title>TalentMatch - Triagem de Candidatos</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 </head>
 <body>
   <div class="app-layout">
-    <!-- Barra Lateral na Esquerda -->
     <aside class="sidebar">
       <div>
         <div class="brand">
           <div class="brand-icon-box">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="9"/>
-              <circle cx="12" cy="12" r="5"/>
-              <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
-            </svg>
+            🎯
           </div>
           <div>
             <h2>ItMatcher</h2>
+            <span>Smart Recruiting</span>
           </div>
         </div>
-
-        <!-- Abas na Parte Esquerda -->
+        
         <nav class="nav-menu">
-          <button class="nav-item active" onclick="switchTab('jobs', this)">
-            <i class="fa-solid fa-briefcase"></i>
-            <span>Vagas Disponíveis</span>
-          </button>
-          <button class="nav-item" onclick="switchTab('applications', this)">
-            <i class="fa-solid fa-file-lines"></i>
-            <span>Minhas Candidaturas</span>
-            <span id="appCountBadge" class="badge-count">0</span>
-          </button>
-          <button class="nav-item" onclick="switchTab('about', this)">
-            <i class="fa-solid fa-circle-info"></i>
-            <span>Sobre Nós</span>
-          </button>
+          <a href="#" class="nav-item active"><i class="fa-solid fa-house"></i> Início / Triagem</a>
+          <a href="#" class="nav-item"><i class="fa-solid fa-briefcase"></i> Vagas Criadas</a>
+          <a href="#" class="nav-item"><i class="fa-solid fa-users"></i> Resultados</a>
         </nav>
       </div>
 
-      <!-- Perfil na Parte Inferior Esquerda -->
-      <div class="sidebar-profile" onclick="switchTab('profile', null)">
-        <div class="profile-avatar" id="avatarLetter">C</div>
-        <div class="profile-info">
-          <h4 id="sidebarName">Carlos Eduardo</h4>
-          <p id="sidebarRole">Ver Meu Perfil</p>
+      <div class="sidebar-footer">
+        <div class="status-indicator">
+          <span class="status-dot"></span>
+          <small>Sistema Ativo • v2.0</small>
         </div>
-        <i class="fa-solid fa-gear" style="color:var(--text-muted); font-size:0.8rem;"></i>
       </div>
     </aside>
 
-    <!-- Conteúdo Principal à Direita -->
     <main class="main-content">
       <header class="page-header">
         <div class="header-top-row">
-          <div>
-            <h1 id="pageTitle">Vagas em Tecnologia</h1>
-            <p id="pageSubtitle">Descubra oportunidades e veja sua compatibilidade em tempo real</p>
+          <div class="header-title-row">
+            <h1>TalentMatch</h1>
+            <span class="header-badge">Triagem de Candidatos</span>
           </div>
-          <button id="themeToggleBtn" class="theme-btn" onclick="toggleTheme()">
+          <button id="themeToggleBtn" class="theme-toggle-btn" onclick="toggleStaticTheme()">
             <i class="fa-solid fa-moon" id="themeIcon"></i>
-            <span id="themeText">Modo Escuro</span>
+            <span id="themeToggleText">Modo Escuro</span>
           </button>
         </div>
+        <p>Compare o currículo de um candidato com os requisitos de uma vaga e descubra o nível de compatibilidade em segundos.</p>
       </header>
 
-      <!-- ABA 1: VAGAS DISPONÍVEIS -->
-      <div id="tab-jobs" class="tab-content active">
-        <!-- Busca e Filtros -->
-        <div class="search-bar-row">
-          <input type="text" id="jobSearchInput" placeholder="Buscar vagas por cargo ou tecnologia (ex: React, Node, Python...)" oninput="filterJobs()" />
-          <div class="filter-chips">
-            <button class="filter-btn active" onclick="filterByModel('Todos', this)">Todos</button>
-            <button class="filter-btn" onclick="filterByModel('Remoto', this)">Remoto</button>
-            <button class="filter-btn" onclick="filterByModel('Híbrido', this)">Híbrido</button>
-          </div>
-        </div>
-
-        <!-- Banner de Match -->
-        <div class="match-info-banner">
-          <div style="display:flex; align-items:center; gap:0.5rem;">
-            <span>🎯</span>
-            <div>
-              <strong>Calculando Match com base nas suas habilidades:</strong>
-              <div id="currentSkillsPreview" style="font-size:0.75rem; color:var(--text-muted);">React, TypeScript, Node.js, Next.js, Git, SQL</div>
-            </div>
-          </div>
-          <button onclick="switchTab('profile', null)" class="btn-link">Editar Perfil &rarr;</button>
-        </div>
-
-        <!-- Lista de Vagas -->
-        <div id="jobsListContainer" class="jobs-list"></div>
-      </div>
-
-      <!-- ABA 2: MINHAS CANDIDATURAS -->
-      <div id="tab-applications" class="tab-content" style="display:none;">
-        <div id="applicationsContainer"></div>
-      </div>
-
-      <!-- ABA 3: MEU PERFIL & MINHA CONTA -->
-      <div id="tab-profile" class="tab-content" style="display:none;">
-        <!-- Header da Conta -->
-        <div class="card" style="margin-bottom: 1.5rem; padding: 1.75rem;">
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; padding-bottom:1.25rem; border-bottom:1px solid var(--border);">
-            <div style="display:flex; align-items:center; gap:1rem;">
-              <div class="profile-avatar" id="profileHeaderAvatar" style="width:56px; height:56px; font-size:1.5rem; border-radius:16px;">C</div>
-              <div>
-                <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
-                  <h2 id="profileDisplayName" style="font-size:1.3rem; font-weight:900; margin:0;">Carlos Eduardo Silva</h2>
-                  <span class="badge-sub" style="font-size:0.65rem;">✓ Conta Ativa</span>
-                </div>
-                <p id="profileDisplayRole" style="font-size:0.8rem; color:var(--primary); font-weight:700; margin-top:2px;">Desenvolvedor Full Stack • Pleno</p>
-                <p id="profileDisplayEmail" style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">📧 carlos.silva@email.com • 📍 São Paulo, SP</p>
-              </div>
-            </div>
-
-            <!-- Botões de Ação da Conta -->
-            <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-              <button type="button" class="filter-btn" onclick="openAuthModal('register')">➕ Criar Nova Conta</button>
-              <button type="button" class="filter-btn" style="color:#e11d48; border-color:#fecdd3;" onclick="logoutAccount()">🚪 Sair da Conta</button>
-            </div>
-          </div>
-
-          <!-- Métricas Rápidas -->
-          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:1rem; margin-top:1.25rem;">
-            <div style="padding:0.85rem; background:var(--input-bg); border-radius:12px; border:1px solid var(--border);">
-              <span style="font-size:0.7rem; font-weight:700; color:var(--text-muted); display:block;">Completude do Perfil</span>
-              <strong style="font-size:1.1rem; color:var(--text); display:block; margin-top:2px;">95% Completo</strong>
-            </div>
-            <div style="padding:0.85rem; background:var(--input-bg); border-radius:12px; border:1px solid var(--border);">
-              <span style="font-size:0.7rem; font-weight:700; color:var(--text-muted); display:block;">Candidaturas Enviadas</span>
-              <strong id="profileAppsCount" style="font-size:1.1rem; color:var(--text); display:block; margin-top:2px;">0 vagas</strong>
-            </div>
-            <div style="padding:0.85rem; background:var(--input-bg); border-radius:12px; border:1px solid var(--border);">
-              <span style="font-size:0.7rem; font-weight:700; color:var(--text-muted); display:block;">Preferência</span>
-              <strong style="font-size:1.1rem; color:var(--primary); display:block; margin-top:2px;">100% Remoto</strong>
-            </div>
-          </div>
-        </div>
-
-        <!-- Formulário Profissional em Blocos -->
-        <form onsubmit="saveProfile(event)" style="display:flex; flex-direction:column; gap:1.25rem;">
-          <!-- Bloco 1 -->
-          <div class="card" style="padding:1.5rem;">
-            <h3 style="font-size:0.85rem; font-weight:900; text-transform:uppercase; margin-bottom:1rem; color:var(--text);">👤 1. Informações Pessoais & Contato</h3>
-            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-              <div class="form-group" style="margin:0;">
-                <label>Nome Completo *</label>
-                <input type="text" id="profileName" value="Carlos Eduardo Silva" required />
-              </div>
-              <div class="form-group" style="margin:0;">
-                <label>E-mail *</label>
-                <input type="email" id="profileEmail" value="carlos.silva@email.com" required />
-              </div>
-              <div class="form-group" style="margin:0;">
-                <label>Telefone / WhatsApp</label>
-                <input type="text" id="profilePhone" value="(11) 98765-4321" />
-              </div>
-              <div class="form-group" style="margin:0;">
-                <label>Cidade / Estado</label>
-                <input type="text" id="profileLocation" value="São Paulo, SP" />
-              </div>
-            </div>
-          </div>
-
-          <!-- Bloco 2 -->
-          <div class="card" style="padding:1.5rem;">
-            <h3 style="font-size:0.85rem; font-weight:900; text-transform:uppercase; margin-bottom:1rem; color:var(--text);">💼 2. Carreira & Preferências</h3>
-            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-              <div class="form-group" style="margin:0;">
-                <label>Cargo Atual ou Almejado</label>
-                <input type="text" id="profileRole" value="Desenvolvedor Full Stack" />
-              </div>
-              <div class="form-group" style="margin:0;">
-                <label>Senioridade</label>
-                <select id="profileSeniority" style="width:100%; padding:0.65rem; background:var(--input-bg); border:1px solid var(--border); border-radius:8px; color:var(--text); font-size:0.85rem;">
-                  <option value="Júnior">Júnior</option>
-                  <option value="Pleno" selected>Pleno</option>
-                  <option value="Sênior">Sênior</option>
-                  <option value="Especialista">Especialista</option>
-                </select>
-              </div>
-              <div class="form-group" style="margin:0;">
-                <label>Modelo Preferido</label>
-                <select id="profileWorkPref" style="width:100%; padding:0.65rem; background:var(--input-bg); border:1px solid var(--border); border-radius:8px; color:var(--text); font-size:0.85rem;">
-                  <option value="Remoto" selected>Remoto</option>
-                  <option value="Híbrido">Híbrido</option>
-                  <option value="Presencial">Presencial</option>
-                </select>
-              </div>
-              <div class="form-group" style="margin:0;">
-                <label>Pretensão Salarial</label>
-                <input type="text" id="profileSalary" value="R$ 8.000,00" />
-              </div>
-            </div>
-          </div>
-
-          <!-- Bloco 3 -->
-          <div class="card" style="padding:1.5rem;">
-            <h3 style="font-size:0.85rem; font-weight:900; text-transform:uppercase; margin-bottom:1rem; color:var(--text);">💻 3. Stack & Tecnologias Dominadas</h3>
-            <div class="form-group" style="margin:0;">
-              <label>Habilidades e Ferramentas (separadas por vírgula):</label>
-              <textarea id="profileSkills" rows="4">React, TypeScript, Node.js, Next.js, Git, SQL, Tailwind CSS, Docker</textarea>
-            </div>
-          </div>
-
-          <!-- Botão Salvar -->
-          <div class="card" style="padding:1.25rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
-            <span style="font-size:0.75rem; color:var(--text-muted);">As alterações atualizam imediatamente todos os seus cálculos de match.</span>
-            <button type="submit" class="btn btn-primary" style="padding:0.75rem 2rem; font-weight:900;">💾 Salvar Alterações</button>
-          </div>
-        </form>
-      </div>
-
-      <!-- ABA 4: SOBRE NÓS -->
-      <div id="tab-about" class="tab-content" style="display:none;">
-        <div class="card about-hero-card" style="margin-bottom: 1.5rem; position: relative; overflow: hidden;">
-          <span class="badge-sub" style="margin-bottom: 0.75rem; display: inline-block;">🌱 Nossa História & Propósito</span>
-          <h2 style="font-size: 1.4rem; font-weight: 900; color: var(--text); margin-bottom: 0.75rem;">
-            Por que o <span style="color: var(--primary);">ItMatcher</span> nasceu?
-          </h2>
-          <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; display: flex; flex-direction: column; gap: 0.6rem;">
-            <p>
-              O mercado de tecnologia cresce em um ritmo acelerado, mas o processo de encontrar um emprego continua sendo burocrático, desgastante e pouco transparente. Quantas vezes você já se candidatou a dezenas de vagas sem saber se o seu perfil realmente atendia aos requisitos ou por que não foi chamado para uma entrevista?
-            </p>
-            <p>
-              O <strong>ItMatcher</strong> surgiu com uma missão clara: <strong>simplificar, agilizar e humanizar a busca por empregos em tecnologia</strong>. Acreditamos que o talento técnico não deve se perder em processos seletivos confusos. Criamos uma ponte direta e inteligente entre desenvolvedores e oportunidades reais.
-            </p>
-          </div>
-        </div>
-
-        <h3 style="font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: 0.75rem;">O que nos move e faz a diferença:</h3>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div class="card" style="padding: 1.25rem;">
-            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🎯</div>
-            <h4 style="font-size: 0.9rem; font-weight: 800; color: var(--text); margin-bottom: 0.35rem;">Match Transparente e Sem Segredos</h4>
-            <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;">Você visualiza na hora o seu percentual de compatibilidade com cada vaga, sabendo exatamente quais requisitos já domina antes mesmo de enviar seu currículo.</p>
-          </div>
-
-          <div class="card" style="padding: 1.25rem;">
-            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">⚡</div>
-            <h4 style="font-size: 0.9rem; font-weight: 800; color: var(--text); margin-bottom: 0.35rem;">Economia de Tempo e Foco</h4>
-            <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;">Chega de formulários intermináveis. Com o ItMatcher, você aplica em 1 clique e foca apenas nas vagas que fazem sentido para seu momento.</p>
-          </div>
-
-          <div class="card" style="padding: 1.25rem;">
-            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🧭</div>
-            <h4 style="font-size: 0.9rem; font-weight: 800; color: var(--text); margin-bottom: 0.35rem;">Direcionamento de Carreira</h4>
-            <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;">Caso falte alguma tecnologia para a vaga desejada, o sistema aponta claramente o que estudar para alcançar o cargo dos seus sonhos.</p>
-          </div>
-
-          <div class="card" style="padding: 1.25rem;">
-            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🤝</div>
-            <h4 style="font-size: 0.9rem; font-weight: 800; color: var(--text); margin-bottom: 0.35rem;">Foco no Desenvolvedor</h4>
-            <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;">Nascemos de quem vive tecnologia para quem constrói tecnologia. Respeitamos seu tempo, valorizamos sua senioridade e simplificamos sua jornada.</p>
-          </div>
-        </div>
-
-        <div class="card" style="background: var(--primary-light); border: 1px solid var(--primary-border); padding: 1.25rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+     
+      <section class="guide-banner">
+        <div class="guide-step">
+          <span class="step-num">1</span>
           <div>
-            <span style="font-size: 0.75rem; font-weight: 800; color: var(--primary); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Nossa Missão</span>
-            <p style="font-size: 0.8rem; color: var(--text); line-height: 1.5;">Conectar talentos de tecnologia às melhores oportunidades através de precisão técnica, eliminando ruídos e acelerando contratações justas.</p>
-          </div>
-          <div>
-            <span style="font-size: 0.75rem; font-weight: 800; color: var(--primary); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Nossa Visão</span>
-            <p style="font-size: 0.8rem; color: var(--text); line-height: 1.5;">Ser o ecossistema de recrutamento técnico mais confiável e intuitivo, onde cada profissional encontra seu próximo desafio em segundos.</p>
+            <strong>Passo 1: Defina a Vaga</strong>
+            <p>Digite o cargo e os requisitos necessários</p>
           </div>
         </div>
-      </div>
+        <div class="guide-step">
+          <span class="step-num">2</span>
+          <div>
+            <strong>Passo 2: Insira o Candidato</strong>
+            <p>Coloque o nome e as habilidades dele</p>
+          </div>
+        </div>
+        <div class="guide-step">
+          <span class="step-num">3</span>
+          <div>
+            <strong>Passo 3: Veja o Resultado</strong>
+            <p>Veja a pontuação (0-100%) e o comparativo</p>
+          </div>
+        </div>
+      </section>
+
+  
+      <section class="quick-examples">
+        <div class="quick-header">
+          <i class="fa-solid fa-bolt"></i>
+          <strong>Quer testar agora mesmo sem digitar nada? Clique em um modelo:</strong>
+        </div>
+        <div class="quick-buttons">
+          <button class="btn-quick" onclick="loadExample('fullstack')">
+            <strong>Exemplo: Dev Full Stack</strong>
+            <span>Testa React + Node contra Carlos (78% de Aderência)</span>
+          </button>
+          <button class="btn-quick" onclick="loadExample('frontend')">
+            <strong>Exemplo: Dev Frontend</strong>
+            <span>Testa Next.js + CSS contra Elaine (90% de Aderência)</span>
+          </button>
+          <button class="btn-quick" onclick="loadExample('devops')">
+            <strong>Exemplo: Cloud & DevOps</strong>
+            <span>Testa AWS + Linux contra Lucas (52% de Aderência)</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="forms-grid">
+      
+        <div class="card card-step-1">
+          <div class="card-title">
+            <span class="step-badge">1</span>
+            <span>Passo 1: Criar ou Escolher a Vaga</span>
+          </div>
+
+          <div class="form-group">
+            <label>Qual é o nome do cargo / vaga?</label>
+            <input type="text" id="jobTitle" placeholder="Ex: Desenvolvedor Full Stack" value="Desenvolvedor Full Stack" />
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group flex-2">
+              <label>Adicionar Habilidade</label>
+              <input type="text" id="skillName" placeholder="Ex: React, Node.js..." />
+            </div>
+            <div class="form-group flex-2">
+              <label>Importância</label>
+              <select id="skillWeight" class="select-input">
+                <option value="5">Obrigatória (Peso 5)</option>
+                <option value="4" selected>Muito Importante (Peso 4)</option>
+                <option value="3">Importância Média (Peso 3)</option>
+                <option value="2">Desejável (Peso 2)</option>
+                <option value="1">Diferencial (Peso 1)</option>
+              </select>
+            </div>
+            <button class="btn btn-secondary" onclick="addSkillToJob()">+ Adicionar</button>
+          </div>
+
+          <label class="label-sub">Habilidades exigidas nesta vaga:</label>
+          <div id="jobSkillsList" class="skills-preview"></div>
+          <button class="btn btn-primary btn-block" onclick="saveJob()">💾 Salvar Esta Vaga</button>
+        </div>
+
+      
+        <div class="card card-step-2">
+          <div class="card-title">
+            <span class="step-badge">2</span>
+            <span>Passo 2: Avaliar um Candidato</span>
+          </div>
+          <div class="form-group">
+            <label>Nome do Candidato(a):</label>
+            <input type="text" id="candidateName" placeholder="Ex: Carlos Eduardo Silva" />
+          </div>
+          <div class="form-group">
+            <label>Habilidades no currículo (separadas por vírgula):</label>
+            <textarea id="candidateSkills" rows="3" placeholder="React, Node.js, TypeScript, PostgreSQL, Git"></textarea>
+          </div>
+          <button class="btn btn-primary btn-block" onclick="processMatch()">🔍 Ver Compatibilidade (Calcular Match)</button>
+        </div>
+      </section>
+
+   
+      <section class="results-section">
+        <div class="results-header">
+          <div class="card-title" style="margin-bottom:0;">
+            <span class="step-badge">3</span>
+            <span>Passo 3: Resultados das Avaliações</span>
+          </div>
+        </div>
+
+        <div id="resultsContainer" class="results-container">
+          <div class="empty-state card">
+            <p><strong>Nenhum candidato avaliado ainda.</strong></p>
+            <p style="font-size:0.85rem; margin-top:4px; color:var(--text-muted);">Preencha os passos acima ou clique nos <strong>Modelos Rápidos</strong> para ver o resultado na hora.</p>
+          </div>
+        </div>
+      </section>
     </main>
-  </div>
-
-  <!-- Modal de Candidatura -->
-  <div id="applyModal" class="modal-overlay" style="display:none;">
-    <div class="modal-card">
-      <button class="modal-close" onclick="closeApplyModal()">&times;</button>
-      <div id="modalContent"></div>
-    </div>
-  </div>
-
-  <!-- Modal de Autenticação / Criar Conta -->
-  <div id="authModal" class="modal-overlay" style="display:none;">
-    <div class="modal-card" style="max-width:440px;">
-      <button class="modal-close" onclick="closeAuthModal()">&times;</button>
-      <div style="text-align:center; margin-bottom:1.25rem;">
-        <div class="brand-icon-box" style="margin:0 auto 0.75rem auto; width:44px; height:44px;">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="9"/>
-            <circle cx="12" cy="12" r="5"/>
-            <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
-          </svg>
-        </div>
-        <h3 id="authModalTitle" style="font-size:1.2rem; font-weight:900;">Criar Nova Conta no ItMatcher</h3>
-        <p style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">Acesse seu perfil profissional e histórico de matches.</p>
-      </div>
-
-      <div style="display:flex; background:var(--input-bg); padding:4px; border-radius:10px; margin-bottom:1.25rem;">
-        <button type="button" id="tabAuthRegister" class="filter-btn active" style="flex:1;" onclick="setAuthMode('register')">Criar Conta</button>
-        <button type="button" id="tabAuthLogin" class="filter-btn" style="flex:1;" onclick="setAuthMode('login')">Entrar</button>
-      </div>
-
-      <form onsubmit="handleAuthSubmit(event)">
-        <div id="authNameGroup" class="form-group">
-          <label>Nome Completo</label>
-          <input type="text" id="authInputName" placeholder="Ex: Carlos Eduardo Silva" />
-        </div>
-
-        <div class="form-group">
-          <label>E-mail</label>
-          <input type="email" id="authInputEmail" placeholder="Ex: seuemail@exemplo.com" required />
-        </div>
-
-        <div class="form-group">
-          <label>Senha</label>
-          <input type="password" id="authInputPassword" placeholder="••••••••" required />
-        </div>
-
-        <div id="authRoleGroup" class="form-group">
-          <label>Cargo / Especialidade</label>
-          <input type="text" id="authInputRole" placeholder="Ex: Desenvolvedor Full Stack" />
-        </div>
-
-        <button type="submit" id="authSubmitBtn" class="btn btn-primary btn-block" style="margin-top:1rem;">Criar Conta e Acessar</button>
-      </form>
-    </div>
   </div>
 
   <script src="script.js"></script>
