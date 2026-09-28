@@ -44,29 +44,29 @@ export const Modal: React.FC<ModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto font-sans">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm transition-opacity animate-in fade-in duration-200"
+        className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity animate-in fade-in duration-200"
         onClick={onClose}
       />
 
       {/* Modal dialog */}
       <div
-        className={`relative w-full ${maxWidthClasses[maxWidth]} bg-slate-900 text-slate-100 rounded-3xl shadow-2xl border border-slate-800 z-10 overflow-hidden transform transition-all animate-in zoom-in-95 duration-200`}
+        className={`relative w-full ${maxWidthClasses[maxWidth]} bg-white dark:bg-[#121215] text-slate-900 dark:text-zinc-100 rounded-3xl shadow-2xl border border-slate-200/90 dark:border-zinc-800 z-10 overflow-hidden transform transition-all animate-in zoom-in-95 duration-200`}
         role="dialog"
         aria-modal="true"
       >
         {/* Header */}
-        <div className="px-6 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-950/60">
+        <div className="px-6 py-5 border-b border-slate-100 dark:border-zinc-800 flex items-center justify-between bg-slate-50/70 dark:bg-zinc-900/50">
           <div>
-            <h3 className="text-lg font-bold text-white">{title}</h3>
-            {subtitle && <p className="text-xs text-slate-400 mt-0.5">{subtitle}</p>}
+            <h3 className="text-base sm:text-lg font-heading font-bold text-slate-900 dark:text-white">{title}</h3>
+            {subtitle && <p className="text-xs text-slate-500 dark:text-zinc-400 mt-0.5">{subtitle}</p>}
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
-            aria-label="Fechar"
+            className="p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+            aria-label="Fechar modal"
           >
             <X className="w-5 h-5" />
           </button>

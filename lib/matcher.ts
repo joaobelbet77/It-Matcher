@@ -38,7 +38,7 @@ export function calculateCandidateMatch(
     id: `app-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
     jobId: targetJob.id,
     jobTitle: targetJob.title,
-    company: targetJob.company,
+    company: targetJob.company || targetJob.companyName || 'Empresa Confidencial',
     candidateName: candidateName.trim(),
     candidateEmail: candidateEmail.trim(),
     candidateSkills: candidateSkillsArr,

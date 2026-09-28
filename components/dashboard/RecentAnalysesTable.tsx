@@ -28,10 +28,10 @@ export const RecentAnalysesTable: React.FC<RecentAnalysesTableProps> = ({
       <Card>
         <CardHeader>
           <div className="flex items-center gap-2">
-            <Clock className="w-5 h-5 text-blue-400" />
+            <Clock className="w-5 h-5 text-blue-600 dark:text-blue-400" />
             <div>
-              <h3 className="text-base font-bold text-white">Últimas Análises e Matchings Calculados</h3>
-              <p className="text-xs text-slate-400">Histórico recente de triagem técnica automatizada</p>
+              <h3 className="text-base font-heading font-bold text-slate-900 dark:text-white">Últimas Análises e Matchings Calculados</h3>
+              <p className="text-xs text-slate-500 dark:text-zinc-400">Histórico recente de triagem técnica automatizada</p>
             </div>
           </div>
           <Link href="/matching">
@@ -44,7 +44,7 @@ export const RecentAnalysesTable: React.FC<RecentAnalysesTableProps> = ({
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs border-collapse">
               <thead>
-                <tr className="bg-slate-950/80 border-b border-slate-800 text-slate-400 font-semibold">
+                <tr className="bg-slate-50 dark:bg-zinc-900/60 border-b border-slate-200 dark:border-zinc-800 text-slate-600 dark:text-zinc-400 font-bold uppercase tracking-wider text-[11px] font-heading">
                   <th className="py-3 px-4">Candidato</th>
                   <th className="py-3 px-4">Vaga</th>
                   <th className="py-3 px-4">Matching & Classificação</th>
@@ -53,13 +53,13 @@ export const RecentAnalysesTable: React.FC<RecentAnalysesTableProps> = ({
                   <th className="py-3 px-4 text-right">Ação</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/80">
+              <tbody className="divide-y divide-slate-100 dark:divide-zinc-800/80">
                 {analyses.slice(0, 6).map((item, idx) => (
-                  <tr key={`${item.jobId}-${item.candidateId}-${idx}`} className="hover:bg-slate-800/40 transition-colors">
-                    <td className="py-3.5 px-4 font-bold text-white text-sm">
+                  <tr key={`${item.jobId}-${item.candidateId}-${idx}`} className="hover:bg-slate-50/80 dark:hover:bg-zinc-800/40 transition-colors">
+                    <td className="py-3.5 px-4 font-bold text-slate-900 dark:text-white text-sm font-heading">
                       {item.candidateName}
                     </td>
-                    <td className="py-3.5 px-4 text-slate-300 font-medium">
+                    <td className="py-3.5 px-4 text-slate-700 dark:text-zinc-300 font-medium">
                       {item.jobTitle}
                     </td>
                     <td className="py-3.5 px-4">
@@ -70,8 +70,8 @@ export const RecentAnalysesTable: React.FC<RecentAnalysesTableProps> = ({
                         size="sm"
                       />
                     </td>
-                    <td className="py-3.5 px-4 text-slate-500">
-                      {new Date(item.calculatedAt).toLocaleDateString('pt-BR')}
+                    <td className="py-3.5 px-4 text-slate-500 dark:text-zinc-400">
+                      {item.calculatedAt ? new Date(item.calculatedAt).toLocaleDateString('pt-BR') : 'Hoje'}
                     </td>
                     <td className="py-3.5 px-4">
                       <ReviewStatusBadge status="Pendente de revisão" size="sm" />

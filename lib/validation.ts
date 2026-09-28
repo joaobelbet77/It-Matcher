@@ -73,7 +73,7 @@ export const JobSkillSchema = z.object({
 export const JobSchema = z.object({
   title: z.string().min(3, 'O título da vaga deve ter no mínimo 3 caracteres').trim(),
   area: z.string().min(2, 'Selecione uma área de atuação').trim(),
-  level: z.enum(ProfessionalLevels, { errorMap: () => ({ message: 'Nível profissional inválido' }) }),
+  level: z.enum(ProfessionalLevels, { message: 'Nível profissional inválido' }),
   minExperienceYears: z.number().min(0, 'A experiência mínima não pode ser negativa'),
   description: z.string().min(10, 'A descrição deve ter no mínimo 10 caracteres').trim(),
   skills: z.array(JobSkillSchema).min(1, 'A vaga deve conter pelo menos uma competência técnica'),
@@ -131,7 +131,7 @@ export const CandidateSchema = z.object({
   phone: z.string().optional().or(z.literal('')),
   experienceYears: z.number().min(0, 'Anos de experiência não podem ser negativos'),
   technicalSkills: z.array(z.string().min(1)).min(1, 'Adicione ao menos uma competência técnica'),
-  level: z.enum(ProfessionalLevels, { errorMap: () => ({ message: 'Nível profissional inválido' }) }),
+  level: z.enum(ProfessionalLevels, { message: 'Nível profissional inválido' }),
   bio: z.string().optional(),
   resumeFileName: z.string().optional(),
   resumeFileSize: z.number().optional(),

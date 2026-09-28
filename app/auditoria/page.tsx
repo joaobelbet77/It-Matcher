@@ -15,9 +15,7 @@ export default async function AuditoriaPage() {
         description="Histórico imutável de todas as análises de matching, uploads e revisões humanas (RG10)"
       />
 
-      <div className="px-6">
-        <AuditTimeline logs={logs} />
-      </div>
+      <AuditTimeline logs={logs} />
     </div>
   );
 }

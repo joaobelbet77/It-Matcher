@@ -1,12 +1,13 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Logo } from '@/components/ui/Logo';
 import { Button } from '@/components/ui/Button';
 import { useAuth } from '@/components/auth/AuthContext';
 import { useToast } from '@/components/layout/Toast';
-import { Lock, Mail, ShieldCheck, ArrowRight, Building2, UserCheck } from 'lucide-react';
+import { Lock, Mail, ShieldCheck, ArrowRight, ArrowLeft, Building2, UserCheck } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -147,6 +148,16 @@ export default function LoginPage() {
           >
             {loginType === 'empresa' ? 'Entrar na Área da Empresa' : 'Entrar como Administrador'}
           </Button>
+
+          <div className="pt-2 text-center">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-blue-400 transition-colors"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" />
+              <span>Voltar ao Portal do Candidato</span>
+            </Link>
+          </div>
         </form>
 
         <div className="text-center pt-2 border-t border-slate-800 text-[11px] text-slate-400">

@@ -19,19 +19,19 @@ export const MatchingScoreBadge: React.FC<MatchingScoreBadgeProps> = ({
 }) => {
   const configs = {
     ALTA: {
-      bg: 'bg-emerald-950/80 text-emerald-300 border-emerald-800/80 shadow-xs',
-      icon: <CheckCircle2 className="shrink-0 text-emerald-400" />,
-      defaultLabel: 'Alta compatibilidade',
+      bg: 'bg-emerald-50 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/80 shadow-xs',
+      icon: <CheckCircle2 className="shrink-0 text-emerald-600 dark:text-emerald-400" />,
+      defaultLabel: 'Alta Aderência',
     },
     MEDIA: {
-      bg: 'bg-amber-950/80 text-amber-300 border-amber-800/80 shadow-xs',
-      icon: <AlertTriangle className="shrink-0 text-amber-400" />,
-      defaultLabel: 'Média compatibilidade',
+      bg: 'bg-amber-50 dark:bg-amber-950/80 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800/80 shadow-xs',
+      icon: <AlertTriangle className="shrink-0 text-amber-600 dark:text-amber-400" />,
+      defaultLabel: 'Média Aderência',
     },
     BAIXA: {
-      bg: 'bg-rose-950/80 text-rose-300 border-rose-800/80 shadow-xs',
-      icon: <XCircle className="shrink-0 text-rose-400" />,
-      defaultLabel: 'Baixa compatibilidade',
+      bg: 'bg-red-50 dark:bg-red-950/80 text-red-700 dark:text-red-400 border-red-200 dark:border-red-800/80 shadow-xs',
+      icon: <XCircle className="shrink-0 text-red-600 dark:text-red-400" />,
+      defaultLabel: 'Baixa Aderência',
     },
   };
 
@@ -39,9 +39,9 @@ export const MatchingScoreBadge: React.FC<MatchingScoreBadgeProps> = ({
   const displayLabel = label || current.defaultLabel;
 
   const sizeClasses = {
-    sm: 'text-xs px-2 py-0.5 gap-1.5',
-    md: 'text-sm px-3 py-1 gap-2',
-    lg: 'text-base px-4 py-2 gap-2.5 font-bold',
+    sm: 'text-xs px-2.5 py-0.5 gap-1.5',
+    md: 'text-xs sm:text-sm px-3 py-1 gap-2',
+    lg: 'text-sm sm:text-base px-4 py-2 gap-2.5 font-bold',
   };
 
   const iconSizes = {
@@ -52,7 +52,7 @@ export const MatchingScoreBadge: React.FC<MatchingScoreBadgeProps> = ({
 
   return (
     <span
-      className={`inline-flex items-center rounded-full font-semibold border ${current.bg} ${sizeClasses[size]}`}
+      className={`inline-flex items-center rounded-xl font-semibold border font-sans ${current.bg} ${sizeClasses[size]}`}
     >
       {showIcon && React.cloneElement(current.icon, { className: `${iconSizes[size]} shrink-0` })}
       <span className="font-extrabold">{score}%</span>

@@ -28,22 +28,19 @@ export default async function DashboardPage() {
     <div className="space-y-6">
       <Header
         title="Dashboard de Smart Matching"
-        description="Visão limpa e organizada da triagem técnica de candidatos e métricas de recrutamento"
       />
 
-      <div className="px-6">
-        <DashboardClientView
-          jobs={jobs}
-          candidates={candidates}
-          reviews={reviews}
-          allMatchings={allMatchings}
-          rankedRecent={rankedRecent}
-          highCount={highCount}
-          mediumCount={mediumCount}
-          lowCount={lowCount}
-          pendingReviewsCount={pendingReviewsCount}
-        />
-      </div>
+      <DashboardClientView
+        jobs={jobs}
+        candidates={candidates}
+        reviews={reviews}
+        allMatchings={allMatchings}
+        rankedRecent={rankedRecent}
+        highCount={highCount}
+        mediumCount={mediumCount}
+        lowCount={lowCount}
+        pendingReviewsCount={pendingReviewsCount}
+      />
     </div>
   );
 }

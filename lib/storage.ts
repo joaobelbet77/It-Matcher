@@ -150,7 +150,7 @@ class InMemoryDataStore {
   // --- VAGAS (JOBS) ---
   public getJobs(): Job[] {
     return Array.from(this.jobs.values()).sort((a, b) => 
-      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime()
     );
   }
 

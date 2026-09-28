@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { CandidateTabType } from '../types';
 
 interface CandidateFooterProps {
@@ -99,6 +100,15 @@ export const CandidateFooter: React.FC<CandidateFooterProps> = ({ onTabChange })
                 >
                   Sobre a Empresa
                 </button>
+              </li>
+              <li className="pt-1.5 mt-1.5 border-t border-slate-100 dark:border-zinc-800/80">
+                <Link
+                  href="/dashboard"
+                  className="inline-flex items-center gap-1.5 text-blue-600 dark:text-blue-400 hover:underline font-bold text-xs"
+                >
+                  <span>Portal da Empresa / Admin</span>
+                  <span>&rarr;</span>
+                </Link>
               </li>
             </ul>
           </div>

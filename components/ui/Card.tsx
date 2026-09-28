@@ -10,7 +10,12 @@ interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 export const Card: React.FC<CardProps> = ({ children, className, ...props }) => {
   return (
     <div
-      className={twMerge(clsx('bg-slate-900/90 rounded-2xl border border-slate-800/90 shadow-sm text-slate-100 overflow-hidden backdrop-blur-xs', className))}
+      className={twMerge(
+        clsx(
+          'bg-white dark:bg-[#121215] rounded-2xl border border-slate-200/90 dark:border-zinc-800 shadow-xs text-slate-900 dark:text-zinc-100 overflow-hidden transition-colors',
+          className
+        )
+      )}
       {...props}
     >
       {children}
@@ -21,7 +26,9 @@ export const Card: React.FC<CardProps> = ({ children, className, ...props }) => 
 export const CardHeader: React.FC<CardProps> = ({ children, className, ...props }) => {
   return (
     <div
-      className={twMerge(clsx('px-6 py-4 border-b border-slate-800 flex items-center justify-between', className))}
+      className={twMerge(
+        clsx('px-6 py-4 border-b border-slate-100 dark:border-zinc-800 flex items-center justify-between', className)
+      )}
       {...props}
     >
       {children}
@@ -40,7 +47,9 @@ export const CardContent: React.FC<CardProps> = ({ children, className, ...props
 export const CardFooter: React.FC<CardProps> = ({ children, className, ...props }) => {
   return (
     <div
-      className={twMerge(clsx('px-6 py-3 bg-slate-950/60 border-t border-slate-800 flex items-center', className))}
+      className={twMerge(
+        clsx('px-6 py-3.5 bg-slate-50/70 dark:bg-zinc-900/50 border-t border-slate-100 dark:border-zinc-800 flex items-center', className)
+      )}
       {...props}
     >
       {children}

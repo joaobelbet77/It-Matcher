@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
@@ -8,32 +8,24 @@ import {
   Briefcase,
   Users,
   GitCompare,
-  UserCheck,
-  ShieldCheck,
-  FileText,
-  Menu,
-  X,
-  ShieldAlert,
-  User as UserIcon,
-  Settings,
-  LogOut,
-  ChevronUp,
   Building2,
+  FileText,
+  ArrowRight,
+  ShieldAlert,
 } from 'lucide-react';
-import { Logo } from '@/components/ui/Logo';
 import { useAuth } from '@/components/auth/AuthContext';
-import { LogoutModal } from '@/components/auth/LogoutModal';
 
-export const Sidebar: React.FC = () => {
+interface SidebarProps {
+  isOpen?: boolean;
+  onClose?: () => void;
+}
+
+export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose = () => {} }) => {
   const pathname = usePathname();
-  const { user, switchAccountType } = useAuth();
-  const [isOpen, setIsOpen] = useState(false);
-  const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+  const { user } = useAuth();
 
   const isCompany = user?.tipoUsuario === 'empresa' || user?.role === 'COMPANY' || user?.role === 'Empresa';
 
-  // Navegação limpa e contextual por tipo de perfil
   const companyNavItems = [
     { label: 'Painel da Empresa', href: '/dashboard', icon: LayoutDashboard },
     { label: 'Minha Vaga', href: '/empresa', icon: Briefcase },
@@ -41,7 +33,7 @@ export const Sidebar: React.FC = () => {
   ];
 
   const adminNavItems = [
-    { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+    { label: 'Dashboard Geral', href: '/dashboard', icon: LayoutDashboard },
     { label: 'Empresas Parceiras', href: '/empresa', icon: Building2 },
     { label: 'Gestão de Vagas', href: '/vagas', icon: Briefcase },
     { label: 'Banco de Candidatos', href: '/candidatos', icon: Users },
@@ -53,198 +45,141 @@ export const Sidebar: React.FC = () => {
 
   return (
     <>
-      {/* Topbar Mobile com Logo Integrada no Fundo Escuro */}
-      <div className="lg:hidden flex items-center justify-between p-3.5 bg-slate-900 text-white border-b border-slate-800 sticky top-0 z-40 shadow-xs">
-        <Link href="/dashboard" className="flex items-center">
-          <Logo variant="full" theme="dark" size="sm" />
-        </Link>
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="p-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white cursor-pointer"
-          aria-label="Abrir menu"
-        >
-          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
-      </div>
-
-      {/* Backdrop Mobile */}
+      {/* Overlay escurecido ao abrir */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-slate-950/70 z-40 lg:hidden backdrop-blur-xs"
-          onClick={() => setIsOpen(false)}
+          className="fixed inset-0 z-40 bg-black/50 backdrop-blur-xs transition-opacity"
+          onClick={onClose}
         />
       )}
 
-      {/* Container Lateral da Sidebar (Fundo Escuro bg-slate-900 Padrão) */}
+      {/* Sidebar Drawer */}
       <aside
-        className={`fixed top-0 left-0 z-50 h-screen w-64 bg-slate-900 text-slate-300 flex flex-col border-r border-slate-800 transition-transform duration-200 lg:translate-x-0 ${
+        className={`fixed top-0 left-0 z-50 h-screen w-72 bg-white dark:bg-[#0c0c0e] text-slate-900 dark:text-zinc-100 flex flex-col justify-between p-6 border-r border-slate-200/80 dark:border-zinc-800 shadow-2xl font-sans transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        {/* Topo da Sidebar: Logo Alvo/Flecha + ITMATCHER na mesma linha horizontal sem fundo branco */}
-        <div className="p-4 bg-slate-900 border-b border-slate-800 flex items-center justify-between">
-          <Link href="/dashboard" className="flex items-center" onClick={() => setIsOpen(false)}>
-            <Logo variant="full" theme="dark" size="md" />
-          </Link>
-          <button
-            onClick={() => setIsOpen(false)}
-            className="lg:hidden p-1.5 text-slate-400 hover:text-white"
-          >
-            <X className="w-5 h-5" />
-          </button>
-        </div>
-
-        {/* Guardrail Banner */}
-        <div className="mx-3.5 my-3 p-3 bg-blue-950/70 border border-blue-800/60 rounded-xl text-xs text-blue-200 flex items-start gap-2">
-          <ShieldAlert className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
-          <div className="text-[11px] leading-snug">
-            <span className="font-bold text-white block mb-0.5">Apoio à Decisão (RG03)</span>
-            {isCompany 
-              ? 'Área da Empresa: adicione sua vaga e visualize os matches.' 
-              : 'Decisão final 100% sob controle do Administrador.'}
-          </div>
-        </div>
-
-        {/* Links de Navegação (Item Selecionado Ativo em AZUL) */}
-        <nav className="flex-1 px-3 py-2 space-y-1 overflow-y-auto">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = pathname === item.href || (item.href !== '/dashboard' && pathname.startsWith(item.href));
-
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setIsOpen(false)}
-                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                  isActive
-                    ? 'bg-blue-600 text-white font-bold shadow-md shadow-blue-900/30'
-                    : 'text-slate-400 hover:text-white hover:bg-slate-800/70'
-                }`}
-              >
-                <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-slate-400'}`} />
-                <span>{item.label}</span>
-              </Link>
-            );
-          })}
-
-          {/* Link para o Portal do Candidato */}
-          <div className="pt-2 mt-2 border-t border-slate-800/80">
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          {/* Topo da Sidebar: Logo + Fechar */}
+          <div className="flex items-center justify-between mb-6 px-1">
             <Link
-              href="/"
-              onClick={() => setIsOpen(false)}
-              className="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold text-blue-400 bg-blue-950/40 hover:bg-blue-900/50 border border-blue-900/60 transition-all group"
+              href="/dashboard"
+              className="flex items-center gap-3 cursor-pointer group"
+              onClick={onClose}
             >
-              <div className="flex items-center gap-2.5">
-                <span className="w-2 h-2 rounded-full bg-blue-400"></span>
-                <span>Portal do Candidato</span>
+              <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-black shadow-md shadow-blue-600/30 group-hover:scale-[1.02] transition-transform">
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="9" strokeWidth="2" strokeLinecap="round" />
+                  <circle cx="12" cy="12" r="5" strokeWidth="2" strokeLinecap="round" />
+                  <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+                </svg>
               </div>
-              <span className="text-[10px] text-blue-300 group-hover:translate-x-0.5 transition-transform">&rarr;</span>
-            </Link>
-          </div>
-        </nav>
-
-
-        {/* Menu do Usuário (Rodapé da Sidebar) */}
-        <div className="relative p-3 border-t border-slate-800/80 bg-slate-950/80">
-          {/* Dropdown Menu Popover */}
-          {userMenuOpen && (
-            <div className="absolute bottom-full left-3 right-3 mb-2 bg-slate-800 border border-slate-700 rounded-xl shadow-2xl p-1.5 text-xs text-slate-200 animate-in fade-in slide-in-from-bottom-2">
-              <Link
-                href="/perfil"
-                onClick={() => {
-                  setUserMenuOpen(false);
-                  setIsOpen(false);
-                }}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-slate-700 text-slate-200 hover:text-white font-medium"
-              >
-                <UserIcon className="w-4 h-4 text-blue-400" />
-                <span>Meu Perfil</span>
-              </Link>
-
-              <Link
-                href="/compliance"
-                onClick={() => {
-                  setUserMenuOpen(false);
-                  setIsOpen(false);
-                }}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-slate-700 text-slate-200 hover:text-white font-medium"
-              >
-                <Settings className="w-4 h-4 text-slate-400" />
-                <span>Configurações & Ética</span>
-              </Link>
-
-              <div className="h-px bg-slate-700/80 my-1" />
-
-              {/* Botão de Troca Rápida de Perfil para Demonstração */}
-              <button
-                type="button"
-                onClick={() => {
-                  setUserMenuOpen(false);
-                  switchAccountType(isCompany ? 'administrador' : 'empresa');
-                }}
-                className="w-full flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-blue-900/50 text-blue-300 text-left font-semibold cursor-pointer"
-              >
-                <Building2 className="w-4 h-4 text-blue-400" />
-                <span>{isCompany ? 'Entrar como Administrador' : 'Entrar como Empresa'}</span>
-              </button>
-
-              <div className="h-px bg-slate-700/80 my-1" />
-
-              <button
-                type="button"
-                onClick={() => {
-                  setUserMenuOpen(false);
-                  setIsLogoutModalOpen(true);
-                }}
-                className="w-full flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-red-950/80 hover:text-red-300 text-slate-300 text-left font-semibold cursor-pointer"
-              >
-                <LogOut className="w-4 h-4 text-red-400" />
-                <span>Sair da Conta</span>
-              </button>
-            </div>
-          )}
-
-          {/* Trigger Card do Usuário */}
-          <button
-            type="button"
-            onClick={() => setUserMenuOpen(!userMenuOpen)}
-            className="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-slate-800/80 transition-colors text-left cursor-pointer"
-          >
-            {user?.avatarUrl ? (
-              <img
-                src={user.avatarUrl}
-                alt={user.name}
-                className="w-9 h-9 rounded-full object-cover border-2 border-blue-500/60"
-              />
-            ) : (
-              <div className="w-9 h-9 rounded-full bg-blue-600 border border-blue-500 flex items-center justify-center font-bold text-white text-xs shadow-xs">
-                {(user?.name || (isCompany ? 'Tech Solutions' : 'Admin')).substring(0, 2).toUpperCase()}
-              </div>
-            )}
-
-            <div className="flex-1 min-w-0">
-              <p className="text-xs font-bold text-white truncate">
-                {user?.name || (isCompany ? 'Tech Solutions' : 'Administrador')}
-              </p>
-              <div className="flex items-center gap-1.5 mt-0.5">
-                <span className={`w-1.5 h-1.5 rounded-full ${isCompany ? 'bg-blue-400' : 'bg-emerald-400'} animate-pulse`} />
-                <span className="text-[10px] text-slate-400 font-semibold uppercase">
-                  {isCompany ? 'EMPRESA' : 'ADMINISTRADOR'}
+              <div>
+                <h2 className="font-heading font-extrabold text-xl tracking-tight text-slate-900 dark:text-white leading-none">
+                  ItMatcher
+                </h2>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 font-heading block mt-0.5">
+                  {isCompany ? 'Portal da Empresa' : 'Painel Admin'}
                 </span>
               </div>
-            </div>
+            </Link>
 
-            <ChevronUp className={`w-4 h-4 text-slate-400 transition-transform ${userMenuOpen ? 'rotate-180' : ''}`} />
-          </button>
+            <button
+              onClick={onClose}
+              className="p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800 transition-colors"
+              title="Fechar menu"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Guardrail Banner */}
+          <div className="my-2 p-3 bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-900/60 rounded-2xl text-xs text-blue-900 dark:text-blue-200 flex items-start gap-2.5">
+            <ShieldAlert className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
+            <div className="text-[11px] leading-snug">
+              <span className="font-bold text-slate-900 dark:text-white block mb-0.5">Decisão Humana (RG03)</span>
+              {isCompany 
+                ? 'Área da Empresa: consulte seus candidatos ranqueados.' 
+                : 'Controle executivo e decisões finais do Administrador.'}
+            </div>
+          </div>
+
+          {/* Section label */}
+          <div className="px-2 mb-2 mt-4">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-zinc-500 font-heading">
+              Navegação do Sistema
+            </span>
+          </div>
+
+          {/* Links de Navegação */}
+          <nav className="flex flex-col gap-1.5 flex-1">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = pathname === item.href || (item.href !== '/dashboard' && pathname.startsWith(item.href));
+
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={onClose}
+                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold tracking-tight transition-all text-left ${
+                    isActive
+                      ? 'bg-blue-50 dark:bg-blue-600/15 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-500/40 font-bold shadow-xs'
+                      : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/70 dark:hover:bg-zinc-800/60 border border-transparent'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <Icon className={`w-4 h-4 ${isActive ? 'text-blue-600 dark:text-blue-400' : 'text-slate-400 dark:text-zinc-500'}`} />
+                    <span>{item.label}</span>
+                  </div>
+                </Link>
+              );
+            })}
+
+            {/* Divisor & Link para o Portal do Candidato */}
+            <div className="pt-3 mt-3 border-t border-slate-100 dark:border-zinc-800">
+              <Link
+                href="/"
+                onClick={onClose}
+                className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold text-slate-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400 bg-slate-50/70 dark:bg-zinc-900/50 hover:bg-blue-50/70 dark:hover:bg-blue-950/40 border border-slate-200/80 dark:border-zinc-800 transition-all group"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400 animate-pulse"></span>
+                  <span>Portal do Candidato</span>
+                </div>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform text-slate-400 group-hover:text-blue-500" />
+              </Link>
+            </div>
+          </nav>
+        </div>
+
+        {/* Rodapé da Sidebar: Perfil */}
+        <div className="pt-4 border-t border-slate-200/80 dark:border-zinc-800">
+          <Link
+            href="/perfil"
+            onClick={onClose}
+            className="w-full p-3 rounded-2xl text-left border border-slate-200 dark:border-zinc-800 bg-slate-50/70 dark:bg-[#121215] hover:border-slate-300 dark:hover:border-zinc-700 transition-all flex items-center gap-3 group"
+          >
+            <div className="relative shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center text-sm shadow-xs border border-blue-400/30">
+                {user?.name ? user.name.charAt(0).toUpperCase() : '👤'}
+              </div>
+              <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 border-2 border-white dark:border-[#0c0c0e] rounded-full"></span>
+            </div>
+            <div className="flex-1 min-w-0">
+              <h4 className="text-xs font-bold text-slate-900 dark:text-white truncate font-heading">
+                {user?.name || (isCompany ? 'Tech Solutions' : 'Carlos Eduardo')}
+              </h4>
+              <p className="text-[11px] text-slate-500 dark:text-zinc-400 font-medium truncate capitalize">
+                {isCompany ? 'Empresa' : (user?.tipoUsuario || 'Administrador')}
+              </p>
+            </div>
+            <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-500 transition-colors" />
+          </Link>
         </div>
       </aside>
-
-      {/* Modal de Confirmação ao Sair */}
-      <LogoutModal
-        isOpen={isLogoutModalOpen}
-        onClose={() => setIsLogoutModalOpen(false)}
-      />
     </>
   );
 };

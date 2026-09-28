@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { CandidateTabType, CandidateProfile } from '../types';
 
 interface CandidateHeaderProps {
@@ -67,6 +68,7 @@ export const CandidateHeader: React.FC<CandidateHeaderProps> = ({
 
           {/* Direita: Alternador de tema + Perfil */}
           <div className="flex items-center gap-3 shrink-0">
+
             {/* Toggle tema */}
             <button
               onClick={onToggleTheme}

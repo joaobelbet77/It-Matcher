@@ -40,8 +40,8 @@ export interface MatchingResult {
     note: string;
   };
   levelComparison: {
-    candidateLevel: ProfessionalLevel;
-    requiredLevel: ProfessionalLevel;
+    candidateLevel: ProfessionalLevel | string;
+    requiredLevel: ProfessionalLevel | string;
     meetsRequirement: boolean;
     note: string;
   };

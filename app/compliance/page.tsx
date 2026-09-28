@@ -95,7 +95,7 @@ export default function CompliancePage() {
         description="Painel de conformidade com os 10 Guardrails de Segurança e Transparência do IT Matcher"
       />
 
-      <div className="px-6 space-y-6 max-w-6xl mx-auto">
+      <div className="space-y-6 max-w-6xl mx-auto">
         {/* Banner Central */}
         <div className="p-6 bg-gradient-to-r from-slate-950 via-blue-950 to-slate-950 text-white rounded-2xl border border-blue-900/60 shadow-md space-y-2">
           <div className="flex items-center gap-3">

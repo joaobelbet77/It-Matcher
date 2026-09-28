@@ -293,7 +293,7 @@ export default function EmpresaPage() {
         </div>
       </Header>
 
-      <div className="px-6 space-y-6 max-w-6xl mx-auto">
+      <div className="space-y-6 max-w-6xl mx-auto">
         {/* Confirmação de Cadastro para o Recrutador (REQUISITO 4) */}
         {regSuccessInfo && (
           <Alert type="success" title="Empresa Cadastrada com Sucesso!">

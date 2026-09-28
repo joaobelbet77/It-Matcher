@@ -24,9 +24,7 @@ export default async function CandidatosPage() {
         </Link>
       </Header>
 
-      <div className="px-6">
-        <CandidateList candidates={candidates} />
-      </div>
+      <CandidateList candidates={candidates} />
     </div>
   );
 }

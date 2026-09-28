@@ -1,10 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
-import { Header } from '@/components/layout/Header';
 import { JobList } from '@/components/jobs/JobList';
 import { Button } from '@/components/ui/Button';
 import { store } from '@/lib/storage';
-import { Plus, Briefcase } from 'lucide-react';
+import { Plus } from 'lucide-react';
 
 export const revalidate = 0;
 
@@ -13,20 +12,16 @@ export default async function VagasPage() {
 
   return (
     <div className="space-y-6">
-      <Header
-        title="Gestão de Vagas de TI"
-        description="Cadastre posições de tecnologia, defina pesos de competências e acesse o ranking de candidatos"
-      >
+      <div className="flex items-center justify-between">
+        <h1 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Vagas</h1>
         <Link href="/vagas/nova">
           <Button variant="primary" size="sm" icon={<Plus className="w-4 h-4" />}>
             Nova Vaga
           </Button>
         </Link>
-      </Header>
-
-      <div className="px-6">
-        <JobList jobs={jobs} />
       </div>
+
+      <JobList jobs={jobs} />
     </div>
   );
 }

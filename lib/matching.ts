@@ -19,7 +19,7 @@ export function normalizeSkillName(skill: string): string {
 /**
  * Mapeamento numérico de senioridade para comparação informativa
  */
-const LEVEL_WEIGHT: Record<ProfessionalLevel, number> = {
+const LEVEL_WEIGHT: Record<string, number> = {
   'Estágio': 1,
   'Júnior': 2,
   'Pleno': 3,
@@ -27,6 +27,7 @@ const LEVEL_WEIGHT: Record<ProfessionalLevel, number> = {
   'Especialista': 5,
   'Tech Lead': 6,
 };
+
 
 /**
  * Classifica a pontuação conforme as regras de negócio estritas:
@@ -147,14 +148,15 @@ export function calculateMatching(job: Job, candidate: Candidate): MatchingResul
   };
 
   // Análise transparente e informativa de nível profissional
-  const candLevelVal = LEVEL_WEIGHT[candidate.level] || 0;
-  const jobLevelVal = LEVEL_WEIGHT[job.level] || 0;
+  const candLevelVal = (candidate.level ? LEVEL_WEIGHT[candidate.level as any] : 0) || 0;
+  const jobLevelVal = (job.level ? LEVEL_WEIGHT[job.level as any] : 0) || 0;
   const meetsLevel = candLevelVal >= jobLevelVal;
 
   const levelComparison = {
     candidateLevel: candidate.level,
-    requiredLevel: job.level,
+    requiredLevel: job.level || 'Pleno',
     meetsRequirement: meetsLevel,
+
     note: candLevelVal === jobLevelVal
       ? `Nível profissional exatamente alinhado (${candidate.level}).`
       : candLevelVal > jobLevelVal

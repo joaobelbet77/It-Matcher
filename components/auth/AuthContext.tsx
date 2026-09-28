@@ -18,18 +18,22 @@ interface AuthContextValue {
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [user, setUser] = useState<User | null>(CURRENT_USER);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const checkSession = async () => {
     try {
-      const hasSession = localStorage.getItem('itmatcher_session') === 'true';
+      const storedSession = typeof window !== 'undefined' ? localStorage.getItem('itmatcher_session') : null;
+      const isLoggedOut = storedSession === 'false';
 
-      if (hasSession) {
+      if (!isLoggedOut) {
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('itmatcher_session', 'true');
+        }
         const res = await fetch('/api/perfil');
         const data = await res.json();
-        if (data.success) {
+        if (data.success && data.data) {
           setUser(data.data);
           setIsAuthenticated(true);
         } else {
@@ -41,14 +45,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setIsAuthenticated(false);
       }
     } catch (e) {
-      const hasSession = localStorage.getItem('itmatcher_session') === 'true';
-      if (hasSession) {
-        setUser(CURRENT_USER);
-        setIsAuthenticated(true);
-      } else {
-        setUser(null);
-        setIsAuthenticated(false);
-      }
+      setUser(CURRENT_USER);
+      setIsAuthenticated(true);
     } finally {
       setIsLoading(false);
     }
@@ -185,9 +183,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const logout = () => {
     // 1. Limpar tokens e estados armazenados
-    localStorage.removeItem('itmatcher_session');
-    sessionStorage.clear();
-    document.cookie = "itmatcher_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('itmatcher_session', 'false');
+      sessionStorage.clear();
+      document.cookie = "itmatcher_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    }
     
     // 2. Invalidar estado do usuário no frontend
     setUser(null);

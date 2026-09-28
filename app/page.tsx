@@ -61,6 +61,11 @@ export default function CandidatePortalPage() {
     }
   }, []);
 
+  // Rolar para o topo sempre que trocar de aba
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [activeTab]);
+
   const toggleTheme = () => {
     setIsDarkMode((prev) => {
       const next = !prev;
@@ -167,53 +172,6 @@ export default function CandidatePortalPage() {
         {/* ABA 1: VAGAS DISPONÍVEIS */}
         {activeTab === 'jobs' && (
           <div className="space-y-8">
-            {/* Hero Banner Maior e Informativo sobre ItMatcher */}
-            <div className="relative w-full rounded-3xl overflow-hidden min-h-[360px] md:min-h-[420px] shadow-xl border border-slate-200/80 dark:border-zinc-800/80 flex items-center">
-              <img
-                src="/tech-banner.jpg"
-                alt="ItMatcher Tecnologia"
-                className="absolute inset-0 w-full h-full object-cover object-center scale-105"
-              />
-              {/* Overlay gradiente cinematográfico para contraste perfeito */}
-              <div className="absolute inset-0 bg-gradient-to-r from-[#09090b]/95 via-[#09090b]/80 to-[#09090b]/40" />
-              
-              {/* Conteúdo sobre a ItMatcher */}
-              <div className="relative z-10 w-full p-8 sm:p-12 lg:p-16 flex flex-col justify-center">
-                <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-blue-600/20 border border-blue-500/40 text-blue-400 text-xs font-bold font-heading mb-4 w-fit backdrop-blur-md">
-                  <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
-                  <span>Plataforma Oficial ItMatcher Enterprise</span>
-                </div>
-
-                <h1 className="font-heading font-black text-3xl sm:text-4xl md:text-5xl text-white leading-tight mb-4 max-w-2xl tracking-tight">
-                  A plataforma definitiva de <span className="text-blue-400">match técnico</span> para profissionais de tecnologia.
-                </h1>
-
-                <p className="text-sm sm:text-base text-zinc-300 max-w-2xl leading-relaxed mb-8">
-                  A <strong>ItMatcher</strong> nasceu para eliminar formulários cansativos e processos opacos. Nosso algoritmo inteligente avalia suas competências em tempo real e calcula com precisão matemática sua compatibilidade com as maiores vagas do mercado.
-                </p>
-
-                {/* Destaques e Métricas em Linha */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl pt-4 border-t border-white/10">
-                  <div className="bg-white/5 backdrop-blur-md rounded-2xl p-3.5 border border-white/10">
-                    <div className="font-heading font-black text-xl sm:text-2xl text-white">100%</div>
-                    <div className="text-[11px] font-semibold text-zinc-400 mt-0.5">Triagem Algorítmica</div>
-                  </div>
-                  <div className="bg-white/5 backdrop-blur-md rounded-2xl p-3.5 border border-white/10">
-                    <div className="font-heading font-black text-xl sm:text-2xl text-blue-400">Tempo Real</div>
-                    <div className="text-[11px] font-semibold text-zinc-400 mt-0.5">Cálculo de Aderência</div>
-                  </div>
-                  <div className="bg-white/5 backdrop-blur-md rounded-2xl p-3.5 border border-white/10">
-                    <div className="font-heading font-black text-xl sm:text-2xl text-white">0% Fricção</div>
-                    <div className="text-[11px] font-semibold text-zinc-400 mt-0.5">Candidatura Direta</div>
-                  </div>
-                  <div className="bg-white/5 backdrop-blur-md rounded-2xl p-3.5 border border-white/10">
-                    <div className="font-heading font-black text-xl sm:text-2xl text-emerald-400">Auditadas</div>
-                    <div className="text-[11px] font-semibold text-zinc-400 mt-0.5">Vagas Verificadas</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
             {/* Barra de Busca e Filtros Corporativos */}
             <div className="flex flex-col sm:flex-row gap-3">
               <div className="relative flex-1">
