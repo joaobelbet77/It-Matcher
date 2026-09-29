@@ -86,9 +86,6 @@ export const Header: React.FC<HeaderProps> = ({
                   <span className="font-heading font-black text-2xl tracking-tight text-slate-900 dark:text-white block leading-none">
                     ItMatcher
                   </span>
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 font-heading block mt-0.5">
-                    Talent Intelligence
-                  </span>
                 </div>
               </Link>
             </div>
