@@ -10,12 +10,17 @@ export interface CompanyData {
   contactName?: string;
   companyType?: string;
   companyIndustry?: string;
+  segment?: string;
   companySize?: string;
   city?: string;
   state?: string;
   country?: string;
   website?: string;
   description?: string;
+  logo?: string;
+  jobsCount?: number;
+  candidatesCount?: number;
+  partnershipStatus?: string;
   jobId?: string;
   createdAt?: string;
 }

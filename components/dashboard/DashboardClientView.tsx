@@ -162,13 +162,6 @@ export const DashboardClientView: React.FC<DashboardClientViewProps> = ({
                 </>
               ) : (
                 <>
-                  <Link href="/empresa" className="block">
-                    <div className="p-3 rounded-xl bg-slate-50 dark:bg-zinc-900/60 hover:bg-blue-50 dark:hover:bg-blue-950/40 border border-slate-200/80 dark:border-zinc-800 transition-colors flex items-center justify-between group">
-                      <span className="text-xs font-bold text-slate-700 dark:text-zinc-200 group-hover:text-blue-600 dark:group-hover:text-blue-400">🏢 Empresas Parceiras</span>
-                      <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-500 transition-colors" />
-                    </div>
-                  </Link>
-
                   <Link href="/vagas/nova" className="block">
                     <div className="p-3 rounded-xl bg-slate-50 dark:bg-zinc-900/60 hover:bg-blue-50 dark:hover:bg-blue-950/40 border border-slate-200/80 dark:border-zinc-800 transition-colors flex items-center justify-between group">
                       <span className="text-xs font-bold text-slate-700 dark:text-zinc-200 group-hover:text-blue-600 dark:group-hover:text-blue-400">+ Cadastrar Nova Vaga</span>

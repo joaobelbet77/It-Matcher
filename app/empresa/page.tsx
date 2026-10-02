@@ -35,6 +35,13 @@ import {
   ArrowRight,
   LogOut,
   Sparkles,
+  Search,
+  Filter,
+  Calendar,
+  Users,
+  ExternalLink,
+  Award,
+  Layers,
 } from 'lucide-react';
 
 export default function EmpresaPage() {
@@ -47,6 +54,11 @@ export default function EmpresaPage() {
   const [loading, setLoading] = useState(true);
   const [companyJob, setCompanyJob] = useState<Job | null>(null);
   const [allCompanies, setAllCompanies] = useState<any[]>([]);
+
+  // Filtros de busca de empresas parceiras
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedSegment, setSelectedSegment] = useState('Todos');
+  const [selectedStatus, setSelectedStatus] = useState('Todos');
 
   // Modal / Form de Cadastro de Empresa (Visível para Recrutador)
   const [showCompanyRegisterModal, setShowCompanyRegisterModal] = useState(false);
@@ -260,14 +272,51 @@ export default function EmpresaPage() {
   const companyType = user?.companyData?.companyType || 'Empresa de Tecnologia';
   const companyIndustry = user?.companyData?.companyIndustry || 'Desenvolvimento de Software';
 
+  // Cálculos de métricas das empresas parceiras
+  const totalJobsCount = allCompanies.reduce((acc, comp) => acc + (comp.companyData?.jobsCount || (comp.email === companyEmail && companyJob ? 1 : 1)), 0);
+  const totalCandidatesCount = allCompanies.reduce((acc, comp) => acc + (comp.companyData?.candidatesCount || 12), 0);
+  const activePartnersCount = allCompanies.filter((comp) => {
+    const status = comp.companyData?.partnershipStatus || 'Ativa';
+    return status !== 'Inativo' && status !== 'Cancelada';
+  }).length;
+
+  // Segmentos únicos dinâmicos
+  const availableSegments = [
+    'Todos',
+    ...Array.from(
+      new Set(
+        allCompanies
+          .map((c) => c.companyData?.segment || c.companyData?.companyIndustry)
+          .filter(Boolean)
+      )
+    ),
+  ];
+
+  // Filtragem de empresas parceiras
+  const filteredCompanies = allCompanies.filter((comp) => {
+    const compData = comp.companyData || comp;
+    const name = (compData.name || comp.name || '').toLowerCase();
+    const segment = (compData.segment || compData.companyIndustry || compData.companyType || '').toLowerCase();
+    const city = (compData.city || '').toLowerCase();
+    const desc = (compData.description || '').toLowerCase();
+    const status = (compData.partnershipStatus || 'Ativa').toLowerCase();
+    const search = searchTerm.toLowerCase();
+
+    const matchesSearch = !search || name.includes(search) || segment.includes(search) || city.includes(search) || desc.includes(search);
+    const matchesSegment = selectedSegment === 'Todos' || segment.includes(selectedSegment.toLowerCase());
+    const matchesStatus = selectedStatus === 'Todos' || status === selectedStatus.toLowerCase();
+
+    return matchesSearch && matchesSegment && matchesStatus;
+  });
+
   return (
     <div className="space-y-6">
       <Header
-        title={isCompany ? '🏢 Área da Empresa' : '🏢 Gestão da Área da Empresa'}
+        title={isCompany ? '🏢 Área da Empresa' : '🏢 Empresas Parceiras'}
         description={
           isCompany
             ? `Bem-vindo, ${companyName}! • E-mail: ${companyEmail}`
-            : 'Módulo de cadastro de empresas contratantes e gestão de vagas vinculadas'
+            : 'Ecossistema de empresas parceiras contratantes, vagas ativas e status das parcerias'
         }
       >
         <div className="flex items-center gap-2">
@@ -455,70 +504,306 @@ export default function EmpresaPage() {
           </>
         )}
 
-        {/* VISÃO DA CONTA DO ADMINISTRADOR (REQUISITO 2 & 12) */}
+        {/* VISÃO DA CONTA DO ADMINISTRADOR - LISTA COMPLETA DE EMPRESAS PARCEIRAS */}
         {!isCompany && (
           <div className="space-y-6">
-            <div className="bg-slate-900/90 p-6 rounded-2xl border border-slate-800 shadow-xs space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-                <div>
-                  <h3 className="text-base font-bold text-slate-100 flex items-center gap-2">
-                    <Building2 className="w-5 h-5 text-blue-400" />
-                    Empresas Cadastradas ({allCompanies.length})
-                  </h3>
-                  <p className="text-xs text-slate-400">
-                    O Administrador possui controle total e visualização de todas as empresas e suas vagas.
-                  </p>
+            {/* 1. CARDS DE KPIS RESUMO DAS PARCERIAS */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="bg-white dark:bg-[#121215] p-5 rounded-2xl border border-slate-200/80 dark:border-zinc-800 shadow-xs flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-900/60 flex items-center justify-center shrink-0">
+                  <Building2 className="w-6 h-6" />
                 </div>
-                <Button
-                  variant="primary"
-                  size="sm"
-                  icon={<Plus className="w-4 h-4" />}
-                  onClick={() => {
-                    setRegError(null);
-                    setRegSuccessInfo(null);
-                    setShowCompanyRegisterModal(true);
-                  }}
-                >
-                  Cadastrar Nova Empresa
-                </Button>
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-zinc-400 block">Total de Empresas</span>
+                  <span className="text-2xl font-black font-heading text-slate-900 dark:text-white">{allCompanies.length}</span>
+                  <span className="text-[11px] text-slate-500 dark:text-zinc-400 block mt-0.5">Parceiras cadastradas</span>
+                </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {allCompanies.map((comp) => {
+              <div className="bg-white dark:bg-[#121215] p-5 rounded-2xl border border-slate-200/80 dark:border-zinc-800 shadow-xs flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-900/60 flex items-center justify-center shrink-0">
+                  <Briefcase className="w-6 h-6" />
+                </div>
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-zinc-400 block">Vagas Publicadas</span>
+                  <span className="text-2xl font-black font-heading text-slate-900 dark:text-white">{totalJobsCount}</span>
+                  <span className="text-[11px] text-slate-500 dark:text-zinc-400 block mt-0.5">Oportunidades ativas</span>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-[#121215] p-5 rounded-2xl border border-slate-200/80 dark:border-zinc-800 shadow-xs flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/60 flex items-center justify-center shrink-0">
+                  <Users className="w-6 h-6" />
+                </div>
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-zinc-400 block">Candidatos no Funil</span>
+                  <span className="text-2xl font-black font-heading text-slate-900 dark:text-white">{totalCandidatesCount}</span>
+                  <span className="text-[11px] text-slate-500 dark:text-zinc-400 block mt-0.5">Aplicações e matches</span>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-[#121215] p-5 rounded-2xl border border-slate-200/80 dark:border-zinc-800 shadow-xs flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-900/60 flex items-center justify-center shrink-0">
+                  <Award className="w-6 h-6" />
+                </div>
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-zinc-400 block">Parcerias Ativas</span>
+                  <span className="text-2xl font-black font-heading text-slate-900 dark:text-white">{activePartnersCount}</span>
+                  <span className="text-[11px] text-slate-500 dark:text-zinc-400 block mt-0.5">100% homologadas</span>
+                </div>
+              </div>
+            </div>
+
+            {/* 2. BARRA DE BUSCA E FILTROS */}
+            <div className="bg-white dark:bg-[#121215] p-5 rounded-2xl border border-slate-200/80 dark:border-zinc-800 shadow-xs space-y-4">
+              <div className="flex flex-col md:flex-row gap-3 items-center justify-between">
+                {/* Campo de Busca */}
+                <div className="relative flex-1 w-full">
+                  <Search className="w-4 h-4 text-slate-400 dark:text-zinc-500 absolute left-3.5 top-3.5" />
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Buscar empresas por nome, segmento, tecnologia ou cidade..."
+                    className="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-zinc-900/70 border border-slate-200 dark:border-zinc-800 rounded-xl text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                  />
+                </div>
+
+                {/* Filtro por Segmento */}
+                <div className="flex items-center gap-2 w-full md:w-auto">
+                  <Filter className="w-4 h-4 text-slate-400 dark:text-zinc-500 shrink-0 hidden sm:block" />
+                  <select
+                    value={selectedSegment}
+                    onChange={(e) => setSelectedSegment(e.target.value)}
+                    className="w-full md:w-52 px-3 py-2.5 bg-slate-50 dark:bg-zinc-900/70 border border-slate-200 dark:border-zinc-800 rounded-xl text-xs text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    {availableSegments.map((seg) => (
+                      <option key={seg} value={seg}>
+                        {seg === 'Todos' ? 'Todos os Segmentos' : seg}
+                      </option>
+                    ))}
+                  </select>
+
+                  {/* Filtro por Status */}
+                  <select
+                    value={selectedStatus}
+                    onChange={(e) => setSelectedStatus(e.target.value)}
+                    className="w-full md:w-44 px-3 py-2.5 bg-slate-50 dark:bg-zinc-900/70 border border-slate-200 dark:border-zinc-800 rounded-xl text-xs text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="Todos">Todos os Status</option>
+                    <option value="Parceiro Premium">Parceiro Premium</option>
+                    <option value="Ativa">Ativa</option>
+                    <option value="Estratégico">Estratégico</option>
+                    <option value="Em Homologação">Em Homologação</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Contagem de resultados */}
+              <div className="flex items-center justify-between text-xs text-slate-500 dark:text-zinc-400 pt-2 border-t border-slate-100 dark:border-zinc-800">
+                <span>Exibindo <strong>{filteredCompanies.length}</strong> de <strong>{allCompanies.length}</strong> empresas parceiras</span>
+                {(searchTerm || selectedSegment !== 'Todos' || selectedStatus !== 'Todos') && (
+                  <button
+                    onClick={() => {
+                      setSearchTerm('');
+                      setSelectedSegment('Todos');
+                      setSelectedStatus('Todos');
+                    }}
+                    className="text-blue-600 dark:text-blue-400 hover:underline font-medium cursor-pointer"
+                  >
+                    Limpar filtros
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* 3. LISTA DE CARDS DAS EMPRESAS PARCEIRAS */}
+            {filteredCompanies.length === 0 ? (
+              <div className="bg-white dark:bg-[#121215] p-12 text-center rounded-2xl border border-slate-200/80 dark:border-zinc-800 space-y-3">
+                <Building2 className="w-10 h-10 text-slate-400 dark:text-zinc-600 mx-auto" />
+                <h4 className="text-sm font-bold text-slate-700 dark:text-zinc-300">Nenhuma empresa parceira encontrada</h4>
+                <p className="text-xs text-slate-500 dark:text-zinc-500">Tente buscar por outro termo ou ajuste os filtros acima.</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                {filteredCompanies.map((comp) => {
                   const compData = comp.companyData || comp;
-                  const linkedJob = comp.email ? companyJob : null;
+                  const name = compData.name || comp.name || 'Empresa Parceira';
+                  const email = compData.email || comp.email;
+                  const cnpj = compData.cnpj || '00.000.000/0001-00';
+                  const phone = compData.phone || '(11) 3456-7890';
+                  const segment = compData.segment || compData.companyIndustry || compData.companyType || 'Tecnologia';
+                  const description = compData.description || 'Empresa parceira credenciada na plataforma IT Matcher para recrutamento de talentos.';
+                  const jobsCount = compData.jobsCount || (email === companyEmail && companyJob ? 1 : 1);
+                  const candidatesCount = compData.candidatesCount || 15;
+                  const status = compData.partnershipStatus || 'Ativa';
+                  const createdAt = compData.createdAt || comp.createdAt || '2026-01-15T09:00:00Z';
+                  const location = compData.city ? `${compData.city}, ${compData.state || 'Brasil'}` : 'São Paulo, SP';
+                  const logoUrl = compData.logo;
+                  const website = compData.website;
+
+                  // Estilização do badge de status
+                  const getStatusBadge = (st: string) => {
+                    switch (st) {
+                      case 'Parceiro Premium':
+                        return (
+                          <span className="inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
+                            <Sparkles className="w-3 h-3 text-blue-600 dark:text-blue-400" />
+                            Parceiro Premium
+                          </span>
+                        );
+                      case 'Estratégico':
+                        return (
+                          <span className="inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-full bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800">
+                            <Award className="w-3 h-3 text-purple-600 dark:text-purple-400" />
+                            Estratégico
+                          </span>
+                        );
+                      case 'Em Homologação':
+                        return (
+                          <span className="inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-full bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
+                            <Clock className="w-3 h-3 text-amber-600 dark:text-amber-400" />
+                            Em Homologação
+                          </span>
+                        );
+                      default:
+                        return (
+                          <span className="inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                            <CheckCircle2 className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
+                            Ativa
+                          </span>
+                        );
+                    }
+                  };
 
                   return (
-                    <div key={comp.id || comp.email} className="p-4 rounded-xl border border-slate-800 bg-slate-950/60 space-y-3">
-                      <div className="flex items-center justify-between">
-                        <h4 className="font-bold text-slate-100 text-sm flex items-center gap-1.5">
-                          <Building2 className="w-4 h-4 text-blue-400" />
-                          {compData.name || comp.name}
-                        </h4>
-                        <Badge variant="info">{compData.companyType || 'Tecnologia'}</Badge>
+                    <div
+                      key={comp.id || email}
+                      className="bg-white dark:bg-[#121215] rounded-2xl border border-slate-200/80 dark:border-zinc-800 p-5 shadow-xs hover:border-blue-300 dark:hover:border-zinc-700 transition-all flex flex-col justify-between space-y-4 group"
+                    >
+                      <div className="space-y-3">
+                        {/* Topo do Card: Logo + Nome + Status */}
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="flex items-center gap-3">
+                            {logoUrl ? (
+                              <img
+                                src={logoUrl}
+                                alt={name}
+                                className="w-12 h-12 rounded-xl object-cover border border-slate-200 dark:border-zinc-800 shrink-0 shadow-xs"
+                              />
+                            ) : (
+                              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white font-black flex items-center justify-center text-lg shadow-md shrink-0">
+                                {name.substring(0, 2).toUpperCase()}
+                              </div>
+                            )}
+
+                            <div>
+                              <h4 className="font-heading font-bold text-sm sm:text-base text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                {name}
+                              </h4>
+                              <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-zinc-400 mt-0.5">
+                                <Building2 className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                                <span className="font-medium">{segment}</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="shrink-0">
+                            {getStatusBadge(status)}
+                          </div>
+                        </div>
+
+                        {/* Descrição da Empresa */}
+                        <p className="text-xs text-slate-600 dark:text-zinc-300 leading-relaxed line-clamp-2">
+                          {description}
+                        </p>
+
+                        {/* Grade de Informações de Parceria (Vagas, Candidatos, Data de Cadastro) */}
+                        <div className="grid grid-cols-3 gap-2 py-2.5 px-3 rounded-xl bg-slate-50/80 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800/80 text-xs">
+                          <div>
+                            <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-zinc-500 block mb-0.5">
+                              Vagas
+                            </span>
+                            <span className="font-bold text-slate-900 dark:text-white flex items-center gap-1">
+                              <Briefcase className="w-3.5 h-3.5 text-blue-500" />
+                              {jobsCount} {jobsCount === 1 ? 'vaga' : 'vagas'}
+                            </span>
+                          </div>
+
+                          <div>
+                            <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-zinc-500 block mb-0.5">
+                              Candidatos
+                            </span>
+                            <span className="font-bold text-slate-900 dark:text-white flex items-center gap-1">
+                              <Users className="w-3.5 h-3.5 text-emerald-500" />
+                              {candidatesCount}
+                            </span>
+                          </div>
+
+                          <div>
+                            <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-zinc-500 block mb-0.5">
+                              Cadastro
+                            </span>
+                            <span className="font-bold text-slate-900 dark:text-white flex items-center gap-1">
+                              <Calendar className="w-3.5 h-3.5 text-amber-500" />
+                              {new Date(createdAt).toLocaleDateString('pt-BR')}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Dados de Contato e Localização */}
+                        <div className="space-y-1.5 text-xs text-slate-500 dark:text-zinc-400 pt-1">
+                          <div className="flex items-center justify-between">
+                            <span className="flex items-center gap-1.5">
+                              <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                              <span>{location}</span>
+                            </span>
+                            <span className="font-mono text-[11px] text-slate-600 dark:text-zinc-300">CNPJ: {cnpj}</span>
+                          </div>
+
+                          <div className="flex items-center justify-between">
+                            <span className="flex items-center gap-1.5 truncate">
+                              <Mail className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                              <span className="font-mono text-blue-600 dark:text-blue-400 truncate">{email}</span>
+                            </span>
+                            {phone && (
+                              <span className="flex items-center gap-1 text-[11px]">
+                                <Phone className="w-3 h-3 text-slate-400" />
+                                {phone}
+                              </span>
+                            )}
+                          </div>
+                        </div>
                       </div>
 
-                      <div className="text-xs space-y-1 text-slate-400">
-                        {compData.cnpj && <p><strong>CNPJ:</strong> <span className="text-slate-200">{compData.cnpj}</span></p>}
-                        <p><strong>E-mail de acesso:</strong> <span className="font-mono font-semibold text-blue-400">{compData.email}</span></p>
-                        {compData.phone && <p><strong>Telefone:</strong> <span className="text-slate-200">{compData.phone}</span></p>}
-                      </div>
+                      {/* Rodapé do Card com Ação / Link */}
+                      <div className="pt-3 border-t border-slate-100 dark:border-zinc-800/80 flex items-center justify-between text-xs">
+                        <Link
+                          href={`/matching`}
+                          className="text-xs font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 flex items-center gap-1 transition-colors"
+                        >
+                          <span>Ver Candidatos Compatíveis</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
 
-                      <div className="pt-2 border-t border-slate-800 flex items-center justify-between text-xs">
-                        <span className="text-slate-400">Vaga vinculada:</span>
-                        {linkedJob ? (
-                          <span className="font-bold text-emerald-400 flex items-center gap-1">
-                            <CheckCircle2 className="w-3.5 h-3.5" /> {linkedJob.title}
-                          </span>
-                        ) : (
-                          <span className="text-slate-500 font-medium">Nenhuma vaga cadastrada ainda</span>
+                        {website && (
+                          <a
+                            href={website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-slate-400 hover:text-slate-700 dark:hover:text-zinc-200 flex items-center gap-1 transition-colors"
+                            title="Visitar website"
+                          >
+                            <Globe className="w-3.5 h-3.5" />
+                            <ExternalLink className="w-3 h-3" />
+                          </a>
                         )}
                       </div>
                     </div>
                   );
                 })}
               </div>
-            </div>
+            )}
           </div>
         )}
       </div>

@@ -1,5 +1,5 @@
 import { Job, Candidate, HumanReview, AuditLog, CreateJobInput, CreateCandidateInput, CreateReviewInput, User, UpdateUserProfileInput, CURRENT_USER } from '@/types';
-import { INITIAL_JOBS, INITIAL_CANDIDATES, INITIAL_REVIEWS, INITIAL_AUDIT_LOGS } from './mock-data';
+import { INITIAL_JOBS, INITIAL_CANDIDATES, INITIAL_REVIEWS, INITIAL_AUDIT_LOGS, INITIAL_PARTNER_COMPANIES } from './mock-data';
 import { createAuditLogEntry } from './security';
 
 // Armazenamento em memória (Singleton padrão para Node.js / Next.js)
@@ -21,30 +21,10 @@ class InMemoryDataStore {
     INITIAL_REVIEWS.forEach((rev) => this.reviews.set(`${rev.jobId}_${rev.candidateId}`, { ...rev }));
     this.auditLogs = [...INITIAL_AUDIT_LOGS];
 
-    // Seed de Empresa Padrão para demonstração imediata
-    const defaultCompany: User = {
-      id: 'emp_tech_01',
-      name: 'Tech Solutions',
-      email: 'empresa@techsolutions.com.br',
-      role: 'Empresa',
-      tipoUsuario: 'empresa',
-      company: 'Tech Solutions',
-      companyData: {
-        id: 'emp_tech_01',
-        name: 'Tech Solutions',
-        email: 'empresa@techsolutions.com.br',
-        companyType: 'Empresa de Tecnologia',
-        companyIndustry: 'Desenvolvimento de Software',
-        companySize: '51–200 funcionários',
-        city: 'São Paulo',
-        state: 'SP',
-        country: 'Brasil',
-        website: 'https://techsolutions.com.br',
-        description: 'Empresa líder em desenvolvimento de software e ecossistemas digitais.',
-        createdAt: new Date().toISOString(),
-      }
-    };
-    this.companyAccounts.set(defaultCompany.email.toLowerCase(), defaultCompany);
+    // Seed de Empresas Parceiras para listagem completa
+    INITIAL_PARTNER_COMPANIES.forEach((comp) => {
+      this.companyAccounts.set(comp.email.toLowerCase(), { ...comp } as User);
+    });
   }
 
   // --- CONTAS DE EMPRESA & AUTENTICAÇÃO ---
