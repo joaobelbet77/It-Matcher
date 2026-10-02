@@ -1,7 +1,7 @@
-'use client';
-
 import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/components/auth/AuthContext';
 import { CandidateTabType } from '../types';
 
 interface CandidateFooterProps {
@@ -9,6 +9,18 @@ interface CandidateFooterProps {
 }
 
 export const CandidateFooter: React.FC<CandidateFooterProps> = ({ onTabChange }) => {
+  const router = useRouter();
+  const { switchAccountType } = useAuth();
+
+  const handleGoToCompany = async () => {
+    await switchAccountType('empresa');
+    router.push('/empresa');
+  };
+
+  const handleGoToAdmin = async () => {
+    await switchAccountType('administrador');
+    router.push('/dashboard');
+  };
   return (
     <footer className="w-full bg-white dark:bg-[#0c0c0e] border-t border-slate-200/80 dark:border-zinc-800 font-sans transition-colors mt-16">
       {/* Container Principal */}
@@ -98,14 +110,23 @@ export const CandidateFooter: React.FC<CandidateFooterProps> = ({ onTabChange })
                   Sobre a Empresa
                 </button>
               </li>
-              <li className="pt-1.5 mt-1.5 border-t border-slate-100 dark:border-zinc-800/80">
-                <Link
-                  href="/dashboard"
-                  className="inline-flex items-center gap-1.5 text-blue-600 dark:text-blue-400 hover:underline font-bold text-xs"
+              <li className="pt-1.5 mt-1.5 border-t border-slate-100 dark:border-zinc-800/80 space-y-1.5">
+                <button
+                  type="button"
+                  onClick={handleGoToCompany}
+                  className="inline-flex items-center gap-1.5 text-blue-600 dark:text-blue-400 hover:underline font-bold text-xs cursor-pointer block text-left"
                 >
-                  <span>Portal da Empresa / Admin</span>
+                  <span>Portal da Empresa</span>
                   <span>&rarr;</span>
-                </Link>
+                </button>
+                <button
+                  type="button"
+                  onClick={handleGoToAdmin}
+                  className="inline-flex items-center gap-1.5 text-slate-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 hover:underline font-semibold text-xs cursor-pointer block text-left"
+                >
+                  <span>Painel do Administrador</span>
+                  <span>&rarr;</span>
+                </button>
               </li>
             </ul>
           </div>

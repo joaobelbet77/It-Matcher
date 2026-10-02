@@ -2,7 +2,10 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/components/auth/AuthContext';
 import { CandidateTabType, CandidateProfile } from '../types';
+import { Building2, LayoutDashboard } from 'lucide-react';
 
 interface CandidateSidebarProps {
   activeTab: CandidateTabType;
@@ -21,9 +24,24 @@ export const CandidateSidebar: React.FC<CandidateSidebarProps> = ({
   isOpen,
   onClose,
 }) => {
+  const router = useRouter();
+  const { switchAccountType } = useAuth();
+
   const handleTabChange = (tab: CandidateTabType) => {
     onTabChange(tab);
     onClose();
+  };
+
+  const handleGoToCompany = async () => {
+    onClose();
+    await switchAccountType('empresa');
+    router.push('/empresa');
+  };
+
+  const handleGoToAdmin = async () => {
+    onClose();
+    await switchAccountType('administrador');
+    router.push('/dashboard');
   };
 
   return (
@@ -156,21 +174,31 @@ export const CandidateSidebar: React.FC<CandidateSidebarProps> = ({
               </div>
             </button>
 
-            {/* Divisor & Acesso Recrutador */}
-            <div className="pt-2 mt-2 border-t border-slate-100 dark:border-zinc-800">
-              <Link
-                href="/dashboard"
-                onClick={onClose}
-                className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold text-slate-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400 bg-slate-50/70 dark:bg-zinc-900/50 hover:bg-blue-50/70 dark:hover:bg-blue-950/40 border border-slate-200/80 dark:border-zinc-800 transition-all group"
+            {/* Divisor & Acessos Corporativos */}
+            <div className="pt-2.5 mt-2.5 border-t border-slate-100 dark:border-zinc-800 space-y-1.5">
+              <button
+                type="button"
+                onClick={handleGoToCompany}
+                className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold text-slate-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400 bg-slate-50/70 dark:bg-zinc-900/50 hover:bg-blue-50/70 dark:hover:bg-blue-950/40 border border-slate-200/80 dark:border-zinc-800 transition-all group text-left cursor-pointer"
               >
                 <div className="flex items-center gap-3">
-                  <svg className="w-4 h-4 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                  </svg>
+                  <Building2 className="w-4 h-4 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform" />
                   <span>Portal da Empresa</span>
                 </div>
                 <span className="text-[10px] text-slate-400 dark:text-zinc-500 font-mono">&rarr;</span>
-              </Link>
+              </button>
+
+              <button
+                type="button"
+                onClick={handleGoToAdmin}
+                className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold text-slate-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400 bg-slate-50/70 dark:bg-zinc-900/50 hover:bg-blue-50/70 dark:hover:bg-blue-950/40 border border-slate-200/80 dark:border-zinc-800 transition-all group text-left cursor-pointer"
+              >
+                <div className="flex items-center gap-3">
+                  <LayoutDashboard className="w-4 h-4 text-slate-500 dark:text-zinc-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:scale-110 transition-transform" />
+                  <span>Painel do Administrador</span>
+                </div>
+                <span className="text-[10px] text-slate-400 dark:text-zinc-500 font-mono">&rarr;</span>
+              </button>
             </div>
           </nav>
         </div>
