@@ -10,7 +10,7 @@ export default function NovoCandidatoPage() {
         description="Preencha as competências técnicas, experiência profissional e realize o upload validado do currículo"
       />
 
-      <div className="px-6 max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <CandidateForm />
       </div>
     </div>

@@ -1,13 +1,3 @@
 {
-  "/page": "app/page.js",
-  "/api/perfil/route": "app/api/perfil/route.js",
-  "/dashboard/page": "app/dashboard/page.js",
-  "/perfil/page": "app/perfil/page.js",
-  "/empresa/page": "app/empresa/page.js",
-  "/api/empresa/route": "app/api/empresa/route.js",
-  "/vagas/page": "app/vagas/page.js",
-  "/candidatos/page": "app/candidatos/page.js",
-  "/matching/page": "app/matching/page.js",
-  "/matching/[vagaId]/page": "app/matching/[vagaId]/page.js",
-  "/auditoria/page": "app/auditoria/page.js"
+  "/dashboard/page": "app/dashboard/page.js"
 }

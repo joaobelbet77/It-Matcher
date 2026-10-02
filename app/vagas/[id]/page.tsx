@@ -48,7 +48,7 @@ export default async function DetalhesVagaPage({
         </div>
       </Header>
 
-      <div className="px-6 space-y-6 max-w-6xl mx-auto">
+      <div className="space-y-6 max-w-6xl mx-auto">
         {/* Card da Empresa / Organização (se houver dados) */}
         {hasCompanyInfo && (
           <div className="bg-slate-900/90 p-6 rounded-2xl border border-slate-800 shadow-xs space-y-4">

@@ -28,13 +28,11 @@ export default async function MatchingVagaPage({
         description="Ranking ponderado de compatibilidade técnica com transparência e revisão humana"
       />
 
-      <div className="px-6">
-        <MatchingClientView
-          job={job}
-          initialCandidates={candidates}
-          initialReviews={reviews}
-        />
-      </div>
+      <MatchingClientView
+        job={job}
+        initialCandidates={candidates}
+        initialReviews={reviews}
+      />
     </div>
   );
 }

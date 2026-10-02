@@ -149,7 +149,7 @@ export default function PerfilPage() {
                 <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white font-sans">
                   {name || user?.name || 'Administrador do Sistema'}
                 </h2>
-                <Badge variant={isCompany ? 'indigo' : 'default'} className="text-xs">
+                <Badge variant={isCompany ? 'info' : 'default'} className="text-xs">
                   {isCompany ? 'Perfil Empresa' : 'Administrador do Sistema'}
                 </Badge>
               </div>

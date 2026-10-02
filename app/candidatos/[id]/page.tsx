@@ -43,7 +43,7 @@ export default async function DetalhesCandidatoPage({
         </Link>
       </Header>
 
-      <div className="px-6 space-y-6 max-w-6xl mx-auto">
+      <div className="space-y-6 max-w-6xl mx-auto">
         {/* Card de Perfil */}
         <div className="bg-slate-900/90 p-6 rounded-2xl border border-slate-800 shadow-xs space-y-5">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">

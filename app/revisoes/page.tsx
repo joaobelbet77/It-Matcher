@@ -17,13 +17,11 @@ export default async function RevisoesPage() {
         description="Fila de acompanhamento de triagem, pareceres do administrador e governança do processo seletivo"
       />
 
-      <div className="px-6">
-        <ReviewsManagerView
-          jobs={jobs}
-          candidates={candidates}
-          initialReviews={reviews}
-        />
-      </div>
+      <ReviewsManagerView
+        jobs={jobs}
+        candidates={candidates}
+        initialReviews={reviews}
+      />
     </div>
   );
 }

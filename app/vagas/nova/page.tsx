@@ -10,7 +10,7 @@ export default function NovaVagaPage() {
         description="Configure o cargo, senioridade, experiência e os pesos de importância das competências técnicas"
       />
 
-      <div className="px-6 max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <JobForm />
       </div>
     </div>
