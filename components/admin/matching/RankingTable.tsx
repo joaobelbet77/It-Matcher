@@ -3,9 +3,9 @@
 import React, { useState } from 'react';
 import { MatchingResult } from '@/types';
 import { MatchingScoreBadge } from './MatchingScoreBadge';
-import { ReviewStatusBadge } from '@/components/reviews/ReviewStatusBadge';
+import { ReviewStatusBadge } from '@/components/admin/revisoes/RevisaoStatusBadge';
 import { MatchingBreakdownModal } from './MatchingBreakdownModal';
-import { HumanReviewModal } from '@/components/reviews/HumanReviewModal';
+import { HumanReviewModal } from '@/components/admin/revisoes/RevisaoModal';
 import { Button } from '@/components/ui/Button';
 import { Eye, UserCheck, Check, X, Award, FileText } from 'lucide-react';
 

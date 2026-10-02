@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { CandidateTabType, CandidateProfile } from '../types';
+import { CandidateTabType, CandidateProfile } from '@/types';
 
 interface CandidateHeaderProps {
   activeTab: CandidateTabType;

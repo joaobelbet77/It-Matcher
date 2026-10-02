@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header } from '@/components/layout/Header';
-import { JobForm } from '@/components/jobs/JobForm';
+import { JobForm } from '@/components/admin/vagas/VagaForm';
 
 export default function NovaVagaPage() {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header } from '@/components/layout/Header';
-import { CandidateForm } from '@/components/candidates/CandidateForm';
+import { CandidateForm } from '@/components/admin/candidatos/CandidatoForm';
 
 export default function NovoCandidatoPage() {
   return (

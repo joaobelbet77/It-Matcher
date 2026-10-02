@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { Header } from '@/components/layout/Header';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
-import { MatchingScoreBadge } from '@/components/matching/MatchingScoreBadge';
+import { MatchingScoreBadge } from '@/components/admin/matching/MatchingScoreBadge';
 import { store } from '@/lib/storage';
 import { calculateMatching } from '@/lib/matching';
 import { maskEmail, maskPhone } from '@/lib/security';

@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Job, Application, CandidateProfile } from '../types';
-import { calculateCandidateMatch } from '../lib/matcher';
+import { Job, Application, CandidateProfile } from '@/types';
+import { calculateCandidateMatch } from '@/lib/matcher';
 
 interface ApplyModalProps {
   job: Job | null;
@@ -223,7 +223,7 @@ export const ApplyModal: React.FC<ApplyModalProps> = ({
                       </span>
                       <div className="flex flex-wrap gap-1">
                         {previewApp.matchedSkills.length > 0 ? (
-                          previewApp.matchedSkills.map((s, idx) => (
+                          previewApp.matchedSkills.map((s: string, idx: number) => (
                             <span key={idx} className="px-2 py-0.5 rounded bg-white dark:bg-zinc-900 border border-emerald-300 dark:border-emerald-800 text-[10px] font-bold text-emerald-800 dark:text-emerald-300">
                               {s}
                             </span>
@@ -240,7 +240,7 @@ export const ApplyModal: React.FC<ApplyModalProps> = ({
                       </span>
                       <div className="flex flex-wrap gap-1">
                         {previewApp.missingSkills.length > 0 ? (
-                          previewApp.missingSkills.map((s, idx) => (
+                          previewApp.missingSkills.map((s: string, idx: number) => (
                             <span key={idx} className="px-2 py-0.5 rounded bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-700 text-[10px] text-slate-600 dark:text-zinc-400">
                               {s}
                             </span>

@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { JobList } from '@/components/jobs/JobList';
+import { JobList } from '@/components/admin/vagas/VagaList';
 import { Button } from '@/components/ui/Button';
 import { store } from '@/lib/storage';
 import { Plus } from 'lucide-react';

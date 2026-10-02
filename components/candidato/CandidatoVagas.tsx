@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Job } from '../types';
-import { getQuickScore } from '../lib/matcher';
+import { Job, JobSkill } from '@/types';
+import { getQuickScore } from '@/lib/matcher';
 
 interface JobCardProps {
   job: Job;
@@ -107,7 +107,7 @@ export const JobCard: React.FC<JobCardProps> = ({
             </span>
           </div>
           <div className="flex flex-wrap gap-1.5">
-            {job.skills.map((skill) => (
+            {job.skills.map((skill: JobSkill) => (
               <span
                 key={skill.id}
                 className="px-2.5 py-1 rounded-lg bg-slate-50 dark:bg-zinc-900 text-slate-700 dark:text-zinc-300 border border-slate-200/80 dark:border-zinc-800 text-xs font-medium"

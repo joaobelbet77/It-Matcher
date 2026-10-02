@@ -1,7 +1,7 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 import { Header } from '@/components/layout/Header';
-import { MatchingClientView } from '@/components/matching/MatchingClientView';
+import { MatchingClientView } from '@/components/admin/matching/MatchingClientView';
 import { store } from '@/lib/storage';
 
 export const revalidate = 0;

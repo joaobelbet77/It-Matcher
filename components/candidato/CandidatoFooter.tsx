@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/auth/AuthContext';
-import { CandidateTabType } from '../types';
+import { CandidateTabType } from '@/types';
 
 interface CandidateFooterProps {
   onTabChange: (tab: CandidateTabType) => void;

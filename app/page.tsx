@@ -1,15 +1,15 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { CandidateSidebar } from '../components/CandidateSidebar';
-import { CandidateHeader } from '../components/CandidateHeader';
-import { JobCard } from '../components/JobCard';
-import { ApplyModal } from '../components/ApplyModal';
-import { MyApplications } from '../components/MyApplications';
-import { ProfileTab } from '../components/ProfileTab';
-import { AboutUsTab } from '../components/AboutUsTab';
-import { HomeTab } from '../components/HomeTab';
-import { CandidateFooter } from '../components/CandidateFooter';
+import { CandidateSidebar } from '@/components/candidato/CandidatoSidebar';
+import { CandidateHeader } from '@/components/candidato/CandidatoHeader';
+import { JobCard } from '@/components/candidato/CandidatoVagas';
+import { ApplyModal } from '@/components/candidato/CandidatoModalVaga';
+import { MyApplications } from '@/components/candidato/CandidatoInscricoes';
+import { ProfileTab } from '@/components/candidato/CandidatoPerfil';
+import { AboutUsTab } from '@/components/candidato/CandidatoSobreNos';
+import { HomeTab } from '@/components/candidato/CandidatoHome';
+import { CandidateFooter } from '@/components/candidato/CandidatoFooter';
 import { Job, Application, CandidateProfile, CandidateTabType } from '../types';
 import { INITIAL_CANDIDATE_JOBS } from '../lib/mockJobs';
 

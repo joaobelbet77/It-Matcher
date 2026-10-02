@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { MatchingResult } from '@/types';
 import { Card, CardHeader, CardContent } from '@/components/ui/Card';
-import { MatchingScoreBadge } from '@/components/matching/MatchingScoreBadge';
-import { ReviewStatusBadge } from '@/components/reviews/ReviewStatusBadge';
-import { MatchingBreakdownModal } from '@/components/matching/MatchingBreakdownModal';
-import { HumanReviewModal } from '@/components/reviews/HumanReviewModal';
+import { MatchingScoreBadge } from '@/components/admin/matching/MatchingScoreBadge';
+import { ReviewStatusBadge } from '@/components/admin/revisoes/RevisaoStatusBadge';
+import { MatchingBreakdownModal } from '@/components/admin/matching/MatchingBreakdownModal';
+import { HumanReviewModal } from '@/components/admin/revisoes/RevisaoModal';
 import { Button } from '@/components/ui/Button';
 import { Clock, Eye, UserCheck, ArrowRight } from 'lucide-react';
 

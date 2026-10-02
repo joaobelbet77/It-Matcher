@@ -5,7 +5,7 @@ import { MatchingResult, ReviewStatus } from '@/types';
 import { Modal } from '@/components/ui/Modal';
 import { Button } from '@/components/ui/Button';
 import { Alert } from '@/components/ui/Alert';
-import { MatchingScoreBadge } from '@/components/matching/MatchingScoreBadge';
+import { MatchingScoreBadge } from '@/components/admin/matching/MatchingScoreBadge';
 import { useToast } from '@/components/layout/Toast';
 import { UserCheck, ShieldAlert, CheckCircle2, MessageSquare, Award } from 'lucide-react';
 

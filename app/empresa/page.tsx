@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/Badge';
 import { Alert } from '@/components/ui/Alert';
 import { useAuth } from '@/components/auth/AuthContext';
 import { useToast } from '@/components/layout/Toast';
-import { SkillWeightConfigurator, ConfiguredSkill } from '@/components/jobs/SkillWeightConfigurator';
+import { SkillWeightConfigurator, ConfiguredSkill } from '@/components/admin/vagas/VagaPesoSkills';
 import {
   ProfessionalLevels,
   COMPANY_TYPES,

@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/auth/AuthContext';
-import { CandidateTabType, CandidateProfile } from '../types';
+import { CandidateTabType, CandidateProfile } from '@/types';
 import { Building2, LayoutDashboard } from 'lucide-react';
 
 interface CandidateSidebarProps {

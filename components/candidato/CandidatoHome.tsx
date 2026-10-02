@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { CandidateTabType, Job } from '../types';
-import { getQuickScore } from '../lib/matcher';
+import { CandidateTabType, Job } from '@/types';
+import { getQuickScore } from '@/lib/matcher';
 
 interface HomeTabProps {
   onNavigate: (tab: CandidateTabType) => void;

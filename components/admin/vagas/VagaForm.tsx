@@ -11,7 +11,7 @@ import {
   WORK_MODELS,
   CONTRACT_TYPES,
 } from '@/lib/validation';
-import { SkillWeightConfigurator, ConfiguredSkill } from './SkillWeightConfigurator';
+import { SkillWeightConfigurator, ConfiguredSkill } from './VagaPesoSkills';
 import { Button } from '@/components/ui/Button';
 import { Alert } from '@/components/ui/Alert';
 import { useToast } from '@/components/layout/Toast';

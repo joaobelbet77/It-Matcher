@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Application } from '../types';
+import { Application } from '@/types';
 
 interface MyApplicationsProps {
   applications: Application[];

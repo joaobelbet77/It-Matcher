@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header } from '@/components/layout/Header';
-import { AuditTimeline } from '@/components/audit/AuditTimeline';
+import { AuditTimeline } from '@/components/admin/auditoria/AuditoriaTimeline';
 import { store } from '@/lib/storage';
 
 export const revalidate = 0;

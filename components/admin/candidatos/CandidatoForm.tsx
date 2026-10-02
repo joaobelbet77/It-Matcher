@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ProfessionalLevel } from '@/types';
 import { ProfessionalLevels } from '@/lib/validation';
-import { ResumeUploader } from './ResumeUploader';
+import { ResumeUploader } from './CurriculoUploader';
 import { Button } from '@/components/ui/Button';
 import { Alert } from '@/components/ui/Alert';
 import { useToast } from '@/components/layout/Toast';

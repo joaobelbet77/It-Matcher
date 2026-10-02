@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header } from '@/components/layout/Header';
-import { DashboardClientView } from '@/components/dashboard/DashboardClientView';
+import { DashboardClientView } from '@/components/admin/dashboard/DashboardClientView';
 import { store } from '@/lib/storage';
 import { calculateMatching, rankCandidates } from '@/lib/matching';
 

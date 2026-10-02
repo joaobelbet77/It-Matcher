@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header } from '@/components/layout/Header';
-import { ReviewsManagerView } from '@/components/reviews/ReviewsManagerView';
+import { ReviewsManagerView } from '@/components/admin/revisoes/RevisoesManagerView';
 import { store } from '@/lib/storage';
 
 export const revalidate = 0;

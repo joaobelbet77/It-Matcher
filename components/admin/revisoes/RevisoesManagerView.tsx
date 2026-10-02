@@ -7,9 +7,9 @@ import { calculateMatching } from '@/lib/matching';
 import { Card, CardHeader, CardContent } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
-import { ReviewStatusBadge } from './ReviewStatusBadge';
-import { MatchingScoreBadge } from '@/components/matching/MatchingScoreBadge';
-import { HumanReviewModal } from './HumanReviewModal';
+import { ReviewStatusBadge } from './RevisaoStatusBadge';
+import { MatchingScoreBadge } from '@/components/admin/matching/MatchingScoreBadge';
+import { HumanReviewModal } from './RevisaoModal';
 import { UserCheck, Search, MessageSquare, Clock, ArrowRight, ShieldAlert, Award } from 'lucide-react';
 
 interface ReviewsManagerViewProps {

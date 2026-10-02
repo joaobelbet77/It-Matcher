@@ -2,9 +2,9 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { StatCard } from '@/components/dashboard/StatCard';
-import { CompatibilityChart } from '@/components/dashboard/CompatibilityChart';
-import { RecentAnalysesTable } from '@/components/dashboard/RecentAnalysesTable';
+import { StatCard } from './StatCard';
+import { CompatibilityChart } from './CompatibilityChart';
+import { RecentAnalysesTable } from './RecentAnalysesTable';
 import { Job, Candidate, HumanReview, MatchingResult } from '@/types';
 import { useAuth } from '@/components/auth/AuthContext';
 import {

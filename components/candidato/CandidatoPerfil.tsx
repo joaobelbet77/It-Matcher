@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { CandidateProfile } from '../types';
+import { CandidateProfile } from '@/types';
 
 interface ProfileTabProps {
   profile: CandidateProfile;
@@ -58,7 +58,7 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
     if (!skills.trim()) {
       setSkills(skill);
     } else {
-      const list = skills.split(',').map((s) => s.trim().toLowerCase());
+      const list = skills.split(',').map((s: string) => s.trim().toLowerCase());
       if (!list.includes(skill.toLowerCase())) {
         setSkills(`${skills.trim()}, ${skill}`);
       }

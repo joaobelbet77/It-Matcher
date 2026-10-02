@@ -4,7 +4,7 @@ import React from 'react';
 import { MatchingResult } from '@/types';
 import { Modal } from '@/components/ui/Modal';
 import { MatchingScoreBadge } from './MatchingScoreBadge';
-import { ReviewStatusBadge } from '@/components/reviews/ReviewStatusBadge';
+import { ReviewStatusBadge } from '@/components/admin/revisoes/RevisaoStatusBadge';
 import { Button } from '@/components/ui/Button';
 import { Check, X, Info, ShieldCheck, AlertTriangle, UserCheck, Briefcase } from 'lucide-react';
 
