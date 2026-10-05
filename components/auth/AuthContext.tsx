@@ -168,6 +168,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         targetUser = { ...CURRENT_USER };
       }
 
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('itmatcher_session', 'true');
+        document.cookie = "itmatcher_session=true; path=/; max-age=86400;";
+      }
+
       await fetch('/api/perfil', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },

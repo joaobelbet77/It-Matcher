@@ -13,13 +13,21 @@ export const CandidateFooter: React.FC<CandidateFooterProps> = ({ onTabChange })
   const { switchAccountType } = useAuth();
 
   const handleGoToCompany = async () => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('itmatcher_session', 'true');
+      document.cookie = "itmatcher_session=true; path=/; max-age=86400;";
+    }
     await switchAccountType('empresa');
-    router.push('/empresa');
+    window.location.href = '/empresa';
   };
 
   const handleGoToAdmin = async () => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('itmatcher_session', 'true');
+      document.cookie = "itmatcher_session=true; path=/; max-age=86400;";
+    }
     await switchAccountType('administrador');
-    router.push('/dashboard');
+    window.location.href = '/dashboard';
   };
   return (
     <footer className="w-full bg-white dark:bg-[#0c0c0e] border-t border-slate-200/80 dark:border-zinc-800 font-sans transition-colors mt-16">

@@ -34,12 +34,20 @@ export const CandidateSidebar: React.FC<CandidateSidebarProps> = ({
 
   const handleGoToCompany = async () => {
     onClose();
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('itmatcher_session', 'true');
+      document.cookie = "itmatcher_session=true; path=/; max-age=86400;";
+    }
     await switchAccountType('empresa');
     window.location.href = '/empresa';
   };
 
   const handleGoToAdmin = async () => {
     onClose();
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('itmatcher_session', 'true');
+      document.cookie = "itmatcher_session=true; path=/; max-age=86400;";
+    }
     await switchAccountType('administrador');
     window.location.href = '/dashboard';
   };
