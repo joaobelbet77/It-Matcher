@@ -9,6 +9,7 @@ import { Alert } from '@/components/ui/Alert';
 import { useAuth } from '@/components/auth/AuthContext';
 import { useToast } from '@/components/layout/Toast';
 import { SkillWeightConfigurator, ConfiguredSkill } from '@/components/admin/vagas/VagaPesoSkills';
+import { VagaTimeline, JobHealthScore } from '@/components/empresa/EmpresaDiferenciais';
 import {
   ProfessionalLevels,
   COMPANY_TYPES,
@@ -497,6 +498,12 @@ export default function EmpresaPage() {
                         ))}
                       </div>
                     </div>
+                  </div>
+
+                  {/* Diferenciais da Empresa: Timeline de Progresso e Saúde da Vaga */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <VagaTimeline job={companyJob} />
+                    <JobHealthScore job={companyJob} />
                   </div>
                 </div>
               )}
