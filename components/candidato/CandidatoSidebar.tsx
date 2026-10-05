@@ -35,13 +35,13 @@ export const CandidateSidebar: React.FC<CandidateSidebarProps> = ({
   const handleGoToCompany = async () => {
     onClose();
     await switchAccountType('empresa');
-    router.push('/empresa');
+    window.location.href = '/empresa';
   };
 
   const handleGoToAdmin = async () => {
     onClose();
     await switchAccountType('administrador');
-    router.push('/dashboard');
+    window.location.href = '/dashboard';
   };
 
   return (
