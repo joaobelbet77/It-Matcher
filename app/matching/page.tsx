@@ -29,7 +29,7 @@ export default async function MatchingOverviewPage() {
   });
 
   return (
-    <div className="space-y-6 font-sans">
+    <div className="space-y-6">
       <Header
         title="Smart Matching & Ranqueamento de Candidatos"
         description="Selecione uma vaga para visualizar a análise técnica ponderada e o ranking automatizado"

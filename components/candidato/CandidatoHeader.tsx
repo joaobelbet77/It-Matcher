@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import { CandidateTabType, CandidateProfile } from '@/types';
 
 interface CandidateHeaderProps {
@@ -15,12 +14,9 @@ interface CandidateHeaderProps {
 }
 
 export const CandidateHeader: React.FC<CandidateHeaderProps> = ({
-  activeTab,
   isDarkMode,
   onToggleTheme,
   onMenuOpen,
-  profile,
-  onProfileClick,
   onTabChange,
 }) => {
   return (
@@ -34,7 +30,7 @@ export const CandidateHeader: React.FC<CandidateHeaderProps> = ({
             {/* Botão 3 Barras */}
             <button
               onClick={onMenuOpen}
-              className="w-12 h-12 flex flex-col items-center justify-center gap-[5px] rounded-2xl border border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-[#121215] hover:border-slate-300 dark:hover:border-zinc-700 hover:bg-slate-100 dark:hover:bg-zinc-800/80 text-slate-800 dark:text-zinc-100 transition-all shadow-xs shrink-0"
+              className="w-12 h-12 flex flex-col items-center justify-center gap-[5px] rounded-2xl border border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-[#121215] hover:border-slate-300 dark:hover:border-zinc-700 hover:bg-slate-100 dark:hover:bg-zinc-800/80 text-slate-800 dark:text-zinc-100 transition-all shadow-xs shrink-0 cursor-pointer"
               title="Abrir menu de navegação"
               aria-label="Abrir menu de navegação"
             >
@@ -63,13 +59,11 @@ export const CandidateHeader: React.FC<CandidateHeaderProps> = ({
             </div>
           </div>
 
-          {/* Direita: Alternador de tema + Perfil */}
+          {/* Direita: Apenas alternador de tema */}
           <div className="flex items-center gap-3 shrink-0">
-
-            {/* Toggle tema */}
             <button
               onClick={onToggleTheme}
-              className="p-3 rounded-2xl border border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-[#121215] hover:border-slate-300 dark:hover:border-zinc-700 text-slate-600 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white transition-all shadow-xs"
+              className="p-3 rounded-2xl border border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-[#121215] hover:border-slate-300 dark:hover:border-zinc-700 text-slate-600 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white transition-all shadow-xs cursor-pointer"
               title={isDarkMode ? 'Alternar para Modo Claro' : 'Alternar para Modo Escuro'}
             >
               {isDarkMode ? (
@@ -82,42 +76,10 @@ export const CandidateHeader: React.FC<CandidateHeaderProps> = ({
                 </svg>
               )}
             </button>
-
-            {/* Avatar & Perfil Profissional */}
-            <button
-              onClick={onProfileClick}
-              className={`flex items-center gap-3 pl-1.5 pr-4 py-1.5 rounded-2xl border transition-all group ${
-                activeTab === 'profile'
-                  ? 'border-blue-500 dark:border-blue-500 bg-blue-50/80 dark:bg-blue-600/15 shadow-sm ring-1 ring-blue-500/30'
-                  : 'border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-[#121215] hover:border-slate-300 dark:hover:border-zinc-700'
-              } shadow-xs`}
-              title="Meu Perfil & Conta"
-            >
-              {/* Avatar com status */}
-              <div className="relative shrink-0">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-bold flex items-center justify-center text-sm shadow-sm">
-                  {profile.name ? profile.name.charAt(0).toUpperCase() : '👤'}
-                </div>
-                <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 border-2 border-white dark:border-[#121215] rounded-full" />
-              </div>
-              
-              {/* Detalhes do Usuário */}
-              <div className="hidden sm:block text-left">
-                <div className="text-xs font-bold text-slate-900 dark:text-white leading-snug truncate max-w-[140px] font-heading">
-                  {profile.name || 'Minha Conta'}
-                </div>
-                <div className="text-[11px] text-slate-500 dark:text-zinc-400 font-medium leading-tight truncate max-w-[140px]">
-                  {profile.roleTitle || 'Configurar Perfil'}
-                </div>
-              </div>
-
-              <svg className="w-4 h-4 text-slate-400 group-hover:text-slate-600 dark:group-hover:text-zinc-200 transition-colors hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
           </div>
         </div>
       </div>
     </header>
   );
 };
+

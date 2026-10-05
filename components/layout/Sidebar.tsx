@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
@@ -12,8 +12,13 @@ import {
   FileText,
   ArrowRight,
   ShieldAlert,
+  User as UserIcon,
+  Settings,
+  LogOut,
+  RefreshCw,
 } from 'lucide-react';
 import { useAuth } from '@/components/auth/AuthContext';
+import { LogoutModal } from '@/components/auth/LogoutModal';
 
 interface SidebarProps {
   isOpen?: boolean;
@@ -22,9 +27,11 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose = () => {} }) => {
   const pathname = usePathname();
-  const { user } = useAuth();
+  const { user, switchAccountType } = useAuth();
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
   const isCompany = user?.tipoUsuario === 'empresa' || user?.role === 'COMPANY' || user?.role === 'Empresa';
+  const userName = user?.name || (isCompany ? 'Tech Solutions' : 'Carlos Eduardo');
 
   const companyNavItems = [
     { label: 'Painel da Empresa', href: '/dashboard', icon: LayoutDashboard },
@@ -152,10 +159,71 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose = () =
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform text-slate-400 group-hover:text-blue-500" />
               </Link>
             </div>
+
+            {/* Divisor & Conta (Perfil + Configurações + Trocar Conta + Sair) */}
+            <div className="pt-3 mt-3 border-t border-slate-100 dark:border-zinc-800">
+              <div className="px-2 mb-2">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-zinc-500 font-heading">
+                  Minha Conta
+                </span>
+              </div>
+
+              <Link
+                href="/perfil"
+                onClick={onClose}
+                className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
+                  pathname === '/perfil'
+                    ? 'bg-blue-50 dark:bg-blue-600/15 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-500/40 font-bold shadow-xs'
+                    : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/70 dark:hover:bg-zinc-800/60 border border-transparent'
+                }`}
+              >
+                <UserIcon className={`w-4 h-4 ${pathname === '/perfil' ? 'text-blue-600 dark:text-blue-400' : 'text-slate-400 dark:text-zinc-500'}`} />
+                <span>Meu Perfil</span>
+              </Link>
+
+              <Link
+                href="/compliance"
+                onClick={onClose}
+                className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all mt-1 ${
+                  pathname === '/compliance'
+                    ? 'bg-blue-50 dark:bg-blue-600/15 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-500/40 font-bold shadow-xs'
+                    : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/70 dark:hover:bg-zinc-800/60 border border-transparent'
+                }`}
+              >
+                <Settings className={`w-4 h-4 ${pathname === '/compliance' ? 'text-blue-600 dark:text-blue-400' : 'text-slate-400 dark:text-zinc-500'}`} />
+                <span>Configurações & Ética</span>
+              </Link>
+
+              {/* Botão Trocar Conta (Admin ↔ Empresa) */}
+              <button
+                type="button"
+                onClick={() => {
+                  onClose();
+                  switchAccountType(isCompany ? 'administrador' : 'empresa');
+                }}
+                className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-blue-700 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/50 border border-transparent transition-all mt-1 cursor-pointer"
+              >
+                <RefreshCw className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                <span>{isCompany ? 'Trocar para Admin' : 'Trocar para Empresa'}</span>
+              </button>
+
+              {/* Botão Sair */}
+              <button
+                type="button"
+                onClick={() => {
+                  onClose();
+                  setIsLogoutModalOpen(true);
+                }}
+                className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/50 border border-transparent transition-all mt-1 cursor-pointer"
+              >
+                <LogOut className="w-4 h-4 text-red-500 dark:text-red-400" />
+                <span>Sair da Conta</span>
+              </button>
+            </div>
           </nav>
         </div>
 
-        {/* Rodapé da Sidebar: Perfil */}
+        {/* Rodapé da Sidebar: Perfil resumido */}
         <div className="pt-4 border-t border-slate-200/80 dark:border-zinc-800">
           <Link
             href="/perfil"
@@ -164,13 +232,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose = () =
           >
             <div className="relative shrink-0">
               <div className="w-10 h-10 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center text-sm shadow-xs border border-blue-400/30">
-                {user?.name ? user.name.charAt(0).toUpperCase() : '👤'}
+                {userName ? userName.charAt(0).toUpperCase() : '👤'}
               </div>
               <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 border-2 border-white dark:border-[#0c0c0e] rounded-full"></span>
             </div>
             <div className="flex-1 min-w-0">
               <h4 className="text-xs font-bold text-slate-900 dark:text-white truncate font-heading">
-                {user?.name || (isCompany ? 'Tech Solutions' : 'Carlos Eduardo')}
+                {userName}
               </h4>
               <p className="text-[11px] text-slate-500 dark:text-zinc-400 font-medium truncate capitalize">
                 {isCompany ? 'Empresa' : (user?.tipoUsuario || 'Administrador')}
@@ -180,6 +248,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose = () =
           </Link>
         </div>
       </aside>
+
+      {/* Modal de Logout */}
+      <LogoutModal isOpen={isLogoutModalOpen} onClose={() => setIsLogoutModalOpen(false)} />
     </>
   );
 };

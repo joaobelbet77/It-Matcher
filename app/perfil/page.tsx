@@ -110,7 +110,7 @@ export default function PerfilPage() {
   const userInitial = name ? name.charAt(0).toUpperCase() : (user?.name?.charAt(0).toUpperCase() || '👤');
 
   return (
-    <div className="space-y-8 animate-fadeIn max-w-5xl mx-auto">
+    <div className="space-y-6">
       {/* Header com Título da Página */}
       <Header
         title="Minha Conta & Perfil Corporativo"
@@ -126,6 +126,8 @@ export default function PerfilPage() {
           {isCompany ? 'Alternar para Admin' : 'Alternar para Empresa'}
         </Button>
       </Header>
+
+      <div className="space-y-6 max-w-5xl mx-auto">
 
       {/* Cartão de Resumo do Perfil */}
       <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-900 via-indigo-950 to-slate-900 text-white p-6 sm:p-8 shadow-xl border border-blue-800/40">
@@ -395,6 +397,7 @@ export default function PerfilPage() {
             </CardContent>
           </Card>
         </div>
+      </div>
       </div>
 
       {/* Modal de confirmação de Logout */}
