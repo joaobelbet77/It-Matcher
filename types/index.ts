@@ -5,6 +5,7 @@ export * from './matching';
 export * from './review';
 export * from './audit';
 export * from './user';
+export * from './plan';
 
 export interface Application {
   id: string;

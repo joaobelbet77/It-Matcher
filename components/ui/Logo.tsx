@@ -16,9 +16,9 @@ export const Logo: React.FC<LogoProps> = ({
 }) => {
   const sizeMap = {
     sm: { iconBox: 'w-8 h-8 rounded-xl', iconSize: 'w-4 h-4', text: 'text-lg', sub: 'text-[9px]' },
-    md: { iconBox: 'w-10 h-10 rounded-xl', iconSize: 'w-5 h-5', text: 'text-xl', sub: 'text-[10px]' },
+    md: { iconBox: 'w-10 h-10 rounded-2xl', iconSize: 'w-5 h-5', text: 'text-xl', sub: 'text-[10px]' },
     lg: { iconBox: 'w-11 h-11 rounded-2xl', iconSize: 'w-6 h-6', text: 'text-2xl', sub: 'text-[10px]' },
-    xl: { iconBox: 'w-14 h-14 rounded-2xl', iconSize: 'w-7 h-7', text: 'text-3xl', sub: 'text-xs' },
+    xl: { iconBox: 'w-14 h-14 rounded-2xl', iconSize: 'w-8 h-8', text: 'text-3xl', sub: 'text-xs' },
   };
 
   const dim = sizeMap[size];
@@ -26,11 +26,11 @@ export const Logo: React.FC<LogoProps> = ({
   return (
     <div className={`inline-flex items-center gap-3 select-none ${className}`}>
       {/* Símbolo do Alvo Azul Corporativo */}
-      <div className={`${dim.iconBox} bg-blue-600 flex items-center justify-center text-white font-black shadow-md shadow-blue-600/30 shrink-0 transition-transform hover:scale-105`}>
-        <svg className={`${dim.iconSize} text-white`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="9" strokeWidth="2" strokeLinecap="round" />
-          <circle cx="12" cy="12" r="5" strokeWidth="2" strokeLinecap="round" />
-          <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+      <div className={`${dim.iconBox} bg-blue-600 flex items-center justify-center text-white font-black shadow-lg shadow-blue-600/30 shrink-0 transition-transform hover:scale-105`}>
+        <svg className={`${dim.iconSize} text-white`} fill="none" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9" stroke="white" strokeWidth="2.2" strokeLinecap="round" />
+          <circle cx="12" cy="12" r="5.2" stroke="white" strokeWidth="2.2" strokeLinecap="round" />
+          <circle cx="12" cy="12" r="2" fill="white" stroke="white" strokeWidth="0.5" />
         </svg>
       </div>
 

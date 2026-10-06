@@ -2,10 +2,8 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/auth/AuthContext';
 import { CandidateTabType, CandidateProfile } from '@/types';
-import { Building2, LayoutDashboard } from 'lucide-react';
 
 interface CandidateSidebarProps {
   activeTab: CandidateTabType;
@@ -24,32 +22,11 @@ export const CandidateSidebar: React.FC<CandidateSidebarProps> = ({
   isOpen,
   onClose,
 }) => {
-  const router = useRouter();
-  const { switchAccountType } = useAuth();
+  const { logout } = useAuth();
 
   const handleTabChange = (tab: CandidateTabType) => {
     onTabChange(tab);
     onClose();
-  };
-
-  const handleGoToCompany = async () => {
-    onClose();
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('itmatcher_session', 'true');
-      document.cookie = "itmatcher_session=true; path=/; max-age=86400;";
-    }
-    await switchAccountType('empresa');
-    window.location.href = '/empresa';
-  };
-
-  const handleGoToAdmin = async () => {
-    onClose();
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('itmatcher_session', 'true');
-      document.cookie = "itmatcher_session=true; path=/; max-age=86400;";
-    }
-    await switchAccountType('administrador');
-    window.location.href = '/dashboard';
   };
 
   return (
@@ -182,30 +159,23 @@ export const CandidateSidebar: React.FC<CandidateSidebarProps> = ({
               </div>
             </button>
 
-            {/* Divisor & Acessos Corporativos */}
+            {/* Divisor & Sair */}
             <div className="pt-2.5 mt-2.5 border-t border-slate-100 dark:border-zinc-800 space-y-1.5">
               <button
                 type="button"
-                onClick={handleGoToCompany}
-                className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold text-slate-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400 bg-slate-50/70 dark:bg-zinc-900/50 hover:bg-blue-50/70 dark:hover:bg-blue-950/40 border border-slate-200/80 dark:border-zinc-800 transition-all group text-left cursor-pointer"
+                onClick={() => {
+                  onClose();
+                  logout();
+                }}
+                className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 border border-transparent hover:border-red-200 dark:hover:border-red-900/60 transition-all group text-left cursor-pointer"
               >
                 <div className="flex items-center gap-3">
-                  <Building2 className="w-4 h-4 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform" />
-                  <span>Portal da Empresa</span>
+                  <svg className="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                  </svg>
+                  <span>Sair da Conta</span>
                 </div>
-                <span className="text-[10px] text-slate-400 dark:text-zinc-500 font-mono">&rarr;</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={handleGoToAdmin}
-                className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold text-slate-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400 bg-slate-50/70 dark:bg-zinc-900/50 hover:bg-blue-50/70 dark:hover:bg-blue-950/40 border border-slate-200/80 dark:border-zinc-800 transition-all group text-left cursor-pointer"
-              >
-                <div className="flex items-center gap-3">
-                  <LayoutDashboard className="w-4 h-4 text-slate-500 dark:text-zinc-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:scale-110 transition-transform" />
-                  <span>Painel do Administrador</span>
-                </div>
-                <span className="text-[10px] text-slate-400 dark:text-zinc-500 font-mono">&rarr;</span>
+                <span className="text-[10px] text-red-400 font-mono">&rarr;</span>
               </button>
             </div>
           </nav>

@@ -1,5 +1,5 @@
-import { Job, Candidate, HumanReview, AuditLog, CreateJobInput, CreateCandidateInput, CreateReviewInput, User, UpdateUserProfileInput, CURRENT_USER } from '@/types';
-import { INITIAL_JOBS, INITIAL_CANDIDATES, INITIAL_REVIEWS, INITIAL_AUDIT_LOGS, INITIAL_PARTNER_COMPANIES } from './mock-data';
+import { Job, Candidate, HumanReview, AuditLog, CreateJobInput, CreateCandidateInput, CreateReviewInput, User, UpdateUserProfileInput, CURRENT_USER, Plan, CreatePlanInput, UpdatePlanInput, Subscription } from '@/types';
+import { INITIAL_JOBS, INITIAL_CANDIDATES, INITIAL_REVIEWS, INITIAL_AUDIT_LOGS, INITIAL_PARTNER_COMPANIES, INITIAL_PLANS } from './mock-data';
 import { createAuditLogEntry } from './security';
 
 // Armazenamento em memória (Singleton padrão para Node.js / Next.js)
@@ -9,6 +9,8 @@ class InMemoryDataStore {
   private reviews: Map<string, HumanReview> = new Map();
   private auditLogs: AuditLog[] = [];
   private companyAccounts: Map<string, User> = new Map();
+  private plans: Map<string, Plan> = new Map();
+  private subscriptions: Subscription[] = [];
   private currentUser: User = { ...CURRENT_USER };
 
   constructor() {
@@ -19,6 +21,7 @@ class InMemoryDataStore {
     INITIAL_JOBS.forEach((job) => this.jobs.set(job.id, { ...job }));
     INITIAL_CANDIDATES.forEach((cand) => this.candidates.set(cand.id, { ...cand }));
     INITIAL_REVIEWS.forEach((rev) => this.reviews.set(`${rev.jobId}_${rev.candidateId}`, { ...rev }));
+    INITIAL_PLANS.forEach((plan) => this.plans.set(plan.id, { ...plan }));
     this.auditLogs = [...INITIAL_AUDIT_LOGS];
 
     // Seed de Empresas Parceiras para listagem completa
@@ -323,6 +326,169 @@ class InMemoryDataStore {
     );
 
     return review;
+  }
+
+  // --- GESTÃO DE PLANOS & ASSINATURAS (MONETIZAÇÃO) ---
+  public getPlans(): Plan[] {
+    return Array.from(this.plans.values());
+  }
+
+  public getPlanById(id: string): Plan | undefined {
+    return this.plans.get(id);
+  }
+
+  public createPlan(input: CreatePlanInput): Plan {
+    const id = `plano-${Date.now().toString().slice(-6)}`;
+    const newPlan: Plan = {
+      id,
+      name: input.name,
+      description: input.description,
+      price: Number(input.price),
+      period: input.period || 'mês',
+      features: input.features || [],
+      maxJobs: input.maxJobs ?? 5,
+      maxMatches: input.maxMatches ?? -1,
+      status: input.status || 'active',
+      isPopular: input.isPopular || false,
+      badge: input.badge || '',
+      createdAt: new Date().toISOString(),
+    };
+
+    this.plans.set(id, newPlan);
+
+    this.addAuditLog(
+      createAuditLogEntry('SETTINGS_UPDATED', `Plano "${newPlan.name}" (R$ ${newPlan.price}/${newPlan.period}) cadastrado com sucesso.`, {
+        planId: newPlan.id,
+        planName: newPlan.name,
+        price: newPlan.price,
+      })
+    );
+
+    return newPlan;
+  }
+
+  public updatePlan(input: UpdatePlanInput): Plan {
+    const existing = this.plans.get(input.id);
+    if (!existing) {
+      throw new Error(`Plano com ID ${input.id} não encontrado.`);
+    }
+
+    const updated: Plan = {
+      ...existing,
+      ...input,
+      price: input.price !== undefined ? Number(input.price) : existing.price,
+    };
+
+    this.plans.set(input.id, updated);
+
+    this.addAuditLog(
+      createAuditLogEntry('SETTINGS_UPDATED', `Plano "${updated.name}" atualizado.`, {
+        planId: updated.id,
+        changes: input,
+      })
+    );
+
+    return updated;
+  }
+
+  public deletePlan(id: string): boolean {
+    const existing = this.plans.get(id);
+    if (!existing) return false;
+
+    this.plans.delete(id);
+    this.addAuditLog(
+      createAuditLogEntry('SETTINGS_UPDATED', `Plano "${existing.name}" (${id}) excluído.`, {
+        planId: id,
+        planName: existing.name,
+      })
+    );
+    return true;
+  }
+
+  public subscribeCompanyToPlan(companyEmail: string, planId: string, paymentMethod: 'PIX' | 'Cartão de Crédito' | 'Boleto Bancário' = 'PIX'): Subscription {
+    const plan = this.plans.get(planId);
+    if (!plan) {
+      throw new Error('Plano selecionado não foi encontrado.');
+    }
+
+    const emailKey = companyEmail.toLowerCase().trim();
+    let companyUser = this.companyAccounts.get(emailKey);
+    if (!companyUser) {
+      companyUser = {
+        id: `emp-${Date.now().toString().slice(-4)}`,
+        name: this.currentUser.company || 'Empresa Parceira',
+        email: companyEmail,
+        role: 'COMPANY',
+        tipoUsuario: 'empresa',
+        company: this.currentUser.company || 'Empresa Parceira',
+        companyData: {
+          id: `emp-${Date.now().toString().slice(-4)}`,
+          name: this.currentUser.company || 'Empresa Parceira',
+          email: companyEmail,
+        }
+      };
+      this.companyAccounts.set(emailKey, companyUser);
+    }
+
+    const now = new Date();
+    const expires = new Date();
+    expires.setDate(expires.getDate() + (plan.period === 'ano' ? 365 : 30));
+
+    const subscription: Subscription = {
+      id: `sub-${Date.now()}`,
+      companyId: companyUser.id,
+      companyName: companyUser.name,
+      companyEmail: companyUser.email,
+      planId: plan.id,
+      planName: plan.name,
+      price: plan.price,
+      period: plan.period,
+      status: 'active',
+      paymentMethod,
+      subscribedAt: now.toISOString(),
+      expiresAt: expires.toISOString(),
+    };
+
+    this.subscriptions.unshift(subscription);
+
+    // Atualiza dados da empresa
+    if (companyUser.companyData) {
+      companyUser.companyData.planId = plan.id;
+      companyUser.companyData.planName = plan.name;
+      companyUser.companyData.subscriptionStatus = 'active';
+      companyUser.companyData.subscribedAt = now.toISOString();
+      companyUser.companyData.expiresAt = expires.toISOString();
+    }
+
+    // Se usuário atual for essa empresa, atualiza currentUser
+    if (this.currentUser.email.toLowerCase() === emailKey) {
+      this.currentUser.companyData = {
+        ...this.currentUser.companyData,
+        ...companyUser.companyData,
+      };
+    }
+
+    this.addAuditLog(
+      createAuditLogEntry('SETTINGS_UPDATED', `Empresa "${companyUser.name}" assinou o "${plan.name}" (R$ ${plan.price}) via ${paymentMethod}.`, {
+        companyId: companyUser.id,
+        planId: plan.id,
+        planName: plan.name,
+        price: plan.price,
+        paymentMethod,
+      })
+    );
+
+    return subscription;
+  }
+
+  public getSubscriptions(): Subscription[] {
+    return [...this.subscriptions];
+  }
+
+  public getCompanySubscription(companyEmail: string): Subscription | undefined {
+    return this.subscriptions.find(
+      (s) => s.companyEmail.toLowerCase() === companyEmail.toLowerCase().trim() && s.status === 'active'
+    );
   }
 
   // --- AUDITORIA (AUDIT LOGS) ---

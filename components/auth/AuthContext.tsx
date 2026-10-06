@@ -7,7 +7,7 @@ interface AuthContextValue {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  login: (email: string, pass: string, isCompany?: boolean) => Promise<boolean>;
+  login: (email: string, pass: string, userType?: 'candidato' | 'empresa' | 'administrador' | boolean) => Promise<boolean>;
   loginCompany: (email: string, pass: string) => Promise<boolean>;
   registerCompany: (data: any) => Promise<boolean>;
   switchAccountType: (type: 'administrador' | 'empresa' | 'recrutador') => Promise<void>;
@@ -18,19 +18,16 @@ interface AuthContextValue {
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(CURRENT_USER);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const checkSession = async () => {
     try {
       const storedSession = typeof window !== 'undefined' ? localStorage.getItem('itmatcher_session') : null;
-      const isLoggedOut = storedSession === 'false';
+      const hasActiveSession = storedSession === 'true';
 
-      if (!isLoggedOut) {
-        if (typeof window !== 'undefined') {
-          localStorage.setItem('itmatcher_session', 'true');
-        }
+      if (hasActiveSession) {
         const res = await fetch('/api/perfil');
         const data = await res.json();
         if (data.success && data.data) {
@@ -45,8 +42,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setIsAuthenticated(false);
       }
     } catch (e) {
-      setUser(CURRENT_USER);
-      setIsAuthenticated(true);
+      setUser(null);
+      setIsAuthenticated(false);
     } finally {
       setIsLoading(false);
     }
@@ -56,17 +53,48 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     checkSession();
   }, []);
 
-  const login = async (email: string, pass: string, isCompany: boolean = false): Promise<boolean> => {
+  const login = async (
+    email: string,
+    pass: string,
+    userType: 'candidato' | 'empresa' | 'administrador' | boolean = 'candidato'
+  ): Promise<boolean> => {
     setIsLoading(true);
     try {
       localStorage.setItem('itmatcher_session', 'true');
       document.cookie = "itmatcher_session=true; path=/; max-age=86400;";
-      
-      const res = await fetch('/api/perfil');
-      const data = await res.json();
+
+      let resolvedType: 'candidato' | 'empresa' | 'administrador' = 'candidato';
+      if (typeof userType === 'boolean') {
+        resolvedType = userType ? 'empresa' : 'administrador';
+      } else if (userType) {
+        resolvedType = userType;
+      } else if (email.includes('empresa') || email.includes('tech')) {
+        resolvedType = 'empresa';
+      } else if (email.includes('admin')) {
+        resolvedType = 'administrador';
+      }
 
       let loggedUser: User;
-      if (isCompany || email.includes('tech') || email.includes('empresa')) {
+      if (resolvedType === 'candidato') {
+        let savedCandidateName = 'Carlos Eduardo Silva';
+        if (typeof window !== 'undefined') {
+          try {
+            const raw = localStorage.getItem('itmatcher_candidate_profile');
+            if (raw) {
+              const parsed = JSON.parse(raw);
+              if (parsed.name) savedCandidateName = parsed.name;
+            }
+          } catch (e) {}
+        }
+
+        loggedUser = {
+          id: 'cand_user_01',
+          name: savedCandidateName,
+          email: email || 'candidato@itmatcher.com.br',
+          role: 'Candidato',
+          tipoUsuario: 'candidato',
+        };
+      } else if (resolvedType === 'empresa') {
         loggedUser = {
           id: 'emp_tech_01',
           name: 'Tech Solutions',
@@ -88,15 +116,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             description: 'Empresa líder em desenvolvimento de software e ecossistemas digitais.',
           }
         };
-        await fetch('/api/perfil', {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(loggedUser),
-        });
       } else {
-        loggedUser = data.success ? data.data : { ...CURRENT_USER, email: email || CURRENT_USER.email };
+        loggedUser = {
+          ...CURRENT_USER,
+          id: 'admin_master_01',
+          name: 'Administrador Master',
+          email: email || 'admin@itmatcher.com.br',
+          role: 'Administrador',
+          tipoUsuario: 'administrador',
+        };
       }
-      
+
+      await fetch('/api/perfil', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(loggedUser),
+      });
+
       setUser(loggedUser);
       setIsAuthenticated(true);
       return true;
@@ -190,8 +226,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     // 1. Limpar tokens e estados armazenados
     if (typeof window !== 'undefined') {
       localStorage.setItem('itmatcher_session', 'false');
+      localStorage.removeItem('itmatcher_candidate_profile');
+      localStorage.removeItem('itmatcher_candidate_apps');
       sessionStorage.clear();
-      document.cookie = "itmatcher_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = "itmatcher_session=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+      document.cookie = "itmatcher_session=false; path=/; max-age=0;";
     }
     
     // 2. Invalidar estado do usuário no frontend

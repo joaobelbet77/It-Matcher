@@ -3,7 +3,7 @@ import { ReviewStatus } from './review';
 
 export interface AuditLog {
   id: string;
-  action: 'MATCHING_CALCULATED' | 'REVIEW_UPDATED' | 'RESUME_UPLOADED' | 'JOB_CREATED' | 'CANDIDATE_CREATED';
+  action: 'MATCHING_CALCULATED' | 'REVIEW_UPDATED' | 'RESUME_UPLOADED' | 'JOB_CREATED' | 'CANDIDATE_CREATED' | 'SETTINGS_UPDATED' | 'PLAN_CREATED' | 'PLAN_UPDATED' | 'PLAN_DELETED' | 'SUBSCRIPTION_CREATED';
   timestamp: string;
   jobId?: string;
   jobTitle?: string;
@@ -12,6 +12,11 @@ export interface AuditLog {
   companyId?: string;
   companyName?: string;
   cnpj?: string;
+  planId?: string;
+  planName?: string;
+  price?: number;
+  paymentMethod?: string;
+  changes?: any;
   score?: number;
   classification?: ClassificationType;
   matchedSkills?: string[];

@@ -12,7 +12,12 @@ export const metadata: Metadata = {
   title: 'ItMatcher Enterprise | Recrutamento Inteligente & Match de Competências',
   description: 'Plataforma corporativa de compatibilidade técnica e recrutamento inteligente em tecnologia.',
   icons: {
-    icon: '/favicon.ico'
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    shortcut: '/icon.svg',
+    apple: '/icon.svg',
   }
 };
 
@@ -23,6 +28,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR" className="h-full">
+      <head>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="alternate icon" href="/favicon.svg" />
+        <link rel="apple-touch-icon" href="/icon.svg" />
+      </head>
       <body className={`${inter.className} min-h-screen bg-[#f8fafc] dark:bg-[#09090b] text-slate-900 dark:text-zinc-100 antialiased font-sans selection:bg-blue-600 selection:text-white`}>
         <ThemeProvider>
           <ToastProvider>

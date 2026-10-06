@@ -15,6 +15,7 @@ import {
   User as UserIcon,
   Settings,
   LogOut,
+  CreditCard,
 } from 'lucide-react';
 import { useAuth } from '@/components/auth/AuthContext';
 import { LogoutModal } from '@/components/auth/LogoutModal';
@@ -35,6 +36,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose = () =
     { label: 'Painel da Empresa', href: '/dashboard', icon: LayoutDashboard },
     { label: 'Minha Vaga', href: '/empresa', icon: Briefcase },
     { label: 'Candidatos Compatíveis', href: '/matching', icon: GitCompare },
+    { label: 'Planos & Assinatura', href: '/planos', icon: CreditCard },
   ];
 
   const adminNavItems = [
@@ -43,6 +45,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose = () =
     { label: 'Gestão de Vagas', href: '/vagas', icon: Briefcase },
     { label: 'Banco de Candidatos', href: '/candidatos', icon: Users },
     { label: 'Smart Matching', href: '/matching', icon: GitCompare },
+    { label: 'Planos & Monetização', href: '/planos', icon: CreditCard },
     { label: 'Auditoria & Logs', href: '/auditoria', icon: FileText },
   ];
 
@@ -72,11 +75,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose = () =
               className="flex items-center gap-3 cursor-pointer group"
               onClick={onClose}
             >
-              <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-black shadow-md shadow-blue-600/30 group-hover:scale-[1.02] transition-transform">
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="9" strokeWidth="2" strokeLinecap="round" />
-                  <circle cx="12" cy="12" r="5" strokeWidth="2" strokeLinecap="round" />
-                  <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+              <div className="w-10 h-10 rounded-2xl bg-blue-600 flex items-center justify-center text-white font-black shadow-lg shadow-blue-600/30 group-hover:scale-[1.02] transition-transform">
+                <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="9" stroke="white" strokeWidth="2.2" strokeLinecap="round" />
+                  <circle cx="12" cy="12" r="5.2" stroke="white" strokeWidth="2.2" strokeLinecap="round" />
+                  <circle cx="12" cy="12" r="2" fill="white" stroke="white" strokeWidth="0.5" />
                 </svg>
               </div>
               <div>
@@ -184,19 +187,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose = () =
                 <span>Configurações & Ética</span>
               </Link>
 
-              {/* Portal do Candidato (movido para baixo de Conta & Configurações) */}
-              <Link
-                href="/"
-                onClick={onClose}
-                className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold text-slate-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400 bg-slate-50/70 dark:bg-zinc-900/50 hover:bg-blue-50/70 dark:hover:bg-blue-950/40 border border-slate-200/80 dark:border-zinc-800 transition-all group mt-1"
-              >
-                <div className="flex items-center gap-3">
-                  <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400 animate-pulse"></span>
-                  <span>Portal do Candidato</span>
-                </div>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform text-slate-400 group-hover:text-blue-500" />
-              </Link>
-
               {/* Botão Sair */}
               <button
                 type="button"
@@ -204,7 +194,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose = () =
                   onClose();
                   setIsLogoutModalOpen(true);
                 }}
-                className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/50 border border-transparent transition-all mt-1.5 cursor-pointer"
+                className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/50 border border-transparent transition-all mt-2 cursor-pointer"
               >
                 <LogOut className="w-4 h-4 text-red-500 dark:text-red-400" />
                 <span>Sair da Conta</span>

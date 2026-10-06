@@ -1,11 +1,11 @@
-export type UserRole = 'ADMIN' | 'COMPANY' | 'Administrador' | 'Empresa' | 'Recrutador' | 'Auditor' | 'RECRUITER';
-export type UserAccountType = 'administrador' | 'empresa' | 'recrutador' | 'ADMIN' | 'COMPANY' | 'RECRUITER';
+export type UserRole = 'ADMIN' | 'COMPANY' | 'CANDIDATO' | 'Administrador' | 'Empresa' | 'Candidato' | 'Recrutador' | 'Auditor' | 'RECRUITER';
+export type UserAccountType = 'administrador' | 'empresa' | 'candidato' | 'recrutador' | 'ADMIN' | 'COMPANY' | 'CANDIDATO' | 'RECRUITER';
 
 export interface CompanyData {
   id?: string;
-  name: string;
+  name?: string;
   cnpj?: string;
-  email: string;
+  email?: string;
   phone?: string;
   contactName?: string;
   companyType?: string;
@@ -21,6 +21,11 @@ export interface CompanyData {
   jobsCount?: number;
   candidatesCount?: number;
   partnershipStatus?: string;
+  planId?: string;
+  planName?: string;
+  subscriptionStatus?: 'active' | 'inactive' | 'trial' | 'none';
+  subscribedAt?: string;
+  expiresAt?: string;
   jobId?: string;
   createdAt?: string;
 }

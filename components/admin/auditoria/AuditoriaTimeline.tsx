@@ -58,6 +58,27 @@ export const AuditTimeline: React.FC<AuditTimelineProps> = ({ logs }) => {
           label: 'Upload de Currículo (RG08)',
           badgeVariant: 'default' as const,
         };
+      case 'SETTINGS_UPDATED':
+      case 'PLAN_CREATED':
+      case 'PLAN_UPDATED':
+      case 'PLAN_DELETED':
+        return {
+          icon: <FileText className="w-4 h-4 text-purple-400" />,
+          label: 'Planos & Monetização',
+          badgeVariant: 'purple' as const,
+        };
+      case 'SUBSCRIPTION_CREATED':
+        return {
+          icon: <ShieldCheck className="w-4 h-4 text-emerald-400" />,
+          label: 'Assinatura Ativada',
+          badgeVariant: 'success' as const,
+        };
+      default:
+        return {
+          icon: <FileText className="w-4 h-4 text-slate-400" />,
+          label: 'Operação Registrada',
+          badgeVariant: 'default' as const,
+        };
     }
   };
 

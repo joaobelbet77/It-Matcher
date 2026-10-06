@@ -1,4 +1,4 @@
-import { Job, Candidate, HumanReview, AuditLog } from '@/types';
+import { Job, Candidate, HumanReview, AuditLog, Plan } from '@/types';
 
 export const INITIAL_JOBS: Job[] = [
   {
@@ -789,3 +789,69 @@ export const INITIAL_PARTNER_COMPANIES = [
     }
   }
 ];
+
+export const INITIAL_PLANS: Plan[] = [
+  {
+    id: 'plano-starter',
+    name: 'Plano Starter',
+    description: 'Ideal para startups e empresas iniciando processos seletivos técnicos.',
+    price: 199.00,
+    period: 'mês',
+    features: [
+      'Acesso ao Algoritmo de Smart Matching',
+      'Até 3 Vagas Ativas simultâneas',
+      'Visualização de até 20 Candidatos por Vaga',
+      'Relatório de Pontuação Aritmética (RG04)',
+      'Suporte via E-mail',
+    ],
+    maxJobs: 3,
+    maxMatches: 20,
+    status: 'active',
+    badge: 'Essencial',
+    createdAt: '2026-01-10T10:00:00Z',
+  },
+  {
+    id: 'plano-pro',
+    name: 'Plano Profissional',
+    description: 'Para empresas em expansão que exigem contratações ágeis com triagem precisa.',
+    price: 499.00,
+    period: 'mês',
+    features: [
+      'Acesso Ilimitado a Smart Matching & Rankings',
+      'Até 10 Vagas Ativas simultâneas',
+      'Candidatos Ranqueados Ilimitados',
+      'Detalhamento Completo de Competências Ponderadas',
+      'Emissão de Pareceres e Gestão de Status',
+      'Exportação de Relatórios de Triagem',
+      'Suporte Prioritário por Chat & WhatsApp',
+    ],
+    maxJobs: 10,
+    maxMatches: -1,
+    status: 'active',
+    isPopular: true,
+    badge: 'Mais Recomendado',
+    createdAt: '2026-01-10T10:00:00Z',
+  },
+  {
+    id: 'plano-enterprise',
+    name: 'Plano Enterprise',
+    description: 'Para grandes corporações e tech hubs com alta demanda de recrutamento especializado.',
+    price: 999.00,
+    period: 'mês',
+    features: [
+      'Vagas Ilimitadas & Matchings Ilimitados',
+      'Trilha de Auditoria & Conformidade Completa (RG10)',
+      'Acesso Direto a Currículos Sanitizados (RG01)',
+      'Gestão Multi-recrutadores & Permissões',
+      'Integração via Webhooks & API ATS',
+      'Gerente de Conta & Treinamento Dedicado',
+      'SLA de Atendimento Garantido em 1h',
+    ],
+    maxJobs: -1,
+    maxMatches: -1,
+    status: 'active',
+    badge: 'Corporativo',
+    createdAt: '2026-01-10T10:00:00Z',
+  },
+];
+

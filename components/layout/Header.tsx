@@ -58,10 +58,10 @@ export const Header: React.FC<HeaderProps> = ({
               className="flex items-center gap-3.5 cursor-pointer group shrink-0"
             >
               <div className="w-11 h-11 rounded-2xl bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-600/30 group-hover:scale-105 transition-transform">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="9" strokeWidth="2" strokeLinecap="round" />
-                  <circle cx="12" cy="12" r="5" strokeWidth="2" strokeLinecap="round" />
-                  <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+                <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="9" stroke="white" strokeWidth="2.2" strokeLinecap="round" />
+                  <circle cx="12" cy="12" r="5.2" stroke="white" strokeWidth="2.2" strokeLinecap="round" />
+                  <circle cx="12" cy="12" r="2" fill="white" stroke="white" strokeWidth="0.5" />
                 </svg>
               </div>
               <div>

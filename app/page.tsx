@@ -10,6 +10,7 @@ import { ProfileTab } from '@/components/candidato/CandidatoPerfil';
 import { AboutUsTab } from '@/components/candidato/CandidatoSobreNos';
 import { HomeTab } from '@/components/candidato/CandidatoHome';
 import { CandidateFooter } from '@/components/candidato/CandidatoFooter';
+import { useAuth } from '@/components/auth/AuthContext';
 import { Job, Application, CandidateProfile, CandidateTabType } from '../types';
 import { INITIAL_CANDIDATE_JOBS } from '../lib/mockJobs';
 
@@ -85,19 +86,10 @@ export default function CandidatePortalPage() {
     localStorage.setItem('itmatcher_candidate_profile', JSON.stringify(newProfile));
   };
 
+  const { logout } = useAuth();
+
   const handleLogout = () => {
-    if (window.confirm('Deseja realmente sair da sua conta?')) {
-      const guestProfile: CandidateProfile = {
-        name: '',
-        email: '',
-        roleTitle: 'Visitante / Sem conta',
-        skills: '',
-        isLoggedIn: false
-      };
-      setProfile(guestProfile);
-      localStorage.removeItem('itmatcher_candidate_profile');
-      alert('Você saiu da sua conta.');
-    }
+    logout();
   };
 
   const handleLoginOrCreateAccount = (newProfile: CandidateProfile) => {

@@ -1,15 +1,17 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
-import { Job, Candidate, HumanReview, MatchingFilterOptions, MatchingResult } from '@/types';
+import { Job, Candidate, HumanReview, MatchingFilterOptions, MatchingResult, Plan } from '@/types';
 import { calculateMatching, rankCandidates } from '@/lib/matching';
 import { MatchingFilterBar } from './MatchingFilterBar';
 import { RankingTable } from './RankingTable';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Alert } from '@/components/ui/Alert';
-import { Briefcase, ArrowLeft, RefreshCw, Award, Filter, ShieldAlert } from 'lucide-react';
+import { useAuth } from '@/components/auth/AuthContext';
+import { PlanosPaywall } from '@/components/empresa/PlanosPaywall';
+import { Briefcase, ArrowLeft, RefreshCw, Award, Filter, ShieldAlert, Lock, Sparkles, CheckCircle2 } from 'lucide-react';
 
 interface MatchingClientViewProps {
   job: Job;
@@ -22,7 +24,23 @@ export const MatchingClientView: React.FC<MatchingClientViewProps> = ({
   initialCandidates,
   initialReviews,
 }) => {
+  const { user, refreshUser } = useAuth();
+  const [plans, setPlans] = useState<Plan[]>([]);
   const [reviews, setReviews] = useState<HumanReview[]>(initialReviews);
+
+  const isCompany = user?.tipoUsuario === 'empresa' || user?.role === 'COMPANY' || user?.role === 'Empresa';
+  const hasActivePlan = !isCompany || user?.companyData?.subscriptionStatus === 'active';
+
+  useEffect(() => {
+    fetch('/api/planos')
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.success && data.data) {
+          setPlans(data.data);
+        }
+      })
+      .catch((err) => console.error('Erro ao carregar planos:', err));
+  }, []);
   const [filters, setFilters] = useState<MatchingFilterOptions>({
     classification: 'ALL',
     level: 'ALL',
@@ -147,6 +165,12 @@ export const MatchingClientView: React.FC<MatchingClientViewProps> = ({
               <h2 className="text-xl font-bold text-slate-100">{job.title}</h2>
               <Badge variant="purple">{job.area}</Badge>
               <Badge variant="default">{job.level}</Badge>
+              {isCompany && hasActivePlan && (
+                <Badge variant="success">
+                  <Sparkles className="w-3 h-3 inline mr-1 text-emerald-300" />
+                  Plano: {user?.companyData?.planName || 'Profissional'}
+                </Badge>
+              )}
             </div>
             <p className="text-xs text-slate-400 mt-1">
               Experiência mínima recomendada: {job.minExperienceYears} ano(s)
@@ -204,30 +228,48 @@ export const MatchingClientView: React.FC<MatchingClientViewProps> = ({
         </div>
       </div>
 
-      {/* Barra de Filtros Combinados (Requisito 10) */}
-      <MatchingFilterBar
-        filters={filters}
-        availableSkills={availableSkills}
-        onChange={setFilters}
-        onReset={handleResetFilters}
-      />
+      {/* VERIFICAÇÃO DE PLANO CORPORATIVO (PAYWALL PARA EMPRESAS SEM PLANO ATIVO) */}
+      {isCompany && !hasActivePlan ? (
+        <div className="space-y-6">
+          <Alert type="warning" title="Recurso Restrito: Assinatura Necessária">
+            Para visualizar o ranking nominal de candidatos, pareceres de compatibilidade e detalhamento técnico das notas, sua empresa precisa de um plano corporativo ativo.
+          </Alert>
 
-      {/* Tabela de Ranking Automatizado (Requisito 9) */}
-      <div className="space-y-3">
-        <div className="flex items-center justify-between px-1">
-          <div className="flex items-center gap-2">
-            <Award className="w-5 h-5 text-blue-400" />
-            <h3 className="text-base font-bold text-slate-100">
-              Ranking de Compatibilidade ({filteredAndRanked.length} de {stats.total})
-            </h3>
-          </div>
-          <span className="text-xs text-slate-400 font-medium">
-            Ordenado automaticamente do maior para o menor percentual
-          </span>
+          <PlanosPaywall
+            plans={plans}
+            onSubscriptionSuccess={() => {
+              refreshUser();
+            }}
+          />
         </div>
+      ) : (
+        <>
+          {/* Barra de Filtros Combinados (Requisito 10) */}
+          <MatchingFilterBar
+            filters={filters}
+            availableSkills={availableSkills}
+            onChange={setFilters}
+            onReset={handleResetFilters}
+          />
 
-        <RankingTable results={filteredAndRanked} onReviewUpdated={handleReviewUpdated} />
-      </div>
+          {/* Tabela de Ranking Automatizado (Requisito 9) */}
+          <div className="space-y-3">
+            <div className="flex items-center justify-between px-1">
+              <div className="flex items-center gap-2">
+                <Award className="w-5 h-5 text-blue-400" />
+                <h3 className="text-base font-bold text-slate-100">
+                  Ranking de Compatibilidade ({filteredAndRanked.length} de {stats.total})
+                </h3>
+              </div>
+              <span className="text-xs text-slate-400 font-medium">
+                Ordenado automaticamente do maior para o menor percentual
+              </span>
+            </div>
+
+            <RankingTable results={filteredAndRanked} onReviewUpdated={handleReviewUpdated} />
+          </div>
+        </>
+      )}
     </div>
   );
 };

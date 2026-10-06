@@ -397,6 +397,57 @@ export default function EmpresaPage() {
               </div>
             </div>
 
+            {/* Card de Plano & Monetização Corporativa */}
+            <div className="bg-gradient-to-r from-blue-950/60 to-slate-900/90 p-6 rounded-2xl border border-blue-900/40 shadow-xs space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/40 text-blue-400 flex items-center justify-center font-bold">
+                    <Sparkles className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-blue-400 block font-heading">
+                      Plano & Assinatura Corporativa
+                    </span>
+                    <h4 className="text-base font-bold text-slate-100 flex items-center gap-2">
+                      {user?.companyData?.planName || 'Nenhum plano contratado'}
+                      {user?.companyData?.subscriptionStatus === 'active' ? (
+                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold">
+                          ● Ativo & Desbloqueado
+                        </span>
+                      ) : (
+                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 font-bold">
+                          ● Bloqueado (Requer Assinatura)
+                        </span>
+                      )}
+                    </h4>
+                  </div>
+                </div>
+
+                <Link href="/planos">
+                  <Button variant="primary" size="sm" icon={<ArrowRight className="w-4 h-4" />}>
+                    {user?.companyData?.subscriptionStatus === 'active' ? 'Gerenciar Plano' : 'Contratar Plano de Acesso'}
+                  </Button>
+                </Link>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs border-t border-slate-800/80">
+                <div className="text-slate-300">
+                  <span className="text-slate-500 block text-[11px]">Smart Matching & Ranking:</span>
+                  <strong className={user?.companyData?.subscriptionStatus === 'active' ? 'text-emerald-400' : 'text-amber-400'}>
+                    {user?.companyData?.subscriptionStatus === 'active' ? '✓ Desbloqueado' : '🔒 Requer Plano Ativo'}
+                  </strong>
+                </div>
+                <div className="text-slate-300">
+                  <span className="text-slate-500 block text-[11px]">Limite de Vagas:</span>
+                  <strong className="text-slate-100">1 vaga simultânea</strong>
+                </div>
+                <div className="text-slate-300">
+                  <span className="text-slate-500 block text-[11px]">Relatórios & Compliance:</span>
+                  <strong className="text-slate-100">RG01 a RG10 Habilitados</strong>
+                </div>
+              </div>
+            </div>
+
             {/* Seção MINHA VAGA (REQUISITO 6, 7 & 9) */}
             <div className="bg-slate-900/90 p-6 rounded-2xl border border-slate-800 shadow-xs space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-slate-800">

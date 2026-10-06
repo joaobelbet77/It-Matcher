@@ -1,6 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/auth/AuthContext';
 import { CandidateTabType } from '@/types';
 
@@ -9,26 +7,7 @@ interface CandidateFooterProps {
 }
 
 export const CandidateFooter: React.FC<CandidateFooterProps> = ({ onTabChange }) => {
-  const router = useRouter();
-  const { switchAccountType } = useAuth();
-
-  const handleGoToCompany = async () => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('itmatcher_session', 'true');
-      document.cookie = "itmatcher_session=true; path=/; max-age=86400;";
-    }
-    await switchAccountType('empresa');
-    window.location.href = '/empresa';
-  };
-
-  const handleGoToAdmin = async () => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('itmatcher_session', 'true');
-      document.cookie = "itmatcher_session=true; path=/; max-age=86400;";
-    }
-    await switchAccountType('administrador');
-    window.location.href = '/dashboard';
-  };
+  const { logout } = useAuth();
   return (
     <footer className="w-full bg-white dark:bg-[#0c0c0e] border-t border-slate-200/80 dark:border-zinc-800 font-sans transition-colors mt-16">
       {/* Container Principal */}
@@ -42,10 +21,10 @@ export const CandidateFooter: React.FC<CandidateFooterProps> = ({ onTabChange })
               onClick={() => onTabChange('jobs')}
             >
               <div className="w-10 h-10 rounded-2xl bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-600/30 group-hover:scale-105 transition-transform">
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="9" strokeWidth="2" strokeLinecap="round" />
-                  <circle cx="12" cy="12" r="5" strokeWidth="2" strokeLinecap="round" />
-                  <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+                <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="9" stroke="white" strokeWidth="2.2" strokeLinecap="round" />
+                  <circle cx="12" cy="12" r="5.2" stroke="white" strokeWidth="2.2" strokeLinecap="round" />
+                  <circle cx="12" cy="12" r="2" fill="white" stroke="white" strokeWidth="0.5" />
                 </svg>
               </div>
               <div>
@@ -118,21 +97,13 @@ export const CandidateFooter: React.FC<CandidateFooterProps> = ({ onTabChange })
                   Sobre a Empresa
                 </button>
               </li>
-              <li className="pt-1.5 mt-1.5 border-t border-slate-100 dark:border-zinc-800/80 space-y-1.5">
+              <li className="pt-1.5 mt-1.5 border-t border-slate-100 dark:border-zinc-800/80">
                 <button
                   type="button"
-                  onClick={handleGoToCompany}
-                  className="inline-flex items-center gap-1.5 text-blue-600 dark:text-blue-400 hover:underline font-bold text-xs cursor-pointer block text-left"
+                  onClick={logout}
+                  className="inline-flex items-center gap-1.5 text-red-600 dark:text-red-400 hover:underline font-bold text-xs cursor-pointer block text-left"
                 >
-                  <span>Portal da Empresa</span>
-                  <span>&rarr;</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={handleGoToAdmin}
-                  className="inline-flex items-center gap-1.5 text-slate-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 hover:underline font-semibold text-xs cursor-pointer block text-left"
-                >
-                  <span>Painel do Administrador</span>
+                  <span>Sair da Conta</span>
                   <span>&rarr;</span>
                 </button>
               </li>

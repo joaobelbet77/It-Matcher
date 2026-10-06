@@ -173,120 +173,45 @@ export default function PerfilPage() {
           </div>
         </div>
 
-        {/* SEÇÃO PRINCIPAL DE TROCA DE TIPO DE CONTA (ADMIN vs EMPRESA) */}
+        {/* SEÇÃO INFORMATIVA DO TIPO DE CONTA AUTENTICADA */}
         <Card className="border-blue-500/30 bg-white dark:bg-[#121215] shadow-md">
           <CardContent className="p-6 space-y-4">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-zinc-800">
               <div className="flex items-center gap-2.5">
                 <div className="p-2 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400">
-                  <RefreshCw className={`w-4 h-4 ${isSwitching ? 'animate-spin' : ''}`} />
+                  <ShieldCheck className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-slate-900 dark:text-white">Tipo de Acesso da Conta</h3>
-                  <p className="text-xs text-slate-500 dark:text-zinc-400">Selecione o modo de visualização e permissões do sistema</p>
+                  <h3 className="text-base font-bold text-slate-900 dark:text-white">Perfil & Nível de Acesso</h3>
+                  <p className="text-xs text-slate-500 dark:text-zinc-400">Nível de privilégios e escopo de permissões da sessão atual</p>
                 </div>
               </div>
               <span className="text-xs font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-3 py-1 rounded-lg border border-blue-200 dark:border-blue-900/60">
-                {isCompany ? 'Empresa' : 'Administrador'}
+                {isCompany ? 'Empresa Contratante' : 'Administrador do Sistema'}
               </span>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
-              {/* Opção: Administrador */}
-              <button
-                type="button"
-                onClick={() => handleSelectAccountType('administrador')}
-                disabled={isSwitching}
-                className={`p-5 rounded-2xl border text-left transition-all relative flex flex-col justify-between cursor-pointer ${
-                  !isCompany
-                    ? 'border-blue-600 dark:border-blue-500 bg-blue-50/70 dark:bg-blue-950/40 shadow-sm ring-2 ring-blue-600/20'
-                    : 'border-slate-200 dark:border-zinc-800 bg-slate-50/50 dark:bg-zinc-900/50 hover:border-slate-300 dark:hover:border-zinc-700'
-                }`}
-              >
-                <div className="flex items-start justify-between gap-3 mb-3">
-                  <div className="flex items-center gap-3">
-                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold ${
-                      !isCompany ? 'bg-blue-600 text-white' : 'bg-slate-200 dark:bg-zinc-800 text-slate-700 dark:text-zinc-300'
-                    }`}>
-                      <ShieldCheck className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-bold text-slate-900 dark:text-white">Painel do Administrador</h4>
-                      <span className="text-[11px] text-slate-500 dark:text-zinc-400">Gestão Global da Plataforma</span>
-                    </div>
-                  </div>
-                  {!isCompany && (
-                    <span className="p-1 rounded-full bg-blue-600 text-white">
-                      <Check className="w-3.5 h-3.5" />
-                    </span>
-                  )}
-                </div>
-
-                <p className="text-xs text-slate-600 dark:text-zinc-300 leading-relaxed mb-4">
-                  Acesso total: banco de candidatos, criação e gestão de vagas, matriz de compatibilidade ponderada, trilha de auditoria e empresas parceiras.
+            <div className="p-4 rounded-2xl bg-slate-50 dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="space-y-1">
+                <span className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                  Conta vinculada ao e-mail: <strong className="text-blue-600 dark:text-blue-400">{user?.email || email}</strong>
+                </span>
+                <p className="text-xs text-slate-500 dark:text-zinc-400 leading-relaxed">
+                  Para acessar outro ambiente (como Candidato, Empresa ou Administrador), utilize o botão <strong>Sair da Conta</strong> e faça login com o e-mail correspondente.
                 </p>
+              </div>
 
-                <div className="flex items-center justify-between pt-3 border-t border-slate-200/80 dark:border-zinc-800/80">
-                  <span className={`text-[11px] font-bold ${!isCompany ? 'text-blue-700 dark:text-blue-400' : 'text-slate-500 dark:text-zinc-400'}`}>
-                    {!isCompany ? '● Modo Ativo Atualmente' : 'Clique para Ativar Modo Admin'}
-                  </span>
-                  <Link
-                    href="/dashboard"
-                    onClick={(e) => e.stopPropagation()}
-                    className="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
-                  >
-                    Ir ao Dashboard &rarr;
-                  </Link>
-                </div>
-              </button>
-
-              {/* Opção: Empresa */}
-              <button
+              <Button
                 type="button"
-                onClick={() => handleSelectAccountType('empresa')}
-                disabled={isSwitching}
-                className={`p-5 rounded-2xl border text-left transition-all relative flex flex-col justify-between cursor-pointer ${
-                  isCompany
-                    ? 'border-blue-600 dark:border-blue-500 bg-blue-50/70 dark:bg-blue-950/40 shadow-sm ring-2 ring-blue-600/20'
-                    : 'border-slate-200 dark:border-zinc-800 bg-slate-50/50 dark:bg-zinc-900/50 hover:border-slate-300 dark:hover:border-zinc-700'
-                }`}
+                variant="outline"
+                size="sm"
+                icon={<LogOut className="w-4 h-4" />}
+                onClick={() => setIsLogoutModalOpen(true)}
+                className="shrink-0 text-red-600 dark:text-red-400 border-red-200 dark:border-red-900/60 hover:bg-red-50 dark:hover:bg-red-950/40"
               >
-                <div className="flex items-start justify-between gap-3 mb-3">
-                  <div className="flex items-center gap-3">
-                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold ${
-                      isCompany ? 'bg-blue-600 text-white' : 'bg-slate-200 dark:bg-zinc-800 text-slate-700 dark:text-zinc-300'
-                    }`}>
-                      <Building2 className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-bold text-slate-900 dark:text-white">Portal da Empresa</h4>
-                      <span className="text-[11px] text-slate-500 dark:text-zinc-400">Ambiente do Contratante</span>
-                    </div>
-                  </div>
-                  {isCompany && (
-                    <span className="p-1 rounded-full bg-blue-600 text-white">
-                      <Check className="w-3.5 h-3.5" />
-                    </span>
-                  )}
-                </div>
-
-                <p className="text-xs text-slate-600 dark:text-zinc-300 leading-relaxed mb-4">
-                  Acesso corporativo: cadastro de vagas da empresa, acompanhamento do status, visualização de candidatos ranqueados e pareceres técnicos.
-                </p>
-
-                <div className="flex items-center justify-between pt-3 border-t border-slate-200/80 dark:border-zinc-800/80">
-                  <span className={`text-[11px] font-bold ${isCompany ? 'text-blue-700 dark:text-blue-400' : 'text-slate-500 dark:text-zinc-400'}`}>
-                    {isCompany ? '● Modo Ativo Atualmente' : 'Clique para Ativar Modo Empresa'}
-                  </span>
-                  <Link
-                    href="/empresa"
-                    onClick={(e) => e.stopPropagation()}
-                    className="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
-                  >
-                    Ir à Área da Empresa &rarr;
-                  </Link>
-                </div>
-              </button>
+                Trocar de Conta
+              </Button>
             </div>
           </CardContent>
         </Card>
