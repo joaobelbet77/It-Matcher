@@ -118,15 +118,15 @@ export const CandidateForm: React.FC = () => {
       </Alert>
 
       {/* Dados Principais */}
-      <div className="bg-slate-900/90 p-6 rounded-2xl border border-slate-800 shadow-xs space-y-4">
-        <h3 className="text-base font-bold text-slate-100 flex items-center gap-2 pb-2 border-b border-slate-800">
-          <User className="w-5 h-5 text-blue-400" />
+      <div className="bg-white dark:bg-[#121215] p-6 rounded-2xl border border-slate-200/80 dark:border-zinc-800 shadow-sm space-y-4">
+        <h3 className="text-base font-bold text-slate-900 dark:text-zinc-100 flex items-center gap-2 pb-2 border-b border-slate-200 dark:border-zinc-800">
+          <User className="w-5 h-5 text-blue-600 dark:text-blue-400" />
           Informações do Candidato
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="md:col-span-2">
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1">
               Nome Completo *
             </label>
             <input
@@ -135,18 +135,18 @@ export const CandidateForm: React.FC = () => {
               placeholder="Ex: João Silva"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-3.5 py-2.5 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+              className="w-full px-3.5 py-2.5 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1">
               Nível Profissional Atual *
             </label>
             <select
               value={level}
               onChange={(e) => setLevel(e.target.value as ProfessionalLevel)}
-              className="w-full px-3.5 py-2.5 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100"
+              className="w-full px-3.5 py-2.5 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100"
             >
               {ProfessionalLevels.map((lvl) => (
                 <option key={lvl} value={lvl}>
@@ -157,7 +157,7 @@ export const CandidateForm: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1">
               Tempo de Experiência (Anos) *
             </label>
             <input
@@ -167,12 +167,12 @@ export const CandidateForm: React.FC = () => {
               required
               value={experienceYears}
               onChange={(e) => setExperienceYears(Number(e.target.value))}
-              className="w-full px-3.5 py-2.5 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100"
+              className="w-full px-3.5 py-2.5 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1">
               E-mail de Contato (Protegido por RG01)
             </label>
             <input
@@ -180,12 +180,12 @@ export const CandidateForm: React.FC = () => {
               placeholder="exemplo@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3.5 py-2.5 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+              className="w-full px-3.5 py-2.5 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1">
               Telefone / WhatsApp (Protegido por RG01)
             </label>
             <input
@@ -193,12 +193,12 @@ export const CandidateForm: React.FC = () => {
               placeholder="(11) 99999-9999"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className="w-full px-3.5 py-2.5 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+              className="w-full px-3.5 py-2.5 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
             />
           </div>
 
           <div className="md:col-span-2">
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1">
               Resumo Profissional
             </label>
             <textarea
@@ -206,48 +206,48 @@ export const CandidateForm: React.FC = () => {
               placeholder="Breve resumo da trajetória técnica e projetos relevantes..."
               value={bio}
               onChange={(e) => setBio(e.target.value)}
-              className="w-full px-3.5 py-2.5 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+              className="w-full px-3.5 py-2.5 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
             />
           </div>
         </div>
       </div>
 
       {/* Upload de Currículo */}
-      <div className="bg-slate-900/90 p-6 rounded-2xl border border-slate-800 shadow-xs">
+      <div className="bg-white dark:bg-[#121215] p-6 rounded-2xl border border-slate-200/80 dark:border-zinc-800 shadow-sm">
         <ResumeUploader onFileUploaded={handleFileUploaded} />
       </div>
 
       {/* Competências Técnicas */}
-      <div className="bg-slate-900/90 p-6 rounded-2xl border border-slate-800 shadow-xs space-y-4">
+      <div className="bg-white dark:bg-[#121215] p-6 rounded-2xl border border-slate-200/80 dark:border-zinc-800 shadow-sm space-y-4">
         <div>
-          <label className="block text-sm font-bold text-slate-100">
+          <label className="block text-sm font-bold text-slate-900 dark:text-zinc-100">
             Competências Técnicas do Candidato *
           </label>
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-slate-500 dark:text-zinc-400">
             Adicione todas as linguagens, frameworks, bancos e ferramentas dominadas pelo profissional.
           </p>
         </div>
 
         {/* Tags de Skills */}
-        <div className="flex flex-wrap gap-2 p-3 bg-slate-950/70 border border-slate-800 rounded-xl min-h-[60px] items-center">
+        <div className="flex flex-wrap gap-2 p-3 bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl min-h-[60px] items-center">
           {technicalSkills.length > 0 ? (
             technicalSkills.map((skill) => (
               <span
                 key={skill}
-                className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-950/80 text-blue-300 border border-blue-800/60 rounded-lg text-xs font-semibold"
+                className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/60 rounded-lg text-xs font-semibold"
               >
                 {skill}
                 <button
                   type="button"
                   onClick={() => handleRemoveSkill(skill)}
-                  className="hover:text-rose-400"
+                  className="hover:text-rose-500 dark:hover:text-rose-400"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>
               </span>
             ))
           ) : (
-            <span className="text-xs text-slate-400">Nenhuma competência selecionada ainda.</span>
+            <span className="text-xs text-slate-400 dark:text-zinc-500">Nenhuma competência selecionada ainda.</span>
           )}
         </div>
 
@@ -264,7 +264,7 @@ export const CandidateForm: React.FC = () => {
                 handleAddSkill();
               }
             }}
-            className="flex-1 px-3 py-2 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+            className="flex-1 px-3 py-2 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
           />
           <Button
             type="button"
@@ -280,7 +280,7 @@ export const CandidateForm: React.FC = () => {
 
         {/* Sugestões rápidas */}
         <div>
-          <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1.5">
+          <span className="text-[11px] font-semibold text-slate-500 dark:text-zinc-400 uppercase tracking-wider block mb-1.5">
             Adicionar rapidamente:
           </span>
           <div className="flex flex-wrap gap-1.5">
@@ -289,7 +289,7 @@ export const CandidateForm: React.FC = () => {
                 key={skill}
                 type="button"
                 onClick={() => handleAddSkill(skill)}
-                className="px-2.5 py-1 text-xs bg-slate-800/80 hover:bg-blue-950/60 hover:text-blue-300 hover:border-blue-800/60 text-slate-300 rounded-md border border-slate-700 cursor-pointer transition-colors"
+                className="px-2.5 py-1 text-xs bg-slate-100 dark:bg-zinc-800/80 hover:bg-blue-50 dark:hover:bg-blue-950/60 hover:text-blue-700 dark:hover:text-blue-300 hover:border-blue-300 dark:hover:border-blue-800/60 text-slate-700 dark:text-zinc-300 rounded-md border border-slate-200 dark:border-zinc-700 cursor-pointer transition-colors"
               >
                 + {skill}
               </button>

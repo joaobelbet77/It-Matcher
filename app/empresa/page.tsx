@@ -367,15 +367,15 @@ export default function EmpresaPage() {
         {isCompany && (
           <>
             {/* Card de Identificação da Empresa */}
-            <div className="bg-slate-900/90 p-6 rounded-2xl border border-slate-800 shadow-xs space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-800">
+            <div className="bg-white dark:bg-[#121215] p-6 rounded-2xl border border-slate-200/80 dark:border-zinc-800 shadow-xs space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-100 dark:border-zinc-800">
                 <div>
-                  <h3 className="text-lg font-black text-slate-100 flex items-center gap-2">
-                    <Building2 className="w-5 h-5 text-blue-400" />
+                  <h3 className="text-lg font-black text-slate-900 dark:text-white flex items-center gap-2">
+                    <Building2 className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                     {companyName}
                   </h3>
-                  <p className="text-xs text-slate-400">
-                    E-mail oficial da conta: <strong className="text-slate-200">{companyEmail}</strong>
+                  <p className="text-xs text-slate-500 dark:text-zinc-400">
+                    E-mail oficial da conta: <strong className="text-slate-800 dark:text-zinc-200">{companyEmail}</strong>
                   </p>
                 </div>
                 <Badge variant="success">Status da conta: Ativa</Badge>
@@ -383,39 +383,39 @@ export default function EmpresaPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
                 <div>
-                  <span className="font-bold text-slate-400 uppercase block mb-0.5">CNPJ</span>
-                  <span className="font-mono text-slate-200 font-semibold">{companyCnpj}</span>
+                  <span className="font-bold text-slate-400 dark:text-zinc-500 uppercase block mb-0.5">CNPJ</span>
+                  <span className="font-mono text-slate-800 dark:text-zinc-200 font-semibold">{companyCnpj}</span>
                 </div>
                 <div>
-                  <span className="font-bold text-slate-400 uppercase block mb-0.5">Tipo de Organização</span>
-                  <span className="text-slate-200 font-medium">{companyType}</span>
+                  <span className="font-bold text-slate-400 dark:text-zinc-500 uppercase block mb-0.5">Tipo de Organização</span>
+                  <span className="text-slate-800 dark:text-zinc-200 font-medium">{companyType}</span>
                 </div>
                 <div>
-                  <span className="font-bold text-slate-400 uppercase block mb-0.5">Área de Atuação</span>
-                  <span className="text-slate-200 font-medium">{companyIndustry}</span>
+                  <span className="font-bold text-slate-400 dark:text-zinc-500 uppercase block mb-0.5">Área de Atuação</span>
+                  <span className="text-slate-800 dark:text-zinc-200 font-medium">{companyIndustry}</span>
                 </div>
               </div>
             </div>
 
             {/* Card de Plano & Monetização Corporativa */}
-            <div className="bg-gradient-to-r from-blue-950/60 to-slate-900/90 p-6 rounded-2xl border border-blue-900/40 shadow-xs space-y-4">
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50/50 dark:from-blue-950/40 dark:to-slate-900/90 p-6 rounded-2xl border border-blue-200 dark:border-blue-900/40 shadow-xs space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/40 text-blue-400 flex items-center justify-center font-bold">
+                  <div className="w-10 h-10 rounded-xl bg-blue-600/10 dark:bg-blue-600/20 border border-blue-500/30 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold">
                     <Sparkles className="w-5 h-5" />
                   </div>
                   <div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-blue-400 block font-heading">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 block font-heading">
                       Plano & Assinatura Corporativa
                     </span>
-                    <h4 className="text-base font-bold text-slate-100 flex items-center gap-2">
+                    <h4 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
                       {user?.companyData?.planName || 'Nenhum plano contratado'}
                       {user?.companyData?.subscriptionStatus === 'active' ? (
-                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold">
+                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-500/30 font-bold">
                           ● Ativo & Desbloqueado
                         </span>
                       ) : (
-                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 font-bold">
+                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-400 border border-amber-300 dark:border-amber-500/30 font-bold">
                           ● Bloqueado (Requer Assinatura)
                         </span>
                       )}
@@ -430,33 +430,33 @@ export default function EmpresaPage() {
                 </Link>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs border-t border-slate-800/80">
-                <div className="text-slate-300">
-                  <span className="text-slate-500 block text-[11px]">Smart Matching & Ranking:</span>
-                  <strong className={user?.companyData?.subscriptionStatus === 'active' ? 'text-emerald-400' : 'text-amber-400'}>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs border-t border-blue-200/60 dark:border-slate-800/80">
+                <div className="text-slate-700 dark:text-slate-300">
+                  <span className="text-slate-500 dark:text-zinc-400 block text-[11px]">Smart Matching & Ranking:</span>
+                  <strong className={user?.companyData?.subscriptionStatus === 'active' ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400'}>
                     {user?.companyData?.subscriptionStatus === 'active' ? '✓ Desbloqueado' : '🔒 Requer Plano Ativo'}
                   </strong>
                 </div>
-                <div className="text-slate-300">
-                  <span className="text-slate-500 block text-[11px]">Limite de Vagas:</span>
-                  <strong className="text-slate-100">1 vaga simultânea</strong>
+                <div className="text-slate-700 dark:text-slate-300">
+                  <span className="text-slate-500 dark:text-zinc-400 block text-[11px]">Limite de Vagas:</span>
+                  <strong className="text-slate-900 dark:text-slate-100">1 vaga simultânea</strong>
                 </div>
-                <div className="text-slate-300">
-                  <span className="text-slate-500 block text-[11px]">Relatórios & Compliance:</span>
-                  <strong className="text-slate-100">RG01 a RG10 Habilitados</strong>
+                <div className="text-slate-700 dark:text-slate-300">
+                  <span className="text-slate-500 dark:text-zinc-400 block text-[11px]">Relatórios & Compliance:</span>
+                  <strong className="text-slate-900 dark:text-slate-100">RG01 a RG10 Habilitados</strong>
                 </div>
               </div>
             </div>
 
             {/* Seção MINHA VAGA (REQUISITO 6, 7 & 9) */}
-            <div className="bg-slate-900/90 p-6 rounded-2xl border border-slate-800 shadow-xs space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+            <div className="bg-white dark:bg-[#121215] p-6 rounded-2xl border border-slate-200/80 dark:border-zinc-800 shadow-xs space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-zinc-800">
                 <div>
-                  <h3 className="text-base font-bold text-slate-100 flex items-center gap-2">
-                    <Briefcase className="w-5 h-5 text-blue-400" />
+                  <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <Briefcase className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                     MINHA VAGA
                   </h3>
-                  <p className="text-xs text-slate-400">
+                  <p className="text-xs text-slate-500 dark:text-zinc-400">
                     Cada conta do tipo Empresa pode cadastrar e gerenciar no máximo 1 vaga.
                   </p>
                 </div>
@@ -475,7 +475,7 @@ export default function EmpresaPage() {
                     + Cadastrar Nova Vaga
                   </Button>
                 ) : (
-                  <span className="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-3 py-1 rounded-full border border-emerald-800/60">
+                  <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-3 py-1 rounded-full border border-emerald-200 dark:border-emerald-800/60">
                     ✓ Vaga Cadastrada
                   </span>
                 )}
@@ -483,13 +483,13 @@ export default function EmpresaPage() {
 
               {/* Caso NENHUMA VAGA cadastrada ainda */}
               {!companyJob ? (
-                <div className="text-center py-8 px-4 border-2 border-dashed border-slate-800 rounded-xl bg-slate-950/40 space-y-3">
-                  <div className="w-12 h-12 rounded-full bg-blue-950/60 text-blue-400 border border-blue-800/40 flex items-center justify-center mx-auto">
+                <div className="text-center py-8 px-4 border-2 border-dashed border-slate-200 dark:border-zinc-800 rounded-xl bg-slate-50/50 dark:bg-zinc-950/40 space-y-3">
+                  <div className="w-12 h-12 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800/40 flex items-center justify-center mx-auto">
                     <Briefcase className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-slate-200 text-sm">Você ainda não possui uma vaga cadastrada.</h4>
-                    <p className="text-xs text-slate-400 max-w-md mx-auto pt-1">
+                    <h4 className="font-bold text-slate-800 dark:text-slate-200 text-sm">Você ainda não possui uma vaga cadastrada.</h4>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 max-w-md mx-auto pt-1">
                       Clique no botão acima para cadastrar a posição de TI da sua empresa e enviá-la para análise do administrador.
                     </p>
                   </div>
@@ -512,11 +512,11 @@ export default function EmpresaPage() {
                     Sua conta atingiu o limite de 1 vaga cadastrada. Acompanhe abaixo o status e os critérios da vaga enviada.
                   </Alert>
 
-                  <div className="p-5 rounded-xl border border-slate-800 bg-slate-950/60 space-y-3">
+                  <div className="p-5 rounded-xl border border-slate-200/80 dark:border-zinc-800 bg-slate-50/80 dark:bg-zinc-900/50 space-y-3">
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div>
-                        <h4 className="font-black text-slate-100 text-base">{companyJob.title}</h4>
-                        <span className="text-xs text-slate-400">
+                        <h4 className="font-black text-slate-900 dark:text-white text-base">{companyJob.title}</h4>
+                        <span className="text-xs text-slate-500 dark:text-zinc-400">
                           Enviada em: {companyJob.createdAt ? new Date(companyJob.createdAt).toLocaleDateString('pt-BR') : 'Recentemente'}
                         </span>
                       </div>
@@ -525,26 +525,26 @@ export default function EmpresaPage() {
                       </Badge>
                     </div>
 
-                    <div className="flex flex-wrap gap-2 text-xs font-medium text-slate-300">
-                      <span className="bg-slate-900 px-2.5 py-1 rounded-md border border-slate-800">Área: {companyJob.area}</span>
-                      <span className="bg-slate-900 px-2.5 py-1 rounded-md border border-slate-800">Nível: {companyJob.level}</span>
-                      {companyJob.workModel && <span className="bg-slate-900 px-2.5 py-1 rounded-md border border-slate-800">Modelo: {companyJob.workModel}</span>}
-                      {companyJob.contractType && <span className="bg-slate-900 px-2.5 py-1 rounded-md border border-slate-800">Contrato: {companyJob.contractType}</span>}
+                    <div className="flex flex-wrap gap-2 text-xs font-medium text-slate-700 dark:text-slate-300">
+                      <span className="bg-white dark:bg-zinc-800 px-2.5 py-1 rounded-md border border-slate-200 dark:border-zinc-700 shadow-2xs">Área: {companyJob.area}</span>
+                      <span className="bg-white dark:bg-zinc-800 px-2.5 py-1 rounded-md border border-slate-200 dark:border-zinc-700 shadow-2xs">Nível: {companyJob.level}</span>
+                      {companyJob.workModel && <span className="bg-white dark:bg-zinc-800 px-2.5 py-1 rounded-md border border-slate-200 dark:border-zinc-700 shadow-2xs">Modelo: {companyJob.workModel}</span>}
+                      {companyJob.contractType && <span className="bg-white dark:bg-zinc-800 px-2.5 py-1 rounded-md border border-slate-200 dark:border-zinc-700 shadow-2xs">Contrato: {companyJob.contractType}</span>}
                     </div>
 
-                    <p className="text-xs text-slate-300 leading-relaxed line-clamp-3">
+                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3">
                       {companyJob.description}
                     </p>
 
-                    <div className="pt-2 border-t border-slate-800">
-                      <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">
+                    <div className="pt-2 border-t border-slate-200/80 dark:border-zinc-800">
+                      <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1.5 font-heading">
                         Skills e Pesos Configurados ({companyJob.skills.length}):
                       </span>
                       <div className="flex flex-wrap gap-1.5">
                         {companyJob.skills.map((sk) => (
-                          <span key={sk.id || sk.name} className="text-xs bg-slate-900 text-slate-200 font-bold px-2.5 py-1 rounded-lg border border-slate-800 flex items-center gap-1">
-                            {sk.name} <span className="text-blue-400">({sk.weight}%)</span>
-                            {sk.required && <span className="text-[9px] bg-blue-950 text-blue-300 border border-blue-800/60 px-1 rounded">Obg</span>}
+                          <span key={sk.id || sk.name} className="text-xs bg-white dark:bg-zinc-800 text-slate-800 dark:text-slate-200 font-bold px-2.5 py-1 rounded-lg border border-slate-200 dark:border-zinc-700 shadow-2xs flex items-center gap-1">
+                            {sk.name} <span className="text-blue-600 dark:text-blue-400">({sk.weight}%)</span>
+                            {sk.required && <span className="text-[9px] bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/60 px-1 rounded">Obg</span>}
                           </span>
                         ))}
                       </div>
@@ -868,17 +868,17 @@ export default function EmpresaPage() {
 
       {/* MODAL DE CADASTRO DE EMPRESA PELO ADMINISTRADOR (REQUISITO 3) */}
       {showCompanyRegisterModal && (
-        <div className="fixed inset-0 bg-slate-950/80 z-50 flex items-center justify-center p-4 backdrop-blur-xs">
-          <div className="bg-slate-900 text-slate-100 rounded-3xl p-6 w-full max-w-xl max-h-[90vh] overflow-y-auto space-y-4 shadow-2xl border border-slate-800 animate-in fade-in">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-              <h3 className="text-lg font-bold text-slate-100 flex items-center gap-2">
-                <Building2 className="w-5 h-5 text-blue-400" />
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-xs">
+          <div className="bg-white dark:bg-[#121215] text-slate-900 dark:text-zinc-100 rounded-3xl p-6 w-full max-w-xl max-h-[90vh] overflow-y-auto space-y-4 shadow-2xl border border-slate-200 dark:border-zinc-800 animate-in fade-in">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-zinc-800">
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2 font-heading">
+                <Building2 className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                 Cadastrar Nova Empresa Contratante
               </h3>
               <button
                 type="button"
                 onClick={() => setShowCompanyRegisterModal(false)}
-                className="text-slate-400 hover:text-slate-200 font-bold text-lg"
+                className="text-slate-400 hover:text-slate-700 dark:hover:text-white font-bold text-lg p-1"
               >
                 ✕
               </button>
@@ -893,7 +893,7 @@ export default function EmpresaPage() {
             <form onSubmit={handleRegisterCompanySubmit} className="space-y-4 text-xs">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div className="md:col-span-2">
-                  <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+                  <label className="block font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1 font-heading">
                     Nome da Empresa *
                   </label>
                   <input
@@ -902,12 +902,12 @@ export default function EmpresaPage() {
                     placeholder="Ex: Tech Solutions Ltda"
                     value={newCompName}
                     onChange={(e) => setNewCompName(e.target.value)}
-                    className="w-full px-3 py-2 border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+                    className="w-full px-3.5 py-2.5 border border-slate-200 dark:border-zinc-800 rounded-xl focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+                  <label className="block font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1 font-heading">
                     CNPJ *
                   </label>
                   <input
@@ -916,12 +916,12 @@ export default function EmpresaPage() {
                     placeholder="Ex: 00.000.000/0001-00"
                     value={newCompCnpj}
                     onChange={(e) => setNewCompCnpj(e.target.value)}
-                    className="w-full px-3 py-2 border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+                    className="w-full px-3.5 py-2.5 border border-slate-200 dark:border-zinc-800 rounded-xl focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+                  <label className="block font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1 font-heading">
                     E-mail da Empresa (Acesso Único) *
                   </label>
                   <input
@@ -930,12 +930,12 @@ export default function EmpresaPage() {
                     placeholder="Ex: empresa@techsolutions.com.br"
                     value={newCompEmail}
                     onChange={(e) => setNewCompEmail(e.target.value)}
-                    className="w-full px-3 py-2 border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+                    className="w-full px-3.5 py-2.5 border border-slate-200 dark:border-zinc-800 rounded-xl focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+                  <label className="block font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1 font-heading">
                     Telefone
                   </label>
                   <input
@@ -943,12 +943,12 @@ export default function EmpresaPage() {
                     placeholder="Ex: (41) 99999-9999"
                     value={newCompPhone}
                     onChange={(e) => setNewCompPhone(e.target.value)}
-                    className="w-full px-3 py-2 border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+                    className="w-full px-3.5 py-2.5 border border-slate-200 dark:border-zinc-800 rounded-xl focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+                  <label className="block font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1 font-heading">
                     Nome do Responsável
                   </label>
                   <input
@@ -956,18 +956,18 @@ export default function EmpresaPage() {
                     placeholder="Ex: Carlos Eduardo (Gerente RH)"
                     value={newCompContact}
                     onChange={(e) => setNewCompContact(e.target.value)}
-                    className="w-full px-3 py-2 border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+                    className="w-full px-3.5 py-2.5 border border-slate-200 dark:border-zinc-800 rounded-xl focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+                  <label className="block font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1 font-heading">
                     Tipo de Organização
                   </label>
                   <select
                     value={newCompType}
                     onChange={(e) => setNewCompType(e.target.value)}
-                    className="w-full px-3 py-2 border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100"
+                    className="w-full px-3.5 py-2.5 border border-slate-200 dark:border-zinc-800 rounded-xl focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-white"
                   >
                     {COMPANY_TYPES.map((t) => (
                       <option key={t} value={t}>{t}</option>
@@ -976,13 +976,13 @@ export default function EmpresaPage() {
                 </div>
 
                 <div>
-                  <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+                  <label className="block font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1 font-heading">
                     Área de Atuação
                   </label>
                   <select
                     value={newCompIndustry}
                     onChange={(e) => setNewCompIndustry(e.target.value)}
-                    className="w-full px-3 py-2 border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100"
+                    className="w-full px-3.5 py-2.5 border border-slate-200 dark:border-zinc-800 rounded-xl focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-white"
                   >
                     {COMPANY_INDUSTRIES.map((ind) => (
                       <option key={ind} value={ind}>{ind}</option>
@@ -991,7 +991,7 @@ export default function EmpresaPage() {
                 </div>
               </div>
 
-              <div className="flex justify-end gap-2 pt-3 border-t border-slate-800">
+              <div className="flex justify-end gap-2 pt-3 border-t border-slate-100 dark:border-zinc-800">
                 <Button
                   type="button"
                   variant="outline"
@@ -1016,17 +1016,17 @@ export default function EmpresaPage() {
 
       {/* MODAL DE CADASTRO DE VAGA DA EMPRESA (REQUISITO 6, 7 & 8) */}
       {showJobModal && (
-        <div className="fixed inset-0 bg-slate-950/80 z-50 flex items-center justify-center p-4 backdrop-blur-xs">
-          <div className="bg-slate-900 text-slate-100 rounded-3xl p-6 w-full max-w-3xl max-h-[90vh] overflow-y-auto space-y-4 shadow-2xl border border-slate-800 animate-in fade-in">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-              <h3 className="text-lg font-bold text-slate-100 flex items-center gap-2">
-                <Briefcase className="w-5 h-5 text-blue-400" />
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-xs">
+          <div className="bg-white dark:bg-[#121215] text-slate-900 dark:text-zinc-100 rounded-3xl p-6 sm:p-8 w-full max-w-3xl max-h-[90vh] overflow-y-auto space-y-4 shadow-2xl border border-slate-200 dark:border-zinc-800 animate-in fade-in">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-zinc-800">
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2 font-heading">
+                <Briefcase className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                 Cadastrar Vaga da Empresa ({companyName})
               </h3>
               <button
                 type="button"
                 onClick={() => setShowJobModal(false)}
-                className="text-slate-400 hover:text-slate-200 font-bold text-lg"
+                className="text-slate-400 hover:text-slate-700 dark:hover:text-white font-bold text-lg p-1"
               >
                 ✕
               </button>
@@ -1041,7 +1041,7 @@ export default function EmpresaPage() {
             <form onSubmit={handleCreateJobSubmit} className="space-y-5 text-xs">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div className="md:col-span-2">
-                  <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+                  <label className="block font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1 font-heading">
                     Título da Vaga *
                   </label>
                   <input
@@ -1050,18 +1050,18 @@ export default function EmpresaPage() {
                     placeholder="Ex: Desenvolvedor Full Stack"
                     value={jobTitle}
                     onChange={(e) => setJobTitle(e.target.value)}
-                    className="w-full px-3 py-2 border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+                    className="w-full px-3.5 py-2.5 border border-slate-200 dark:border-zinc-800 rounded-xl focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+                  <label className="block font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1 font-heading">
                     Área da Vaga *
                   </label>
                   <select
                     value={jobArea}
                     onChange={(e) => setJobArea(e.target.value as JobArea)}
-                    className="w-full px-3 py-2 border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100"
+                    className="w-full px-3.5 py-2.5 border border-slate-200 dark:border-zinc-800 rounded-xl focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-white"
                   >
                     <option value="Frontend">Frontend</option>
                     <option value="Backend">Backend</option>
@@ -1076,13 +1076,13 @@ export default function EmpresaPage() {
                 </div>
 
                 <div>
-                  <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+                  <label className="block font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1 font-heading">
                     Nível da Vaga *
                   </label>
                   <select
                     value={jobLevel}
                     onChange={(e) => setJobLevel(e.target.value as ProfessionalLevel)}
-                    className="w-full px-3 py-2 border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100"
+                    className="w-full px-3.5 py-2.5 border border-slate-200 dark:border-zinc-800 rounded-xl focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-white"
                   >
                     <option value="Júnior">Júnior</option>
                     <option value="Pleno">Pleno</option>
@@ -1091,13 +1091,13 @@ export default function EmpresaPage() {
                 </div>
 
                 <div>
-                  <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+                  <label className="block font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1 font-heading">
                     Modelo de Trabalho *
                   </label>
                   <select
                     value={jobWorkModel}
                     onChange={(e) => setJobWorkModel(e.target.value)}
-                    className="w-full px-3 py-2 border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100"
+                    className="w-full px-3.5 py-2.5 border border-slate-200 dark:border-zinc-800 rounded-xl focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-white"
                   >
                     {WORK_MODELS.map((m) => (
                       <option key={m} value={m}>{m}</option>
@@ -1106,13 +1106,13 @@ export default function EmpresaPage() {
                 </div>
 
                 <div>
-                  <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+                  <label className="block font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1 font-heading">
                     Tipo de Contratação *
                   </label>
                   <select
                     value={jobContractType}
                     onChange={(e) => setJobContractType(e.target.value)}
-                    className="w-full px-3 py-2 border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100"
+                    className="w-full px-3.5 py-2.5 border border-slate-200 dark:border-zinc-800 rounded-xl focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-white"
                   >
                     {CONTRACT_TYPES.map((c) => (
                       <option key={c} value={c}>{c}</option>
@@ -1121,7 +1121,7 @@ export default function EmpresaPage() {
                 </div>
 
                 <div>
-                  <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+                  <label className="block font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1 font-heading">
                     Local da Vaga
                   </label>
                   <input
@@ -1129,13 +1129,13 @@ export default function EmpresaPage() {
                     placeholder="Ex: São Paulo, SP (ou Remoto)"
                     value={jobLocation}
                     onChange={(e) => setJobLocation(e.target.value)}
-                    className="w-full px-3 py-2 border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+                    className="w-full px-3.5 py-2.5 border border-slate-200 dark:border-zinc-800 rounded-xl focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500"
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-2">
                   <div>
-                    <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+                    <label className="block font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1 font-heading">
                       Salário Mínimo
                     </label>
                     <input
@@ -1143,11 +1143,11 @@ export default function EmpresaPage() {
                       placeholder="Ex: R$ 7.000"
                       value={jobSalaryMin}
                       onChange={(e) => setJobSalaryMin(e.target.value)}
-                      className="w-full px-3 py-2 border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+                      className="w-full px-3.5 py-2.5 border border-slate-200 dark:border-zinc-800 rounded-xl focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500"
                     />
                   </div>
                   <div>
-                    <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+                    <label className="block font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1 font-heading">
                       Salário Máximo
                     </label>
                     <input
@@ -1155,13 +1155,13 @@ export default function EmpresaPage() {
                       placeholder="Ex: R$ 10.000"
                       value={jobSalaryMax}
                       onChange={(e) => setJobSalaryMax(e.target.value)}
-                      className="w-full px-3 py-2 border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+                      className="w-full px-3.5 py-2.5 border border-slate-200 dark:border-zinc-800 rounded-xl focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500"
                     />
                   </div>
                 </div>
 
                 <div className="md:col-span-2">
-                  <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+                  <label className="block font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1 font-heading">
                     Descrição da Vaga *
                   </label>
                   <textarea
@@ -1170,12 +1170,12 @@ export default function EmpresaPage() {
                     placeholder="Descreva as responsabilidades e desafios do cargo..."
                     value={jobDescription}
                     onChange={(e) => setJobDescription(e.target.value)}
-                    className="w-full px-3 py-2 border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+                    className="w-full px-3.5 py-2.5 border border-slate-200 dark:border-zinc-800 rounded-xl focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500"
                   />
                 </div>
 
                 <div className="md:col-span-2">
-                  <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+                  <label className="block font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1 font-heading">
                     Requisitos Obrigatórios
                   </label>
                   <textarea
@@ -1183,12 +1183,12 @@ export default function EmpresaPage() {
                     placeholder="Conhecimentos e graduações indispensáveis..."
                     value={jobMandatory}
                     onChange={(e) => setJobMandatory(e.target.value)}
-                    className="w-full px-3 py-2 border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+                    className="w-full px-3.5 py-2.5 border border-slate-200 dark:border-zinc-800 rounded-xl focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500"
                   />
                 </div>
 
                 <div className="md:col-span-2">
-                  <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+                  <label className="block font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1 font-heading">
                     Requisitos Desejáveis
                   </label>
                   <textarea
@@ -1196,12 +1196,12 @@ export default function EmpresaPage() {
                     placeholder="Diferenciais bem-vindos..."
                     value={jobDesirable}
                     onChange={(e) => setJobDesirable(e.target.value)}
-                    className="w-full px-3 py-2 border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+                    className="w-full px-3.5 py-2.5 border border-slate-200 dark:border-zinc-800 rounded-xl focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500"
                   />
                 </div>
 
                 <div className="md:col-span-2">
-                  <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+                  <label className="block font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1 font-heading">
                     Benefícios
                   </label>
                   <textarea
@@ -1209,17 +1209,17 @@ export default function EmpresaPage() {
                     placeholder="Ex: VR, VA, Plano de Saúde, PLR..."
                     value={jobBenefits}
                     onChange={(e) => setJobBenefits(e.target.value)}
-                    className="w-full px-3 py-2 border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+                    className="w-full px-3.5 py-2.5 border border-slate-200 dark:border-zinc-800 rounded-xl focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500"
                   />
                 </div>
               </div>
 
               {/* Seção Skills e Pesos (REQUISITO 7) */}
-              <div className="pt-2 border-t border-slate-800">
+              <div className="pt-2 border-t border-slate-100 dark:border-zinc-800">
                 <SkillWeightConfigurator skills={jobSkills} onChange={setJobSkills} />
               </div>
 
-              <div className="flex justify-end gap-2 pt-3 border-t border-slate-800">
+              <div className="flex justify-end gap-2 pt-3 border-t border-slate-100 dark:border-zinc-800">
                 <Button
                   type="button"
                   variant="outline"

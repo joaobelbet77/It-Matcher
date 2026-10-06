@@ -71,41 +71,41 @@ export const MatchingBreakdownModal: React.FC<MatchingBreakdownModalProps> = ({
         ) : null}
 
         {/* Seção Obrigatória: "Como o percentual foi calculado" (Requisito 11 e RG04) */}
-        <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-4">
-          <div className="flex items-center gap-2 pb-2 border-b border-slate-800">
-            <Info className="w-5 h-5 text-blue-400" />
-            <h4 className="text-base font-bold text-slate-100">Como o percentual foi calculado</h4>
+        <div className="bg-white dark:bg-[#121215] border border-slate-200/80 dark:border-zinc-800 rounded-2xl p-5 space-y-4">
+          <div className="flex items-center gap-2 pb-2 border-b border-slate-200 dark:border-zinc-800">
+            <Info className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+            <h4 className="text-base font-bold text-slate-900 dark:text-zinc-100">Como o percentual foi calculado</h4>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs border-collapse">
               <thead>
-                <tr className="border-b border-slate-800 text-slate-400 font-semibold bg-slate-950/80">
+                <tr className="border-b border-slate-200 dark:border-zinc-800 text-slate-600 dark:text-zinc-400 font-semibold bg-slate-50 dark:bg-zinc-900/80">
                   <th className="py-2.5 px-3">Competência Exigida</th>
                   <th className="py-2.5 px-3 text-center">Peso na Vaga</th>
                   <th className="py-2.5 px-3 text-center">Status no Candidato</th>
                   <th className="py-2.5 px-3 text-right">Pontos Obtidos</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60">
+              <tbody className="divide-y divide-slate-100 dark:divide-zinc-800/60">
                 {matching.calculationBreakdown.map((item, idx) => {
                   const isFound = item.status === 'Encontrado';
                   return (
-                    <tr key={idx} className={isFound ? 'bg-emerald-950/20' : 'bg-rose-950/20'}>
-                      <td className="py-3 px-3 font-semibold text-slate-200 flex items-center gap-2">
+                    <tr key={idx} className={isFound ? 'bg-emerald-50/60 dark:bg-emerald-950/20' : 'bg-rose-50/60 dark:bg-rose-950/20'}>
+                      <td className="py-3 px-3 font-semibold text-slate-900 dark:text-zinc-200 flex items-center gap-2">
                         {isFound ? (
-                          <span className="w-5 h-5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800/60 flex items-center justify-center shrink-0">
+                          <span className="w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-800/60 flex items-center justify-center shrink-0">
                             <Check className="w-3.5 h-3.5" />
                           </span>
                         ) : (
-                          <span className="w-5 h-5 rounded-full bg-rose-950 text-rose-400 border border-rose-800/60 flex items-center justify-center shrink-0">
+                          <span className="w-5 h-5 rounded-full bg-rose-100 dark:bg-rose-950 text-rose-600 dark:text-rose-400 border border-rose-300 dark:border-rose-800/60 flex items-center justify-center shrink-0">
                             <X className="w-3.5 h-3.5" />
                           </span>
                         )}
                         <span>{item.skillName}</span>
                       </td>
 
-                      <td className="py-3 px-3 text-center font-bold text-slate-300">
+                      <td className="py-3 px-3 text-center font-bold text-slate-700 dark:text-zinc-300">
                         {item.weight}%
                       </td>
 
@@ -113,15 +113,15 @@ export const MatchingBreakdownModal: React.FC<MatchingBreakdownModalProps> = ({
                         <span
                           className={`inline-flex items-center px-2 py-0.5 rounded-full font-semibold text-[11px] ${
                             isFound
-                              ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-800/60'
-                              : 'bg-rose-950/80 text-rose-300 border border-rose-800/60'
+                              ? 'bg-emerald-50 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60'
+                              : 'bg-rose-50 dark:bg-rose-950/80 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800/60'
                           }`}
                         >
                           {item.status}
                         </span>
                       </td>
 
-                      <td className="py-3 px-3 text-right font-extrabold text-slate-100">
+                      <td className="py-3 px-3 text-right font-extrabold text-slate-900 dark:text-zinc-100">
                         +{item.pointsAwarded}%
                       </td>
                     </tr>
@@ -129,11 +129,11 @@ export const MatchingBreakdownModal: React.FC<MatchingBreakdownModalProps> = ({
                 })}
               </tbody>
               <tfoot>
-                <tr className="border-t-2 border-slate-700 font-bold bg-slate-950 text-slate-100 text-sm">
+                <tr className="border-t-2 border-slate-200 dark:border-zinc-700 font-bold bg-slate-50 dark:bg-zinc-950 text-slate-900 dark:text-zinc-100 text-sm">
                   <td colSpan={3} className="py-3 px-3 text-right">
                     Total Final de Compatibilidade:
                   </td>
-                  <td className="py-3 px-3 text-right text-blue-400 font-black text-base">
+                  <td className="py-3 px-3 text-right text-blue-600 dark:text-blue-400 font-black text-base">
                     {matching.score}%
                   </td>
                 </tr>
@@ -142,9 +142,9 @@ export const MatchingBreakdownModal: React.FC<MatchingBreakdownModalProps> = ({
           </div>
 
           {/* Fórmula e Soma Explícita */}
-          <div className="p-3.5 bg-slate-950/70 rounded-xl border border-slate-800 text-xs text-slate-300">
-            <span className="font-bold text-slate-100 block mb-1">Demonstração Aritmética da Fórmula:</span>
-            <code className="text-blue-300 font-mono text-xs block bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+          <div className="p-3.5 bg-slate-50 dark:bg-zinc-950/70 rounded-xl border border-slate-200 dark:border-zinc-800 text-xs text-slate-700 dark:text-zinc-300">
+            <span className="font-bold text-slate-900 dark:text-zinc-100 block mb-1">Demonstração Aritmética da Fórmula:</span>
+            <code className="text-blue-700 dark:text-blue-300 font-mono text-xs block bg-white dark:bg-zinc-950 p-2.5 rounded-lg border border-slate-200 dark:border-zinc-800">
               {matching.totalFormulaExplanation}
             </code>
           </div>
@@ -152,53 +152,53 @@ export const MatchingBreakdownModal: React.FC<MatchingBreakdownModalProps> = ({
 
         {/* Comparativo de Critérios Complementares */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="p-4 rounded-xl border border-slate-800 bg-slate-900/90 space-y-2">
-            <h5 className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+          <div className="p-4 rounded-xl border border-slate-200/80 dark:border-zinc-800 bg-white dark:bg-[#121215] space-y-2">
+            <h5 className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">
               Experiência Profissional
             </h5>
             <div className="flex items-baseline justify-between">
-              <span className="text-xs text-slate-400">Exigido pela vaga:</span>
-              <span className="font-bold text-slate-200 text-sm">
+              <span className="text-xs text-slate-500 dark:text-zinc-400">Exigido pela vaga:</span>
+              <span className="font-bold text-slate-900 dark:text-zinc-200 text-sm">
                 {matching.experienceComparison.requiredYears} ano(s)
               </span>
             </div>
             <div className="flex items-baseline justify-between">
-              <span className="text-xs text-slate-400">Candidato possui:</span>
-              <span className="font-bold text-slate-200 text-sm">
+              <span className="text-xs text-slate-500 dark:text-zinc-400">Candidato possui:</span>
+              <span className="font-bold text-slate-900 dark:text-zinc-200 text-sm">
                 {matching.experienceComparison.candidateYears} ano(s)
               </span>
             </div>
-            <p className="text-[11px] text-slate-400 pt-1 border-t border-slate-800">
+            <p className="text-[11px] text-slate-500 dark:text-zinc-400 pt-1 border-t border-slate-200 dark:border-zinc-800">
               {matching.experienceComparison.note}
             </p>
           </div>
 
-          <div className="p-4 rounded-xl border border-slate-800 bg-slate-900/90 space-y-2">
-            <h5 className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+          <div className="p-4 rounded-xl border border-slate-200/80 dark:border-zinc-800 bg-white dark:bg-[#121215] space-y-2">
+            <h5 className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">
               Nível de Senioridade
             </h5>
             <div className="flex items-baseline justify-between">
-              <span className="text-xs text-slate-400">Perfil da vaga:</span>
-              <span className="font-bold text-slate-200 text-sm">
+              <span className="text-xs text-slate-500 dark:text-zinc-400">Perfil da vaga:</span>
+              <span className="font-bold text-slate-900 dark:text-zinc-200 text-sm">
                 {matching.levelComparison.requiredLevel}
               </span>
             </div>
             <div className="flex items-baseline justify-between">
-              <span className="text-xs text-slate-400">Nível do candidato:</span>
-              <span className="font-bold text-slate-200 text-sm">
+              <span className="text-xs text-slate-500 dark:text-zinc-400">Nível do candidato:</span>
+              <span className="font-bold text-slate-900 dark:text-zinc-200 text-sm">
                 {matching.levelComparison.candidateLevel}
               </span>
             </div>
-            <p className="text-[11px] text-slate-400 pt-1 border-t border-slate-800">
+            <p className="text-[11px] text-slate-500 dark:text-zinc-400 pt-1 border-t border-slate-200 dark:border-zinc-800">
               {matching.levelComparison.note}
             </p>
           </div>
         </div>
 
         {/* Rodapé com Ações de Decisão Humana */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-slate-800">
-          <div className="flex items-center gap-2 text-xs text-slate-400">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-slate-200 dark:border-zinc-800">
+          <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-zinc-400">
+            <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             <span>Auditado conforme Guardrail RG10</span>
           </div>
 

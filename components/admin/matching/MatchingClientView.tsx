@@ -158,21 +158,21 @@ export const MatchingClientView: React.FC<MatchingClientViewProps> = ({
   return (
     <div className="space-y-6">
       {/* Informações da Vaga e Pesos */}
-      <div className="bg-slate-900/90 p-6 rounded-2xl border border-slate-800 shadow-xs space-y-4">
+      <div className="bg-white dark:bg-[#121215] p-6 rounded-2xl border border-slate-200/80 dark:border-zinc-800 shadow-sm space-y-4">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 flex-wrap">
-              <h2 className="text-xl font-bold text-slate-100">{job.title}</h2>
+              <h2 className="text-xl font-bold text-slate-900 dark:text-zinc-100">{job.title}</h2>
               <Badge variant="purple">{job.area}</Badge>
               <Badge variant="default">{job.level}</Badge>
               {isCompany && hasActivePlan && (
                 <Badge variant="success">
-                  <Sparkles className="w-3 h-3 inline mr-1 text-emerald-300" />
+                  <Sparkles className="w-3 h-3 inline mr-1 text-emerald-600 dark:text-emerald-300" />
                   Plano: {user?.companyData?.planName || 'Profissional'}
                 </Badge>
               )}
             </div>
-            <p className="text-xs text-slate-400 mt-1">
+            <p className="text-xs text-slate-500 dark:text-zinc-400 mt-1">
               Experiência mínima recomendada: {job.minExperienceYears} ano(s)
             </p>
           </div>
@@ -187,18 +187,18 @@ export const MatchingClientView: React.FC<MatchingClientViewProps> = ({
         </div>
 
         {/* Pesos das Skills da Vaga (Requisito 4) */}
-        <div className="p-3.5 bg-slate-950/70 rounded-xl border border-slate-800 space-y-2">
-          <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">
+        <div className="p-3.5 bg-slate-50 dark:bg-zinc-900/70 rounded-xl border border-slate-200 dark:border-zinc-800 space-y-2">
+          <span className="text-[11px] font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider block">
             Pesos Técnicos da Vaga (Soma 100%):
           </span>
           <div className="flex flex-wrap gap-2">
             {job.skills.map((skill) => (
               <span
                 key={skill.id}
-                className="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-900 text-slate-200 rounded-lg text-xs font-semibold border border-slate-800 shadow-2xs"
+                className="inline-flex items-center gap-1.5 px-3 py-1 bg-white dark:bg-zinc-800 text-slate-800 dark:text-zinc-200 rounded-lg text-xs font-semibold border border-slate-200 dark:border-zinc-700 shadow-xs"
               >
                 <span>{skill.name}</span>
-                <span className="text-blue-400 font-black">{skill.weight}%</span>
+                <span className="text-blue-600 dark:text-blue-400 font-black">{skill.weight}%</span>
               </span>
             ))}
           </div>
@@ -206,24 +206,24 @@ export const MatchingClientView: React.FC<MatchingClientViewProps> = ({
 
         {/* Resumo Rápido de Contadores */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-          <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800 text-center">
-            <span className="text-xs text-slate-400 font-medium">Candidatos Avaliados</span>
-            <span className="block text-xl font-bold text-slate-100">{stats.total}</span>
+          <div className="p-3 rounded-xl bg-slate-50 dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800 text-center">
+            <span className="text-xs text-slate-500 dark:text-zinc-400 font-medium">Candidatos Avaliados</span>
+            <span className="block text-xl font-bold text-slate-900 dark:text-zinc-100">{stats.total}</span>
           </div>
 
-          <div className="p-3 rounded-xl bg-emerald-950/40 border border-emerald-800/50 text-center">
-            <span className="text-xs text-emerald-400 font-medium">Alta (&gt;=80%)</span>
-            <span className="block text-xl font-bold text-emerald-400">{stats.high}</span>
+          <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/50 text-center">
+            <span className="text-xs text-emerald-700 dark:text-emerald-400 font-medium">Alta (&gt;=80%)</span>
+            <span className="block text-xl font-bold text-emerald-600 dark:text-emerald-400">{stats.high}</span>
           </div>
 
-          <div className="p-3 rounded-xl bg-amber-950/40 border border-amber-800/50 text-center">
-            <span className="text-xs text-amber-400 font-medium">Média (60-79%)</span>
-            <span className="block text-xl font-bold text-amber-400">{stats.medium}</span>
+          <div className="p-3 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/50 text-center">
+            <span className="text-xs text-amber-700 dark:text-amber-400 font-medium">Média (60-79%)</span>
+            <span className="block text-xl font-bold text-amber-600 dark:text-amber-400">{stats.medium}</span>
           </div>
 
-          <div className="p-3 rounded-xl bg-blue-950/40 border border-blue-800/50 text-center">
-            <span className="text-xs text-blue-400 font-medium">Revisões Concluídas</span>
-            <span className="block text-xl font-bold text-blue-400">{stats.reviewed}</span>
+          <div className="p-3 rounded-xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800/50 text-center">
+            <span className="text-xs text-blue-700 dark:text-blue-400 font-medium">Revisões Concluídas</span>
+            <span className="block text-xl font-bold text-blue-600 dark:text-blue-400">{stats.reviewed}</span>
           </div>
         </div>
       </div>
@@ -256,12 +256,12 @@ export const MatchingClientView: React.FC<MatchingClientViewProps> = ({
           <div className="space-y-3">
             <div className="flex items-center justify-between px-1">
               <div className="flex items-center gap-2">
-                <Award className="w-5 h-5 text-blue-400" />
-                <h3 className="text-base font-bold text-slate-100">
+                <Award className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                <h3 className="text-base font-bold text-slate-900 dark:text-zinc-100">
                   Ranking de Compatibilidade ({filteredAndRanked.length} de {stats.total})
                 </h3>
               </div>
-              <span className="text-xs text-slate-400 font-medium">
+              <span className="text-xs text-slate-500 dark:text-zinc-400 font-medium">
                 Ordenado automaticamente do maior para o menor percentual
               </span>
             </div>

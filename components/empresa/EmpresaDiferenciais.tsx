@@ -153,18 +153,18 @@ export function VagaTimeline({ job }: { job: JobForHealth }) {
     : 0;
 
   return (
-    <div className="p-5 rounded-2xl bg-gradient-to-br from-slate-900/90 to-slate-950/90 border border-slate-800/80 backdrop-blur-sm space-y-1 relative overflow-hidden">
+    <div className="p-5 rounded-2xl bg-white dark:bg-[#121215] border border-slate-200/80 dark:border-zinc-800 shadow-sm space-y-1 relative overflow-hidden">
       {/* Decorative glow */}
-      <div className="absolute -top-20 -right-20 w-40 h-40 bg-blue-500/5 rounded-full blur-3xl" />
+      <div className="absolute -top-20 -right-20 w-40 h-40 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
 
-      <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-1.5 relative z-10">
-        <TrendingUp className="w-3.5 h-3.5 text-blue-400" />
+      <p className="text-[11px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider mb-4 flex items-center gap-1.5 relative z-10">
+        <TrendingUp className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
         Progresso da Vaga
       </p>
 
       <div className="relative z-10">
         {/* Background line */}
-        <div className="absolute left-5 top-5 bottom-5 w-0.5 bg-slate-800/80" />
+        <div className="absolute left-5 top-5 bottom-5 w-0.5 bg-slate-200 dark:bg-zinc-800" />
 
         {/* Animated progress line */}
         <div
@@ -181,17 +181,17 @@ export function VagaTimeline({ job }: { job: JobForHealth }) {
             const isCurrent = idx === activeStep;
 
             const bgColors: Record<string, string> = {
-              emerald: 'bg-emerald-500 shadow-emerald-500/40',
-              amber: 'bg-amber-500 shadow-amber-500/40',
-              blue: 'bg-blue-500 shadow-blue-500/40',
-              purple: 'bg-purple-500 shadow-purple-500/40',
+              emerald: 'bg-emerald-500 shadow-emerald-500/30',
+              amber: 'bg-amber-500 shadow-amber-500/30',
+              blue: 'bg-blue-600 shadow-blue-500/30',
+              purple: 'bg-purple-500 shadow-purple-500/30',
             };
 
             const textColors: Record<string, string> = {
-              emerald: 'text-emerald-400',
-              amber: 'text-amber-400',
-              blue: 'text-blue-400',
-              purple: 'text-purple-400',
+              emerald: 'text-emerald-600 dark:text-emerald-400',
+              amber: 'text-amber-600 dark:text-amber-400',
+              blue: 'text-blue-600 dark:text-blue-400',
+              purple: 'text-purple-600 dark:text-purple-400',
             };
 
             return (
@@ -199,8 +199,8 @@ export function VagaTimeline({ job }: { job: JobForHealth }) {
                 <div
                   className={`relative z-10 w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-500 shrink-0 ${
                     isDone
-                      ? `${bgColors[step.color]} border-transparent text-white shadow-lg`
-                      : 'bg-slate-900 border-slate-700 text-slate-600'
+                      ? `${bgColors[step.color]} border-transparent text-white shadow-md`
+                      : 'bg-slate-100 dark:bg-zinc-900 border-slate-300 dark:border-zinc-700 text-slate-400 dark:text-zinc-500'
                   }`}
                 >
                   {isDone && idx < activeStep ? (
@@ -217,7 +217,7 @@ export function VagaTimeline({ job }: { job: JobForHealth }) {
                 </div>
 
                 <div className={`pt-1.5 transition-opacity duration-300 ${isDone ? 'opacity-100' : 'opacity-40'}`}>
-                  <p className={`text-xs font-bold ${isCurrent ? textColors[step.color] : isDone ? 'text-slate-200' : 'text-slate-500'}`}>
+                  <p className={`text-xs font-bold ${isCurrent ? textColors[step.color] : isDone ? 'text-slate-800 dark:text-zinc-200' : 'text-slate-400 dark:text-zinc-500'}`}>
                     {step.label}
                     {isCurrent && (
                       <span className={`ml-2 text-[10px] font-bold ${textColors[step.color]} px-2 py-0.5 rounded-full border border-current/30 bg-current/10`}>
@@ -225,7 +225,7 @@ export function VagaTimeline({ job }: { job: JobForHealth }) {
                       </span>
                     )}
                   </p>
-                  <p className="text-[11px] text-slate-500 mt-0.5">{step.description}</p>
+                  <p className="text-[11px] text-slate-500 dark:text-zinc-400 mt-0.5">{step.description}</p>
                 </div>
               </div>
             );
@@ -234,12 +234,12 @@ export function VagaTimeline({ job }: { job: JobForHealth }) {
       </div>
 
       {/* Mini stats bar */}
-      <div className="flex items-center justify-between pt-3 border-t border-slate-800/60 mt-4 relative z-10">
-        <div className="flex items-center gap-1.5 text-[10px] text-slate-500">
+      <div className="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-zinc-800 mt-4 relative z-10">
+        <div className="flex items-center gap-1.5 text-[10px] text-slate-500 dark:text-zinc-400">
           <Calendar className="w-3 h-3" />
           {job.createdAt ? new Date(job.createdAt).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' }) : 'Recente'}
         </div>
-        <div className="flex items-center gap-1.5 text-[10px] font-bold text-blue-400">
+        <div className="flex items-center gap-1.5 text-[10px] font-bold text-blue-600 dark:text-blue-400">
           <Activity className="w-3 h-3" />
           {daysSince} dia(s) ativo
         </div>
@@ -289,19 +289,19 @@ export function SkillsRadarChart({
   const rings = [25, 50, 75, 100];
 
   return (
-    <div className="p-5 rounded-2xl bg-gradient-to-br from-slate-900/90 to-slate-950/90 border border-slate-800/80 backdrop-blur-sm space-y-4 relative overflow-hidden">
-      <div className="absolute -bottom-16 -left-16 w-32 h-32 bg-purple-500/5 rounded-full blur-3xl" />
+    <div className="p-5 rounded-2xl bg-white dark:bg-[#121215] border border-slate-200/80 dark:border-zinc-800 shadow-sm space-y-4 relative overflow-hidden">
+      <div className="absolute -bottom-16 -left-16 w-32 h-32 bg-purple-500/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="flex items-center justify-between relative z-10">
-        <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-          <BarChart3 className="w-3.5 h-3.5 text-purple-400" />
+        <p className="text-[11px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
+          <BarChart3 className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
           Cobertura de Skills
         </p>
-        <span className="text-[11px] text-slate-500">{matchingResults.length} avaliados</span>
+        <span className="text-[11px] text-slate-500 dark:text-zinc-400">{matchingResults.length} avaliados</span>
       </div>
 
       {matchingResults.length === 0 ? (
-        <p className="text-xs text-slate-500 text-center py-4">Nenhum candidato avaliado ainda.</p>
+        <p className="text-xs text-slate-500 dark:text-zinc-400 text-center py-4">Nenhum candidato avaliado ainda.</p>
       ) : (
         <div className="relative z-10 space-y-4">
           {/* SVG Radar Chart */}
@@ -316,20 +316,20 @@ export function SkillsRadarChart({
                 </defs>
                 {/* Grid rings */}
                 {rings.map((pct) => (
-                  <circle key={pct} cx={cx} cy={cy} r={(pct / 100) * maxR} fill="none" stroke="#334155" strokeWidth="0.5" strokeDasharray="2 2" />
+                  <circle key={pct} cx={cx} cy={cy} r={(pct / 100) * maxR} fill="none" stroke="currentColor" className="text-slate-200 dark:text-zinc-800" strokeWidth="0.5" strokeDasharray="2 2" />
                 ))}
                 {/* Axis lines */}
                 {skillStats.map((_, i) => {
                   const angle = angleStep * i - Math.PI / 2;
                   return (
-                    <line key={i} x1={cx} y1={cy} x2={cx + maxR * Math.cos(angle)} y2={cy + maxR * Math.sin(angle)} stroke="#334155" strokeWidth="0.5" />
+                    <line key={i} x1={cx} y1={cy} x2={cx + maxR * Math.cos(angle)} y2={cy + maxR * Math.sin(angle)} stroke="currentColor" className="text-slate-200 dark:text-zinc-800" strokeWidth="0.5" />
                   );
                 })}
                 {/* Radar area */}
                 {n > 0 && <path d={radarPath} fill="url(#radarFill)" stroke="#8b5cf6" strokeWidth="1.5" />}
                 {/* Dots */}
                 {radarPoints.map((p, i) => (
-                  <circle key={i} cx={p.x} cy={p.y} r="3" fill="#8b5cf6" stroke="#1e1b4b" strokeWidth="1.5" />
+                  <circle key={i} cx={p.x} cy={p.y} r="3" fill="#8b5cf6" stroke="#ffffff" className="dark:stroke-zinc-900" strokeWidth="1.5" />
                 ))}
                 {/* Labels */}
                 {skillStats.map((s, i) => {
@@ -338,7 +338,7 @@ export function SkillsRadarChart({
                   const lx = cx + lr * Math.cos(angle);
                   const ly = cy + lr * Math.sin(angle);
                   return (
-                    <text key={i} x={lx} y={ly} textAnchor="middle" dominantBaseline="middle" className="fill-slate-500 text-[6px] font-medium">
+                    <text key={i} x={lx} y={ly} textAnchor="middle" dominantBaseline="middle" className="fill-slate-500 dark:fill-zinc-400 text-[6px] font-medium">
                       {s.name.length > 8 ? s.name.slice(0, 7) + '..' : s.name}
                     </text>
                   );
@@ -355,16 +355,16 @@ export function SkillsRadarChart({
               return (
                 <div key={skill.name} className="space-y-1">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="font-semibold text-slate-300 flex items-center gap-2">
+                    <span className="font-semibold text-slate-800 dark:text-zinc-200 flex items-center gap-2">
                       {skill.name}
-                      <span className="text-[10px] text-slate-600 font-normal">(peso {skill.weight}%)</span>
+                      <span className="text-[10px] text-slate-500 dark:text-zinc-500 font-normal">(peso {skill.weight}%)</span>
                     </span>
-                    <span className={`font-bold text-xs ${pct >= 70 ? 'text-emerald-400' : pct >= 40 ? 'text-amber-400' : 'text-red-400'}`}>
+                    <span className={`font-bold text-xs ${pct >= 70 ? 'text-emerald-600 dark:text-emerald-400' : pct >= 40 ? 'text-amber-600 dark:text-amber-400' : 'text-red-600 dark:text-red-400'}`}>
                       {pct}%
-                      <span className="text-slate-600 font-normal ml-1">({skill.count}/{skill.total})</span>
+                      <span className="text-slate-500 dark:text-zinc-500 font-normal ml-1">({skill.count}/{skill.total})</span>
                     </span>
                   </div>
-                  <div className="h-1.5 bg-slate-800/80 rounded-full overflow-hidden">
+                  <div className="h-1.5 bg-slate-100 dark:bg-zinc-800 rounded-full overflow-hidden">
                     <div
                       className={`h-full rounded-full bg-gradient-to-r ${barColor} transition-all duration-700`}
                       style={{ width: `${pct}%` }}
@@ -377,14 +377,14 @@ export function SkillsRadarChart({
 
           {/* Skill Gap Indicator */}
           {hardestSkills.length > 0 && (
-            <div className="p-3 rounded-xl bg-red-950/20 border border-red-900/30 space-y-1.5">
-              <p className="text-[10px] font-bold text-red-400 uppercase tracking-wider flex items-center gap-1.5">
+            <div className="p-3 rounded-xl bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-900/30 space-y-1.5">
+              <p className="text-[10px] font-bold text-red-700 dark:text-red-400 uppercase tracking-wider flex items-center gap-1.5">
                 <AlertTriangle className="w-3 h-3" />
-                Skills mais dificeis de encontrar
+                Skills mais difíceis de encontrar
               </p>
               <div className="flex flex-wrap gap-1.5">
                 {hardestSkills.slice(0, 3).map(s => (
-                  <span key={s.name} className="text-[10px] px-2 py-0.5 rounded-md bg-red-950/40 border border-red-800/40 text-red-300 font-medium">
+                  <span key={s.name} className="text-[10px] px-2 py-0.5 rounded-md bg-white dark:bg-red-950/40 border border-red-200 dark:border-red-800/40 text-red-700 dark:text-red-300 font-medium">
                     {s.name} ({s.matchRate}%)
                   </span>
                 ))}
@@ -488,7 +488,7 @@ export function JobHealthScore({ job }: { job: JobForHealth }) {
     return () => cancelAnimationFrame(frame);
   }, [score]);
 
-  const color = score >= 80 ? 'text-emerald-400' : score >= 50 ? 'text-amber-400' : 'text-red-400';
+  const color = score >= 80 ? 'text-emerald-600 dark:text-emerald-400' : score >= 50 ? 'text-amber-600 dark:text-amber-400' : 'text-red-600 dark:text-red-400';
   const ringColor = score >= 80 ? '#10b981' : score >= 50 ? '#f59e0b' : '#ef4444';
   const label = score >= 80 ? 'Excelente' : score >= 50 ? 'Regular' : 'Incompleta';
 
@@ -497,24 +497,24 @@ export function JobHealthScore({ job }: { job: JobForHealth }) {
   const dash = (score / 100) * circ;
 
   return (
-    <div className="p-5 rounded-2xl bg-gradient-to-br from-slate-900/90 to-slate-950/90 border border-slate-800/80 backdrop-blur-sm space-y-4 relative overflow-hidden">
-      <div className="absolute -top-16 -right-16 w-32 h-32 bg-emerald-500/5 rounded-full blur-3xl" />
+    <div className="p-5 rounded-2xl bg-white dark:bg-[#121215] border border-slate-200/80 dark:border-zinc-800 shadow-sm space-y-4 relative overflow-hidden">
+      <div className="absolute -top-16 -right-16 w-32 h-32 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="flex items-center justify-between relative z-10">
-        <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-          <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-          Saude da Vaga
+        <p className="text-[11px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
+          <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+          Saúde da Vaga
         </p>
         <button
           onClick={() => setOpen((p) => !p)}
-          className="text-[11px] text-slate-400 hover:text-slate-200 flex items-center gap-1 transition-colors"
+          className="text-[11px] text-slate-500 dark:text-zinc-400 hover:text-slate-800 dark:hover:text-zinc-200 flex items-center gap-1 transition-colors cursor-pointer"
         >
           Detalhes {open ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
         </button>
       </div>
 
       <div className="flex items-center gap-5 relative z-10">
-        {/* Bigger SVG Donut with gradient */}
+        {/* SVG Donut */}
         <div className="relative shrink-0">
           <svg width="100" height="100" viewBox="0 0 100 100">
             <defs>
@@ -522,15 +522,8 @@ export function JobHealthScore({ job }: { job: JobForHealth }) {
                 <stop offset="0%" stopColor={ringColor} />
                 <stop offset="100%" stopColor={ringColor} stopOpacity="0.5" />
               </linearGradient>
-              <filter id="glow">
-                <feGaussianBlur stdDeviation="2" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
             </defs>
-            <circle cx="50" cy="50" r={r} fill="none" stroke="#1e293b" strokeWidth="6" />
+            <circle cx="50" cy="50" r={r} fill="none" stroke="currentColor" className="text-slate-100 dark:text-zinc-800" strokeWidth="6" />
             <circle
               cx="50" cy="50" r={r}
               fill="none"
@@ -539,22 +532,21 @@ export function JobHealthScore({ job }: { job: JobForHealth }) {
               strokeDasharray={`${dash} ${circ}`}
               strokeLinecap="round"
               transform="rotate(-90 50 50)"
-              filter="url(#glow)"
               style={{ transition: 'stroke-dasharray 1.2s ease' }}
             />
           </svg>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <span className={`text-2xl font-black ${color}`}>{animatedScore}</span>
-            <span className="text-[8px] text-slate-500 font-bold uppercase">pontos</span>
+            <span className="text-[8px] text-slate-400 dark:text-zinc-500 font-bold uppercase">pontos</span>
           </div>
         </div>
 
         <div className="flex-1">
           <p className={`text-lg font-black ${color}`}>{label}</p>
-          <p className="text-[11px] text-slate-400 mt-0.5">
+          <p className="text-[11px] text-slate-500 dark:text-zinc-400 mt-0.5">
             {tips.filter((t) => t.type === 'error' || t.type === 'warning').length} ponto(s) de melhoria
           </p>
-          <div className="h-1.5 w-full bg-slate-800 rounded-full mt-2.5 overflow-hidden">
+          <div className="h-1.5 w-full bg-slate-100 dark:bg-zinc-800 rounded-full mt-2.5 overflow-hidden">
             <div
               className="h-full rounded-full transition-all duration-1000"
               style={{ width: `${score}%`, background: `linear-gradient(90deg, ${ringColor}, ${ringColor}88)` }}
@@ -564,17 +556,17 @@ export function JobHealthScore({ job }: { job: JobForHealth }) {
       </div>
 
       {open && (
-        <div className="space-y-2 pt-3 border-t border-slate-800/60 relative z-10">
-          <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5 mb-3">
-            <Target className="w-3 h-3" /> Criterios detalhados
+        <div className="space-y-2 pt-3 border-t border-slate-100 dark:border-zinc-800 relative z-10">
+          <p className="text-[11px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider flex items-center gap-1.5 mb-3">
+            <Target className="w-3 h-3" /> Critérios detalhados
           </p>
           {tips.map((tip, i) => {
             const pct = tip.maxPoints > 0 ? (tip.points / tip.maxPoints) * 100 : 0;
             const tipColors: Record<HealthTip['type'], string> = {
-              error: 'text-red-400 border-red-900/40',
-              warning: 'text-amber-400 border-amber-900/40',
-              success: 'text-emerald-400 border-emerald-900/40',
-              info: 'text-blue-400 border-blue-900/40',
+              error: 'text-red-600 dark:text-red-400 border-red-200 dark:border-red-900/40 bg-red-50/50 dark:bg-red-950/20',
+              warning: 'text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-900/40 bg-amber-50/50 dark:bg-amber-950/20',
+              success: 'text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-900/40 bg-emerald-50/50 dark:bg-emerald-950/20',
+              info: 'text-blue-600 dark:text-blue-400 border-blue-200 dark:border-blue-900/40 bg-blue-50/50 dark:bg-blue-950/20',
             };
             const barColors: Record<HealthTip['type'], string> = {
               error: 'bg-red-500',
@@ -583,15 +575,15 @@ export function JobHealthScore({ job }: { job: JobForHealth }) {
               info: 'bg-blue-500',
             };
             return (
-              <div key={i} className={`p-2.5 rounded-lg bg-slate-950/50 border ${tipColors[tip.type]} space-y-1.5`}>
+              <div key={i} className={`p-2.5 rounded-lg border ${tipColors[tip.type]} space-y-1.5`}>
                 <div className="flex items-center justify-between">
-                  <span className={`text-[11px] font-bold ${tipColors[tip.type].split(' ')[0]}`}>{tip.category}</span>
-                  <span className="text-[10px] text-slate-500 font-mono">{tip.points}/{tip.maxPoints} pts</span>
+                  <span className="text-[11px] font-bold">{tip.category}</span>
+                  <span className="text-[10px] text-slate-500 dark:text-zinc-400 font-mono">{tip.points}/{tip.maxPoints} pts</span>
                 </div>
-                <div className="h-1 bg-slate-800 rounded-full overflow-hidden">
+                <div className="h-1 bg-slate-200/80 dark:bg-zinc-800 rounded-full overflow-hidden">
                   <div className={`h-full rounded-full ${barColors[tip.type]} transition-all duration-500`} style={{ width: `${pct}%` }} />
                 </div>
-                <p className="text-[10px] text-slate-500">{tip.message}</p>
+                <p className="text-[10px] text-slate-600 dark:text-zinc-400">{tip.message}</p>
               </div>
             );
           })}
@@ -606,9 +598,9 @@ export function JobHealthScore({ job }: { job: JobForHealth }) {
 // ═══════════════════════════════════════════════════════════════════════════════
 
 function classifColor(c: string) {
-  if (c === 'ALTA') return { badge: 'text-emerald-400 border-emerald-800 bg-emerald-950/50', bar: 'bg-emerald-500', glow: 'shadow-emerald-500/20' };
-  if (c === 'MEDIA') return { badge: 'text-amber-400 border-amber-800 bg-amber-950/50', bar: 'bg-amber-500', glow: 'shadow-amber-500/20' };
-  return { badge: 'text-red-400 border-red-800 bg-red-950/50', bar: 'bg-red-500', glow: 'shadow-red-500/20' };
+  if (c === 'ALTA') return { badge: 'text-emerald-700 dark:text-emerald-400 border-emerald-300 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/50', bar: 'bg-emerald-500', glow: 'shadow-emerald-500/20' };
+  if (c === 'MEDIA') return { badge: 'text-amber-700 dark:text-amber-400 border-amber-300 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/50', bar: 'bg-amber-500', glow: 'shadow-amber-500/20' };
+  return { badge: 'text-red-700 dark:text-red-400 border-red-300 dark:border-red-800 bg-red-50 dark:bg-red-950/50', bar: 'bg-red-500', glow: 'shadow-red-500/20' };
 }
 
 interface CandidatesPanelProps {
@@ -688,7 +680,7 @@ export function CandidatesPanel({ results, jobTitle, onSelectForComparison, sele
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    showInternalToast('Relatorio em CSV exportado com sucesso!');
+    showInternalToast('Relatório em CSV exportado com sucesso!');
   };
 
   const filtered = results.filter((r) => {
@@ -715,27 +707,27 @@ export function CandidatesPanel({ results, jobTitle, onSelectForComparison, sele
     <div className="space-y-4">
       {/* Internal Notification Toast */}
       {toastMsg && (
-        <div className="fixed bottom-5 right-5 z-50 bg-slate-900 border border-blue-500 text-slate-100 px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 animate-in fade-in slide-in-from-bottom-5">
-          <Sparkles className="w-4 h-4 text-blue-400 shrink-0" />
+        <div className="fixed bottom-5 right-5 z-50 bg-white dark:bg-zinc-900 border border-blue-500 text-slate-900 dark:text-zinc-100 px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 animate-in fade-in slide-in-from-bottom-5">
+          <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
           <p className="text-xs font-semibold">{toastMsg}</p>
         </div>
       )}
 
       {/* Top Pick Hero */}
       {topPick && topPick.score >= 70 && (
-        <div className="p-4 rounded-2xl bg-gradient-to-r from-amber-950/30 via-yellow-950/20 to-amber-950/30 border border-amber-700/40 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/10 rounded-full blur-2xl" />
+        <div className="p-4 rounded-2xl bg-gradient-to-r from-amber-50 via-yellow-50/60 to-amber-50 dark:from-amber-950/30 dark:via-yellow-950/20 dark:to-amber-950/30 border border-amber-200 dark:border-amber-700/40 relative overflow-hidden shadow-xs">
+          <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/10 rounded-full blur-2xl pointer-events-none" />
           <div className="flex items-center gap-3 relative z-10">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-yellow-600 flex items-center justify-center text-white shadow-lg shadow-amber-500/30">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-yellow-600 flex items-center justify-center text-white shadow-md shadow-amber-500/30">
               <Crown className="w-5 h-5" />
             </div>
             <div className="flex-1">
-              <p className="text-[10px] font-bold text-amber-400 uppercase tracking-wider">Top Pick - Melhor Match</p>
-              <p className="text-sm font-black text-slate-100">{topPick.candidate?.name || topPick.candidateName || 'Candidato'}</p>
+              <p className="text-[10px] font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wider">Top Pick - Melhor Match</p>
+              <p className="text-sm font-black text-slate-900 dark:text-zinc-100">{topPick.candidate?.name || topPick.candidateName || 'Candidato'}</p>
             </div>
             <div className="text-right">
-              <p className="text-2xl font-black text-amber-400">{topPick.score}%</p>
-              <p className="text-[10px] text-amber-500/70">compatibilidade</p>
+              <p className="text-2xl font-black text-amber-600 dark:text-amber-400">{topPick.score}%</p>
+              <p className="text-[10px] text-amber-700/70 dark:text-amber-500/70">compatibilidade</p>
             </div>
           </div>
         </div>
@@ -750,7 +742,7 @@ export function CandidatesPanel({ results, jobTitle, onSelectForComparison, sele
                 className="w-full rounded-t-sm bg-gradient-to-t from-blue-600/60 to-blue-400/40 transition-all duration-500"
                 style={{ height: `${Math.max(h, 4)}%` }}
               />
-              <span className="text-[8px] text-slate-600">{i * 20}-{(i + 1) * 20}</span>
+              <span className="text-[8px] text-slate-400 dark:text-zinc-500">{i * 20}-{(i + 1) * 20}</span>
             </div>
           ))}
         </div>
@@ -763,17 +755,17 @@ export function CandidatesPanel({ results, jobTitle, onSelectForComparison, sele
           placeholder="Buscar candidato por nome..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="flex-1 px-3 py-2 text-xs bg-slate-950 border border-slate-800 rounded-xl text-slate-100 placeholder-slate-600 focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 focus:outline-none transition-all"
+          className="flex-1 px-3 py-2 text-xs bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-all shadow-2xs"
         />
         <div className="flex gap-1 flex-wrap">
           {(['ALL', 'ALTA', 'MEDIA', 'BAIXA'] as const).map((f) => (
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`px-3 py-1.5 text-[11px] font-bold rounded-lg border transition-all ${
+              className={`px-3 py-1.5 text-[11px] font-bold rounded-lg border transition-all cursor-pointer ${
                 filter === f
-                  ? 'bg-blue-600 border-blue-500 text-white shadow-lg shadow-blue-500/20'
-                  : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
+                  ? 'bg-blue-600 border-blue-600 text-white shadow-md shadow-blue-600/20'
+                  : 'bg-white dark:bg-zinc-900 border-slate-200 dark:border-zinc-800 text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-100 hover:border-slate-300 dark:hover:border-zinc-700'
               }`}
             >
               {f === 'ALL' ? 'Todos' : f === 'ALTA' ? 'Alta' : f === 'MEDIA' ? 'Média' : 'Baixa'}
@@ -781,7 +773,7 @@ export function CandidatesPanel({ results, jobTitle, onSelectForComparison, sele
           ))}
           <button
             onClick={() => setViewMode(v => v === 'list' ? 'cards' : 'list')}
-            className="px-2.5 py-1.5 rounded-lg border border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700 transition-all text-xs font-semibold"
+            className="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-100 hover:border-slate-300 dark:hover:border-zinc-700 transition-all text-xs font-semibold cursor-pointer"
             title={viewMode === 'list' ? 'Ver em cards' : 'Ver em lista'}
           >
             {viewMode === 'list' ? <Filter className="w-3.5 h-3.5 inline mr-1" /> : <BarChart3 className="w-3.5 h-3.5 inline mr-1" />}
@@ -789,7 +781,7 @@ export function CandidatesPanel({ results, jobTitle, onSelectForComparison, sele
           </button>
           <button
             onClick={handleExportCSV}
-            className="px-2.5 py-1.5 rounded-lg border border-slate-800 text-emerald-400 hover:bg-emerald-950/30 hover:border-emerald-700/50 transition-all text-xs font-semibold flex items-center gap-1"
+            className="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 hover:border-emerald-300 dark:hover:border-emerald-700/50 transition-all text-xs font-semibold flex items-center gap-1 cursor-pointer"
             title="Exportar dados dos candidatos em CSV"
           >
             <Download className="w-3.5 h-3.5" /> CSV
@@ -797,16 +789,16 @@ export function CandidatesPanel({ results, jobTitle, onSelectForComparison, sele
         </div>
       </div>
 
-      <div className="flex items-center justify-between text-[11px] text-slate-500">
+      <div className="flex items-center justify-between text-[11px] text-slate-500 dark:text-zinc-400">
         <span>
-          Mostrando <strong className="text-slate-300">{filtered.length}</strong> de{' '}
-          <strong className="text-slate-300">{results.length}</strong> candidatos para{' '}
-          <strong className="text-blue-400">{jobTitle}</strong>
+          Mostrando <strong className="text-slate-700 dark:text-zinc-300">{filtered.length}</strong> de{' '}
+          <strong className="text-slate-700 dark:text-zinc-300">{results.length}</strong> candidatos para{' '}
+          <strong className="text-blue-600 dark:text-blue-400">{jobTitle}</strong>
         </span>
       </div>
 
       {selectedForComparison.length > 0 && (
-        <div className="flex items-center justify-between px-3 py-2 bg-blue-950/30 border border-blue-800/40 rounded-xl text-xs text-blue-300">
+        <div className="flex items-center justify-between px-3 py-2 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800/40 rounded-xl text-xs text-blue-700 dark:text-blue-300">
           <span className="flex items-center gap-2">
             <GitCompare className="w-3.5 h-3.5 shrink-0" />
             {selectedForComparison.length === 1
@@ -814,7 +806,7 @@ export function CandidatesPanel({ results, jobTitle, onSelectForComparison, sele
               : '2 candidatos selecionados para comparação'}
           </span>
           {selectedForComparison.length === 2 && (
-            <span className="font-bold text-blue-400 underline cursor-pointer">Pronto para comparar!</span>
+            <span className="font-bold text-blue-600 dark:text-blue-400 underline cursor-pointer">Pronto para comparar!</span>
           )}
         </div>
       )}
@@ -822,8 +814,8 @@ export function CandidatesPanel({ results, jobTitle, onSelectForComparison, sele
       {/* Candidate List / Cards */}
       <div className={viewMode === 'cards' ? 'grid grid-cols-1 sm:grid-cols-2 gap-3' : 'space-y-2'}>
         {filtered.length === 0 && (
-          <div className="text-center py-8 text-slate-500 col-span-2">
-            <Users className="w-8 h-8 mx-auto mb-2 text-slate-700" />
+          <div className="text-center py-8 text-slate-400 dark:text-zinc-500 col-span-2">
+            <Users className="w-8 h-8 mx-auto mb-2 text-slate-300 dark:text-zinc-700" />
             <p className="text-xs">Nenhum candidato corresponde aos filtros selecionados.</p>
           </div>
         )}
@@ -837,19 +829,19 @@ export function CandidatesPanel({ results, jobTitle, onSelectForComparison, sele
           const currentStatus = candidateStatus[result.candidateId] || 'Novo';
 
           const statusColors: Record<string, string> = {
-            Novo: 'bg-blue-950/60 text-blue-400 border-blue-800/60',
-            'Em Análise': 'bg-amber-950/60 text-amber-400 border-amber-800/60',
-            Entrevistado: 'bg-purple-950/60 text-purple-400 border-purple-800/60',
-            Aprovado: 'bg-emerald-950/60 text-emerald-400 border-emerald-800/60',
-            Recusado: 'bg-red-950/60 text-red-400 border-red-800/60',
+            Novo: 'bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-400 border-blue-200 dark:border-blue-800/60',
+            'Em Análise': 'bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-800/60',
+            Entrevistado: 'bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-400 border-purple-200 dark:border-purple-800/60',
+            Aprovado: 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800/60',
+            Recusado: 'bg-red-50 dark:bg-red-950/60 text-red-700 dark:text-red-400 border-red-200 dark:border-red-800/60',
           };
 
           if (viewMode === 'cards') {
             return (
               <div
                 key={result.candidateId}
-                className={`p-4 rounded-2xl border transition-all duration-300 bg-slate-950/60 hover:bg-slate-900/60 ${
-                  isTopPick ? 'border-amber-600/50 shadow-lg shadow-amber-500/10' : 'border-slate-800 hover:border-slate-700'
+                className={`p-4 rounded-2xl border transition-all duration-300 bg-white dark:bg-[#121215] shadow-xs ${
+                  isTopPick ? 'border-amber-400/80 dark:border-amber-600/50 shadow-md shadow-amber-500/10' : 'border-slate-200/80 dark:border-zinc-800 hover:border-slate-300 dark:hover:border-zinc-700'
                 } ${isSelected ? 'ring-2 ring-blue-600/50' : ''}`}
               >
                 <div className="flex items-center gap-3 mb-3">
@@ -857,12 +849,12 @@ export function CandidatesPanel({ results, jobTitle, onSelectForComparison, sele
                     {name.charAt(0)}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs font-bold text-slate-100 truncate flex items-center gap-1.5">
+                    <p className="text-xs font-bold text-slate-900 dark:text-zinc-100 truncate flex items-center gap-1.5">
                       {name}
-                      {isTopPick && <Crown className="w-3 h-3 text-amber-400" />}
+                      {isTopPick && <Crown className="w-3 h-3 text-amber-500" />}
                     </p>
                     <div className="flex items-center gap-2 mt-0.5">
-                      <span className="text-[11px] text-slate-500">{result.candidate?.level || '--'}</span>
+                      <span className="text-[11px] text-slate-500 dark:text-zinc-400">{result.candidate?.level || '--'}</span>
                       <span className={`text-[9px] font-bold px-1.5 py-0.2 rounded border ${statusColors[currentStatus]}`}>
                         {currentStatus}
                       </span>
@@ -870,14 +862,14 @@ export function CandidatesPanel({ results, jobTitle, onSelectForComparison, sele
                   </div>
                   <span className={`text-lg font-black ${colors.badge.split(' ')[0]}`}>{result.score}%</span>
                 </div>
-                <div className="h-1.5 bg-slate-800/80 rounded-full overflow-hidden mb-3">
+                <div className="h-1.5 bg-slate-100 dark:bg-zinc-800 rounded-full overflow-hidden mb-3">
                   <div className={`h-full rounded-full ${colors.bar} transition-all duration-700`} style={{ width: `${result.score}%` }} />
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <button onClick={() => onSelectForComparison(result)} className={`flex-1 py-1.5 rounded-lg border text-[11px] font-bold transition-all ${isSelected ? 'bg-blue-600 border-blue-500 text-white' : 'border-slate-700 text-slate-400 hover:border-blue-600 hover:text-blue-400'}`}>
+                  <button onClick={() => onSelectForComparison(result)} className={`flex-1 py-1.5 rounded-lg border text-[11px] font-bold transition-all cursor-pointer ${isSelected ? 'bg-blue-600 border-blue-600 text-white' : 'border-slate-200 dark:border-zinc-700 text-slate-600 dark:text-zinc-400 hover:border-blue-600 hover:text-blue-600 dark:hover:text-blue-400'}`}>
                     <GitCompare className="w-3 h-3 inline mr-1" />Comparar
                   </button>
-                  <button onClick={() => setExpanded(isExpanded ? null : result.candidateId)} className="py-1.5 px-2.5 rounded-lg border border-slate-700 text-slate-400 hover:text-slate-200 transition-all text-xs font-semibold">
+                  <button onClick={() => setExpanded(isExpanded ? null : result.candidateId)} className="py-1.5 px-2.5 rounded-lg border border-slate-200 dark:border-zinc-700 text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-200 transition-all text-xs font-semibold cursor-pointer">
                     <Eye className="w-3.5 h-3.5 inline mr-1" />
                     {isExpanded ? 'Ocultar' : 'Ver'}
                   </button>
@@ -889,35 +881,35 @@ export function CandidatesPanel({ results, jobTitle, onSelectForComparison, sele
           return (
             <div
               key={result.candidateId}
-              className={`rounded-xl border transition-all duration-200 overflow-hidden ${
-                isExpanded ? 'border-blue-700/60 shadow-lg shadow-blue-950/30' : isTopPick ? 'border-amber-700/40 shadow-md shadow-amber-950/20' : 'border-slate-800 hover:border-slate-700'
+              className={`rounded-xl border transition-all duration-200 overflow-hidden bg-white dark:bg-[#121215] shadow-2xs ${
+                isExpanded ? 'border-blue-500/80 dark:border-blue-700/60 shadow-md' : isTopPick ? 'border-amber-300 dark:border-amber-700/40 shadow-xs' : 'border-slate-200/80 dark:border-zinc-800 hover:border-slate-300 dark:hover:border-zinc-700'
               } ${isSelected ? 'ring-2 ring-blue-600/50' : ''}`}
             >
-              <div className="flex items-center gap-3 p-3.5 bg-slate-950/60">
-                <span className="text-[11px] font-black text-slate-600 w-5 text-center shrink-0">
-                  {rank === 1 && result.score >= 70 ? <Trophy className="w-3.5 h-3.5 text-amber-400 mx-auto" /> : rank}
+              <div className="flex items-center gap-3 p-3.5 bg-slate-50/50 dark:bg-zinc-900/40">
+                <span className="text-[11px] font-black text-slate-400 dark:text-zinc-500 w-5 text-center shrink-0">
+                  {rank === 1 && result.score >= 70 ? <Trophy className="w-3.5 h-3.5 text-amber-500 mx-auto" /> : rank}
                 </span>
                 <div className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-black shrink-0 border ${colors.badge}`}>
                   {name.charAt(0)}
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <p className="text-xs font-bold text-slate-100 truncate flex items-center gap-1.5">
+                    <p className="text-xs font-bold text-slate-900 dark:text-zinc-100 truncate flex items-center gap-1.5">
                       {name}
-                      {isTopPick && <Flame className="w-3 h-3 text-amber-400" />}
+                      {isTopPick && <Flame className="w-3 h-3 text-amber-500" />}
                     </p>
                     <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full border ${statusColors[currentStatus]}`}>
                       {currentStatus}
                     </span>
                   </div>
-                  <p className="text-[11px] text-slate-500">
+                  <p className="text-[11px] text-slate-500 dark:text-zinc-400">
                     {result.candidate?.level || '--'}
                     {result.candidate?.experienceYears !== undefined ? ` • ${result.candidate.experienceYears} ano(s) exp.` : ''}
                   </p>
                 </div>
                 <div className="flex items-center gap-3 shrink-0">
                   <div className="hidden sm:flex flex-col gap-1 w-20">
-                    <div className="h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                    <div className="h-1.5 bg-slate-100 dark:bg-zinc-800 rounded-full overflow-hidden">
                       <div className={`h-full rounded-full ${colors.bar} transition-all duration-700`} style={{ width: `${result.score}%` }} />
                     </div>
                     <span className={`text-[10px] font-bold ${colors.badge.split(' ')[0]}`}>{result.score}%</span>
@@ -925,10 +917,10 @@ export function CandidatesPanel({ results, jobTitle, onSelectForComparison, sele
                   <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full border ${colors.badge} hidden sm:inline`}>
                     {result.classification === 'ALTA' ? 'Alta' : result.classification === 'MEDIA' ? 'Média' : 'Baixa'}
                   </span>
-                  <button onClick={() => onSelectForComparison(result)} title={isSelected ? 'Remover da comparação' : 'Adicionar à comparação'} className={`w-7 h-7 rounded-lg border flex items-center justify-center transition-all text-xs ${isSelected ? 'bg-blue-600 border-blue-500 text-white' : 'border-slate-700 text-slate-500 hover:border-blue-600 hover:text-blue-400'}`}>
+                  <button onClick={() => onSelectForComparison(result)} title={isSelected ? 'Remover da comparação' : 'Adicionar à comparação'} className={`w-7 h-7 rounded-lg border flex items-center justify-center transition-all text-xs cursor-pointer ${isSelected ? 'bg-blue-600 border-blue-600 text-white' : 'border-slate-200 dark:border-zinc-700 text-slate-500 dark:text-zinc-400 hover:border-blue-600 hover:text-blue-600'}`}>
                     <GitCompare className="w-3.5 h-3.5" />
                   </button>
-                  <button onClick={() => setExpanded(isExpanded ? null : result.candidateId)} className="w-7 h-7 rounded-lg border border-slate-700 text-slate-500 hover:text-slate-200 hover:border-slate-600 flex items-center justify-center transition-colors">
+                  <button onClick={() => setExpanded(isExpanded ? null : result.candidateId)} className="w-7 h-7 rounded-lg border border-slate-200 dark:border-zinc-700 text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-200 flex items-center justify-center transition-colors cursor-pointer">
                     {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
                   </button>
                 </div>
@@ -936,11 +928,11 @@ export function CandidatesPanel({ results, jobTitle, onSelectForComparison, sele
 
               {/* Expanded profile */}
               {isExpanded && (
-                <div className="border-t border-slate-800 bg-slate-900/40 p-4 space-y-4">
+                <div className="border-t border-slate-100 dark:border-zinc-800 bg-slate-50/70 dark:bg-zinc-900/30 p-4 space-y-4">
                   {/* Pipeline Status Selector */}
-                  <div className="flex items-center justify-between p-3 rounded-xl bg-slate-950/60 border border-slate-800">
-                    <span className="text-xs font-bold text-slate-300 flex items-center gap-1.5">
-                      <Target className="w-3.5 h-3.5 text-blue-400" />
+                  <div className="flex items-center justify-between p-3 rounded-xl bg-white dark:bg-zinc-900 border border-slate-200/80 dark:border-zinc-800">
+                    <span className="text-xs font-bold text-slate-700 dark:text-zinc-300 flex items-center gap-1.5">
+                      <Target className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
                       Status no Funil:
                     </span>
                     <div className="flex items-center gap-1 flex-wrap">
@@ -948,10 +940,10 @@ export function CandidatesPanel({ results, jobTitle, onSelectForComparison, sele
                         <button
                           key={st}
                           onClick={() => handleStatusChange(result.candidateId, st)}
-                          className={`text-[10px] font-bold px-2 py-1 rounded-lg border transition-all ${
+                          className={`text-[10px] font-bold px-2 py-1 rounded-lg border transition-all cursor-pointer ${
                             currentStatus === st
-                              ? 'bg-blue-600 text-white border-blue-500 shadow-xs'
-                              : 'bg-slate-900 text-slate-400 border-slate-800 hover:text-slate-200 hover:border-slate-700'
+                              ? 'bg-blue-600 text-white border-blue-600 shadow-xs'
+                              : 'bg-slate-50 dark:bg-zinc-900 text-slate-600 dark:text-zinc-400 border-slate-200 dark:border-zinc-800 hover:text-slate-900 dark:hover:text-zinc-200 hover:border-slate-300'
                           }`}
                         >
                           {st}
@@ -963,15 +955,15 @@ export function CandidatesPanel({ results, jobTitle, onSelectForComparison, sele
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {result.calculationBreakdown && result.calculationBreakdown.length > 0 && (
                       <div className="space-y-2">
-                        <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Skills Avaliadas</p>
+                        <p className="text-[11px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider">Skills Avaliadas</p>
                         <div className="space-y-1.5">
                           {result.calculationBreakdown.map((b) => (
                             <div key={b.skillName} className="flex items-center justify-between text-xs">
                               <span className="flex items-center gap-1.5">
-                                {b.status === 'Encontrado' ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" /> : <X className="w-3.5 h-3.5 text-red-400 shrink-0" />}
-                                <span className={b.status === 'Encontrado' ? 'text-slate-200' : 'text-slate-500'}>{b.skillName}</span>
+                                {b.status === 'Encontrado' ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" /> : <X className="w-3.5 h-3.5 text-red-500 dark:text-red-400 shrink-0" />}
+                                <span className={b.status === 'Encontrado' ? 'text-slate-800 dark:text-zinc-200 font-medium' : 'text-slate-400 dark:text-zinc-500'}>{b.skillName}</span>
                               </span>
-                              <span className={`font-bold text-[10px] ${b.status === 'Encontrado' ? 'text-emerald-400' : 'text-slate-600'}`}>
+                              <span className={`font-bold text-[10px] ${b.status === 'Encontrado' ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-400 dark:text-zinc-500'}`}>
                                 {b.pointsAwarded > 0 ? `+${b.pointsAwarded}%` : `0% / ${b.weight}%`}
                               </span>
                             </div>
@@ -981,58 +973,58 @@ export function CandidatesPanel({ results, jobTitle, onSelectForComparison, sele
                     )}
                     <div className="space-y-3">
                       {result.experienceComparison && (
-                        <div className="p-3 rounded-lg bg-slate-950/60 border border-slate-800">
-                          <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Experiência</p>
+                        <div className="p-3 rounded-lg bg-white dark:bg-zinc-900 border border-slate-200/80 dark:border-zinc-800">
+                          <p className="text-[10px] font-bold text-slate-400 dark:text-zinc-500 uppercase tracking-wider mb-1.5">Experiência</p>
                           <div className="flex items-center gap-2">
-                            <span className={`text-xl font-black ${result.experienceComparison.meetsRequirement ? 'text-emerald-400' : 'text-amber-400'}`}>
+                            <span className={`text-xl font-black ${result.experienceComparison.meetsRequirement ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400'}`}>
                               {result.experienceComparison.candidateYears}
                             </span>
-                            <span className="text-[11px] text-slate-500">anos <ArrowRight className="w-3 h-3 inline" /> req. {result.experienceComparison.requiredYears} ano(s)</span>
+                            <span className="text-[11px] text-slate-500 dark:text-zinc-400">anos <ArrowRight className="w-3 h-3 inline" /> req. {result.experienceComparison.requiredYears} ano(s)</span>
                           </div>
-                          <p className="text-[10px] text-slate-500 mt-1">{result.experienceComparison.note}</p>
+                          <p className="text-[10px] text-slate-500 dark:text-zinc-400 mt-1">{result.experienceComparison.note}</p>
                         </div>
                       )}
                       {result.levelComparison && (
-                        <div className="p-3 rounded-lg bg-slate-950/60 border border-slate-800">
-                          <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Nível Profissional</p>
+                        <div className="p-3 rounded-lg bg-white dark:bg-zinc-900 border border-slate-200/80 dark:border-zinc-800">
+                          <p className="text-[10px] font-bold text-slate-400 dark:text-zinc-500 uppercase tracking-wider mb-1.5">Nível Profissional</p>
                           <div className="flex items-center gap-2">
-                            <span className={`text-xs font-black ${result.levelComparison.meetsRequirement ? 'text-emerald-400' : 'text-amber-400'}`}>
+                            <span className={`text-xs font-black ${result.levelComparison.meetsRequirement ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400'}`}>
                               {result.levelComparison.candidateLevel}
                             </span>
-                            <span className="text-[10px] text-slate-500"><ArrowRight className="w-3 h-3 inline" /> req. {result.levelComparison.requiredLevel}</span>
+                            <span className="text-[10px] text-slate-500 dark:text-zinc-400"><ArrowRight className="w-3 h-3 inline" /> req. {result.levelComparison.requiredLevel}</span>
                           </div>
-                          <p className="text-[10px] text-slate-500 mt-1">{result.levelComparison.note}</p>
+                          <p className="text-[10px] text-slate-500 dark:text-zinc-400 mt-1">{result.levelComparison.note}</p>
                         </div>
                       )}
                     </div>
                   </div>
                   {result.candidate?.technicalSkills && result.candidate.technicalSkills.length > 0 && (
                     <div>
-                      <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">Skills do Candidato</p>
+                      <p className="text-[11px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider mb-2">Skills do Candidato</p>
                       <div className="flex flex-wrap gap-1.5">
                         {result.candidate.technicalSkills.map((sk) => (
-                          <span key={sk} className="text-[11px] px-2 py-0.5 rounded-md border border-slate-700 bg-slate-900 text-slate-300 font-medium">{sk}</span>
+                          <span key={sk} className="text-[11px] px-2 py-0.5 rounded-md border border-slate-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-slate-700 dark:text-zinc-300 font-medium">{sk}</span>
                         ))}
                       </div>
                     </div>
                   )}
                   {result.candidate?.bio && (
                     <div>
-                      <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Bio / Resumo</p>
-                      <p className="text-[11px] text-slate-400 leading-relaxed line-clamp-3">{result.candidate.bio}</p>
+                      <p className="text-[11px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider mb-1">Bio / Resumo</p>
+                      <p className="text-[11px] text-slate-600 dark:text-zinc-400 leading-relaxed line-clamp-3">{result.candidate.bio}</p>
                     </div>
                   )}
                   {/* Quick Actions */}
-                  <div className="flex gap-2 pt-2 border-t border-slate-800/60">
+                  <div className="flex gap-2 pt-2 border-t border-slate-200 dark:border-zinc-800">
                     <button
                       onClick={() => setMessageModalCandidate(result)}
-                      className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-blue-600/10 border border-blue-600/30 text-blue-400 text-[11px] font-bold hover:bg-blue-600/20 transition-all cursor-pointer"
+                      className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-blue-50 dark:bg-blue-600/10 border border-blue-200 dark:border-blue-600/30 text-blue-600 dark:text-blue-400 text-[11px] font-bold hover:bg-blue-100 dark:hover:bg-blue-600/20 transition-all cursor-pointer"
                     >
                       <MessageSquare className="w-3.5 h-3.5" /> Enviar Mensagem
                     </button>
                     <button
                       onClick={() => setScheduleModalCandidate(result)}
-                      className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-600/10 border border-emerald-600/30 text-emerald-400 text-[11px] font-bold hover:bg-emerald-600/20 transition-all cursor-pointer"
+                      className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-50 dark:bg-emerald-600/10 border border-emerald-200 dark:border-emerald-600/30 text-emerald-600 dark:text-emerald-400 text-[11px] font-bold hover:bg-emerald-100 dark:hover:bg-emerald-600/20 transition-all cursor-pointer"
                     >
                       <Calendar className="w-3.5 h-3.5" /> Agendar Entrevista
                     </button>
@@ -1046,26 +1038,26 @@ export function CandidatesPanel({ results, jobTitle, onSelectForComparison, sele
 
       {/* ── Modal Enviar Mensagem ── */}
       {messageModalCandidate && (
-        <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 w-full max-w-lg space-y-4 shadow-2xl">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-              <h4 className="font-bold text-slate-100 text-sm flex items-center gap-2">
-                <MessageSquare className="w-4 h-4 text-blue-400" />
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-[#121215] border border-slate-200 dark:border-zinc-800 rounded-3xl p-6 w-full max-w-lg space-y-4 shadow-2xl">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-zinc-800">
+              <h4 className="font-bold text-slate-900 dark:text-zinc-100 text-sm flex items-center gap-2">
+                <MessageSquare className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                 Mensagem para {messageModalCandidate.candidate?.name || messageModalCandidate.candidateName}
               </h4>
-              <button onClick={() => setMessageModalCandidate(null)} className="text-slate-400 hover:text-slate-100">
+              <button onClick={() => setMessageModalCandidate(null)} className="text-slate-400 hover:text-slate-700 dark:hover:text-zinc-200 p-1 rounded-lg">
                 <X className="w-4 h-4" />
               </button>
             </div>
             {messageSentSuccess ? (
               <div className="py-8 text-center space-y-2">
-                <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto animate-bounce" />
-                <p className="font-bold text-slate-100 text-sm">Mensagem enviada com sucesso!</p>
+                <CheckCircle2 className="w-12 h-12 text-emerald-500 mx-auto animate-bounce" />
+                <p className="font-bold text-slate-900 dark:text-zinc-100 text-sm">Mensagem enviada com sucesso!</p>
               </div>
             ) : (
               <form onSubmit={handleSendMessageSubmit} className="space-y-4 text-xs">
                 <div>
-                  <p className="text-slate-400 mb-2">Selecione um modelo rápido ou digite sua mensagem:</p>
+                  <p className="text-slate-500 dark:text-zinc-400 mb-2">Selecione um modelo rápido ou digite sua mensagem:</p>
                   <div className="flex gap-1.5 flex-wrap mb-3">
                     {[
                       'Olá! Gostamos do seu perfil para a vaga.',
@@ -1076,7 +1068,7 @@ export function CandidatesPanel({ results, jobTitle, onSelectForComparison, sele
                         key={template}
                         type="button"
                         onClick={() => setMessageText(template)}
-                        className="text-[10px] px-2 py-1 rounded-lg bg-slate-950 border border-slate-800 text-slate-300 hover:border-blue-500/50"
+                        className="text-[10px] px-2 py-1 rounded-lg bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 text-slate-700 dark:text-zinc-300 hover:border-blue-500 cursor-pointer"
                       >
                         {template.slice(0, 30)}...
                       </button>
@@ -1088,10 +1080,10 @@ export function CandidatesPanel({ results, jobTitle, onSelectForComparison, sele
                     value={messageText}
                     onChange={(e) => setMessageText(e.target.value)}
                     placeholder="Escreva sua mensagem diretamente ao candidato..."
-                    className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-slate-100 focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl text-slate-900 dark:text-zinc-100 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                   />
                 </div>
-                <div className="flex justify-end gap-2 pt-2 border-t border-slate-800">
+                <div className="flex justify-end gap-2 pt-2 border-t border-slate-100 dark:border-zinc-800">
                   <Button type="button" variant="outline" size="sm" onClick={() => setMessageModalCandidate(null)}>
                     Cancelar
                   </Button>
@@ -1107,57 +1099,57 @@ export function CandidatesPanel({ results, jobTitle, onSelectForComparison, sele
 
       {/* ── Modal Agendar Entrevista ── */}
       {scheduleModalCandidate && (
-        <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 w-full max-w-lg space-y-4 shadow-2xl">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-              <h4 className="font-bold text-slate-100 text-sm flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-emerald-400" />
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-[#121215] border border-slate-200 dark:border-zinc-800 rounded-3xl p-6 w-full max-w-lg space-y-4 shadow-2xl">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-zinc-800">
+              <h4 className="font-bold text-slate-900 dark:text-zinc-100 text-sm flex items-center gap-2">
+                <Calendar className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                 Agendar Entrevista — {scheduleModalCandidate.candidate?.name || scheduleModalCandidate.candidateName}
               </h4>
-              <button onClick={() => setScheduleModalCandidate(null)} className="text-slate-400 hover:text-slate-100">
+              <button onClick={() => setScheduleModalCandidate(null)} className="text-slate-400 hover:text-slate-700 dark:hover:text-zinc-200 p-1 rounded-lg">
                 <X className="w-4 h-4" />
               </button>
             </div>
             {scheduleSentSuccess ? (
               <div className="py-8 text-center space-y-2">
-                <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto animate-bounce" />
-                <p className="font-bold text-slate-100 text-sm">Entrevista agendada com sucesso!</p>
+                <CheckCircle2 className="w-12 h-12 text-emerald-500 mx-auto animate-bounce" />
+                <p className="font-bold text-slate-900 dark:text-zinc-100 text-sm">Entrevista agendada com sucesso!</p>
               </div>
             ) : (
               <form onSubmit={handleScheduleSubmit} className="space-y-4 text-xs">
                 <div>
-                  <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">Data da Entrevista</label>
+                  <label className="block font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1">Data da Entrevista</label>
                   <input
                     type="date"
                     required
                     value={interviewDate}
                     onChange={(e) => setInterviewDate(e.target.value)}
-                    className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-slate-100 focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl text-slate-900 dark:text-zinc-100 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">Horário</label>
+                  <label className="block font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1">Horário</label>
                   <input
                     type="time"
                     required
                     value={interviewTime}
                     onChange={(e) => setInterviewTime(e.target.value)}
-                    className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-slate-100 focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl text-slate-900 dark:text-zinc-100 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">Formato / Link</label>
+                  <label className="block font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1">Formato / Link</label>
                   <select
                     value={interviewType}
                     onChange={(e) => setInterviewType(e.target.value)}
-                    className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-slate-100 focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl text-slate-900 dark:text-zinc-100 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
                   >
                     <option value="Entrevista Online (Google Meet)">Entrevista Online (Google Meet)</option>
                     <option value="Entrevista Online (Microsoft Teams)">Entrevista Online (Microsoft Teams)</option>
                     <option value="Presencial na Empresa">Presencial na Empresa</option>
                   </select>
                 </div>
-                <div className="flex justify-end gap-2 pt-2 border-t border-slate-800">
+                <div className="flex justify-end gap-2 pt-2 border-t border-slate-100 dark:border-zinc-800">
                   <Button type="button" variant="outline" size="sm" onClick={() => setScheduleModalCandidate(null)}>
                     Cancelar
                   </Button>
@@ -1215,14 +1207,14 @@ export function ComparisonModal({ candidates, jobSkills, onClose }: ComparisonMo
   const circ = 2 * Math.PI * r;
 
   return (
-    <div className="fixed inset-0 bg-slate-950/90 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
-      <div className="bg-slate-900 rounded-3xl border border-slate-800 shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
-        <div className="flex items-center justify-between p-6 border-b border-slate-800 sticky top-0 bg-slate-900 z-10 rounded-t-3xl">
+    <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+      <div className="bg-white dark:bg-[#121215] rounded-3xl border border-slate-200 dark:border-zinc-800 shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+        <div className="flex items-center justify-between p-6 border-b border-slate-100 dark:border-zinc-800 sticky top-0 bg-white dark:bg-[#121215] z-10 rounded-t-3xl">
           <div className="flex items-center gap-2">
-            <GitCompare className="w-5 h-5 text-blue-400" />
-            <h3 className="text-base font-bold text-slate-100">Comparacao de Candidatos</h3>
+            <GitCompare className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+            <h3 className="text-base font-bold text-slate-900 dark:text-zinc-100">Comparação de Candidatos</h3>
           </div>
-          <button onClick={onClose} className="p-2 rounded-xl text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition-colors">
+          <button onClick={onClose} className="p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-zinc-100 hover:bg-slate-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer">
             <X className="w-4 h-4" />
           </button>
         </div>
@@ -1238,21 +1230,21 @@ export function ComparisonModal({ candidates, jobSkills, onClose }: ComparisonMo
               const ringCol = cand.classification === 'ALTA' ? '#10b981' : cand.classification === 'MEDIA' ? '#f59e0b' : '#ef4444';
 
               return (
-                <div key={i} className={`text-center p-5 rounded-2xl border relative overflow-hidden ${isWinner ? 'border-emerald-700/60 bg-emerald-950/10' : 'border-slate-800 bg-slate-950/40'}`}>
+                <div key={i} className={`text-center p-5 rounded-2xl border relative overflow-hidden ${isWinner ? 'border-emerald-300 dark:border-emerald-700/60 bg-emerald-50/50 dark:bg-emerald-950/10' : 'border-slate-200/80 dark:border-zinc-800 bg-slate-50/50 dark:bg-zinc-900/40'}`}>
                   {isWinner && <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-emerald-500 to-transparent" />}
                   <div className="relative inline-block mb-3">
                     <svg width="76" height="76" viewBox="0 0 76 76">
-                      <circle cx="38" cy="38" r={r} fill="none" stroke="#1e293b" strokeWidth="4" />
+                      <circle cx="38" cy="38" r={r} fill="none" stroke="currentColor" className="text-slate-200 dark:text-zinc-800" strokeWidth="4" />
                       <circle cx="38" cy="38" r={r} fill="none" stroke={ringCol} strokeWidth="4" strokeDasharray={`${dash} ${circ}`} strokeLinecap="round" transform="rotate(-90 38 38)" style={{ transition: 'stroke-dasharray 0.8s ease' }} />
                     </svg>
                     <div className="absolute inset-0 flex items-center justify-center">
                       <span className={`text-lg font-black ${colors.badge.split(' ')[0]}`}>{cand.score}%</span>
                     </div>
                   </div>
-                  <p className="text-xs font-bold text-slate-100 truncate">{name}</p>
-                  <p className="text-[11px] text-slate-400">{cand.candidate?.level || '--'}</p>
+                  <p className="text-xs font-bold text-slate-900 dark:text-zinc-100 truncate">{name}</p>
+                  <p className="text-[11px] text-slate-500 dark:text-zinc-400">{cand.candidate?.level || '--'}</p>
                   {isWinner && (
-                    <div className="mt-2 flex items-center justify-center gap-1 text-[11px] font-bold text-emerald-400">
+                    <div className="mt-2 flex items-center justify-center gap-1 text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
                       <Award className="w-3.5 h-3.5" /> Melhor match
                     </div>
                   )}
@@ -1263,28 +1255,28 @@ export function ComparisonModal({ candidates, jobSkills, onClose }: ComparisonMo
 
           {/* Comparison rows */}
           <CompareRow label="Score de Compatibilidade" aValue={`${a.score}%`} bValue={`${b.score}%`} winner={winner} highlight />
-          <CompareRow label="Classificacao" aValue={a.classification} bValue={b.classification} winner={-1} />
-          <CompareRow label="Anos de Experiencia" aValue={`${a.experienceComparison?.candidateYears ?? '?'} anos`} bValue={`${b.experienceComparison?.candidateYears ?? '?'} anos`} winner={winnerOf('experience')} />
-          <CompareRow label="Nivel Profissional" aValue={a.levelComparison?.candidateLevel || a.candidate?.level || '--'} bValue={b.levelComparison?.candidateLevel || b.candidate?.level || '--'} winner={-1} />
+          <CompareRow label="Classificação" aValue={a.classification} bValue={b.classification} winner={-1} />
+          <CompareRow label="Anos de Experiência" aValue={`${a.experienceComparison?.candidateYears ?? '?'} anos`} bValue={`${b.experienceComparison?.candidateYears ?? '?'} anos`} winner={winnerOf('experience')} />
+          <CompareRow label="Nível Profissional" aValue={a.levelComparison?.candidateLevel || a.candidate?.level || '--'} bValue={b.levelComparison?.candidateLevel || b.candidate?.level || '--'} winner={-1} />
 
           {/* Skills comparison */}
           <div>
-            <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3">Skills da Vaga</p>
+            <p className="text-[11px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider mb-3">Skills da Vaga</p>
             <div className="space-y-2">
               {skillRows.map((row) => (
                 <div key={row.name} className="grid grid-cols-3 gap-4 items-center">
-                  <span className="text-xs text-slate-300 font-medium truncate">
-                    {row.name} <span className="text-[10px] text-slate-600 ml-1">({row.weight}%)</span>
+                  <span className="text-xs text-slate-700 dark:text-zinc-300 font-medium truncate">
+                    {row.name} <span className="text-[10px] text-slate-400 dark:text-zinc-500 ml-1">({row.weight}%)</span>
                   </span>
                   {[row.aHas, row.bHas].map((has, i) => (
                     <div key={i} className="flex justify-center">
                       {has ? (
-                        <span className="flex items-center gap-1 text-[11px] text-emerald-400 font-bold">
+                        <span className="flex items-center gap-1 text-[11px] text-emerald-600 dark:text-emerald-400 font-bold">
                           <CheckCircle2 className="w-3.5 h-3.5" /> Sim
                         </span>
                       ) : (
-                        <span className="flex items-center gap-1 text-[11px] text-slate-600">
-                          <X className="w-3.5 h-3.5" /> Nao
+                        <span className="flex items-center gap-1 text-[11px] text-slate-400 dark:text-zinc-600">
+                          <X className="w-3.5 h-3.5" /> Não
                         </span>
                       )}
                     </div>
@@ -1296,18 +1288,18 @@ export function ComparisonModal({ candidates, jobSkills, onClose }: ComparisonMo
 
           {/* Recommendation */}
           {winner >= 0 && (
-            <div className="p-4 rounded-xl bg-gradient-to-r from-emerald-950/30 to-blue-950/20 border border-emerald-800/40">
-              <p className="text-[11px] font-bold text-emerald-400 flex items-center gap-1.5 mb-1">
-                <Sparkles className="w-3.5 h-3.5" /> Recomendacao IA
+            <div className="p-4 rounded-xl bg-gradient-to-r from-emerald-50 to-blue-50 dark:from-emerald-950/30 dark:to-blue-950/20 border border-emerald-200 dark:border-emerald-800/40">
+              <p className="text-[11px] font-bold text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5 mb-1">
+                <Sparkles className="w-3.5 h-3.5" /> Recomendação IA
               </p>
-              <p className="text-xs text-slate-300">
-                Com base na analise de skills, experiencia e nivel, <strong className="text-emerald-300">{winner === 0 ? aName : bName}</strong> apresenta o melhor alinhamento com os requisitos da vaga, com uma vantagem de <strong className="text-emerald-300">{Math.abs(a.score - b.score)}%</strong> no score geral.
+              <p className="text-xs text-slate-700 dark:text-zinc-300">
+                Com base na análise de skills, experiência e nível, <strong className="text-emerald-700 dark:text-emerald-300">{winner === 0 ? aName : bName}</strong> apresenta o melhor alinhamento com os requisitos da vaga, com uma vantagem de <strong className="text-emerald-700 dark:text-emerald-300">{Math.abs(a.score - b.score)}%</strong> no score geral.
               </p>
             </div>
           )}
 
-          <div className="pt-4 border-t border-slate-800 flex justify-end">
-            <Button variant="outline" size="sm" onClick={onClose}>Fechar Comparacao</Button>
+          <div className="pt-4 border-t border-slate-100 dark:border-zinc-800 flex justify-end">
+            <Button variant="outline" size="sm" onClick={onClose}>Fechar Comparação</Button>
           </div>
         </div>
       </div>
@@ -1317,10 +1309,10 @@ export function ComparisonModal({ candidates, jobSkills, onClose }: ComparisonMo
 
 function CompareRow({ label, aValue, bValue, winner, highlight }: { label: string; aValue: string; bValue: string; winner: number; highlight?: boolean }) {
   return (
-    <div className={`grid grid-cols-3 gap-4 items-center py-3 border-b border-slate-800/60 ${highlight ? 'bg-slate-800/20 rounded-lg px-2' : ''}`}>
-      <span className="text-xs text-slate-400 font-medium">{label}</span>
-      <div className={`text-center text-xs font-bold rounded-lg py-1.5 ${winner === 0 ? 'bg-emerald-950/40 text-emerald-400 border border-emerald-800/50' : 'text-slate-300'}`}>{aValue}</div>
-      <div className={`text-center text-xs font-bold rounded-lg py-1.5 ${winner === 1 ? 'bg-emerald-950/40 text-emerald-400 border border-emerald-800/50' : 'text-slate-300'}`}>{bValue}</div>
+    <div className={`grid grid-cols-3 gap-4 items-center py-3 border-b border-slate-100 dark:border-zinc-800/60 ${highlight ? 'bg-slate-50 dark:bg-zinc-800/20 rounded-lg px-2' : ''}`}>
+      <span className="text-xs text-slate-500 dark:text-zinc-400 font-medium">{label}</span>
+      <div className={`text-center text-xs font-bold rounded-lg py-1.5 ${winner === 0 ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/50' : 'text-slate-700 dark:text-zinc-300'}`}>{aValue}</div>
+      <div className={`text-center text-xs font-bold rounded-lg py-1.5 ${winner === 1 ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/50' : 'text-slate-700 dark:text-zinc-300'}`}>{bValue}</div>
     </div>
   );
 }
@@ -1333,65 +1325,65 @@ export function MarketInsightsWidget({ job, candidatesCount }: { job: JobForHeal
   const timeToHire = candidatesCount > 10 ? '1-2 semanas' : '3-4 semanas';
   const hotSkills = ['React', 'Node.js', 'Python', 'AWS', 'TypeScript', 'Go', 'Kubernetes'];
   const demandScore = job.skills.some((s) => hotSkills.includes(s.name)) ? 'Alta' : 'Media';
-  const competition = demandScore === 'Alta' ? 'Muitas empresas contratando' : 'Competicao equilibrada';
+  const competition = demandScore === 'Alta' ? 'Muitas empresas contratando' : 'Competição equilibrada';
   const confidence = candidatesCount > 5 ? 85 : candidatesCount > 0 ? 60 : 30;
 
   return (
-    <div className="p-6 rounded-3xl bg-gradient-to-br from-blue-950/40 via-slate-900/80 to-purple-950/20 border border-slate-800/60 shadow-2xl relative overflow-hidden group">
+    <div className="p-6 rounded-3xl bg-white dark:bg-[#121215] border border-slate-200/80 dark:border-zinc-800 shadow-sm relative overflow-hidden group">
       {/* Decorative orbs */}
-      <div className="absolute top-0 right-0 w-40 h-40 bg-blue-500/5 rounded-full blur-3xl group-hover:bg-blue-500/10 transition-colors duration-700" />
-      <div className="absolute bottom-0 left-0 w-32 h-32 bg-purple-500/5 rounded-full blur-3xl group-hover:bg-purple-500/8 transition-colors duration-700" />
+      <div className="absolute top-0 right-0 w-40 h-40 bg-blue-500/5 rounded-full blur-3xl group-hover:bg-blue-500/10 transition-colors duration-700 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-32 h-32 bg-purple-500/5 rounded-full blur-3xl group-hover:bg-purple-500/8 transition-colors duration-700 pointer-events-none" />
 
       <div className="relative z-10 space-y-5">
         <div className="flex items-center justify-between">
-          <p className="text-xs font-black text-blue-400 uppercase tracking-widest flex items-center gap-2">
+          <p className="text-xs font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest flex items-center gap-2">
             <Sparkles className="w-4 h-4" />
             Market Insights IA
           </p>
           <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-950/40 border border-emerald-800/40">
-              <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-[10px] text-emerald-400 font-bold">{confidence}% confianca</span>
+            <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/40">
+              <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-[10px] text-emerald-700 dark:text-emerald-400 font-bold">{confidence}% confiança</span>
             </div>
             <Badge variant="info">Beta</Badge>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="p-4 rounded-2xl bg-slate-950/50 border border-slate-800/60 backdrop-blur-sm hover:border-slate-700 hover:bg-slate-900/50 transition-all duration-300 group/card">
-            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+          <div className="p-4 rounded-2xl bg-slate-50 dark:bg-zinc-900/50 border border-slate-200/80 dark:border-zinc-800 hover:border-slate-300 dark:hover:border-zinc-700 transition-all duration-300 group/card">
+            <p className="text-[10px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
               <Clock className="w-3.5 h-3.5" /> Tempo Estimado
             </p>
-            <p className="text-xl font-black text-slate-100 group-hover/card:text-blue-300 transition-colors">{timeToHire}</p>
-            <p className="text-[10px] text-emerald-400 mt-1.5 flex items-center gap-1">
-              <TrendingUp className="w-3 h-3" /> Mais rapido que a media
+            <p className="text-xl font-black text-slate-900 dark:text-zinc-100 group-hover/card:text-blue-600 dark:group-hover/card:text-blue-300 transition-colors">{timeToHire}</p>
+            <p className="text-[10px] text-emerald-600 dark:text-emerald-400 mt-1.5 flex items-center gap-1">
+              <TrendingUp className="w-3 h-3" /> Mais rápido que a média
             </p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-slate-950/50 border border-slate-800/60 backdrop-blur-sm hover:border-slate-700 hover:bg-slate-900/50 transition-all duration-300 group/card">
-            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+          <div className="p-4 rounded-2xl bg-slate-50 dark:bg-zinc-900/50 border border-slate-200/80 dark:border-zinc-800 hover:border-slate-300 dark:hover:border-zinc-700 transition-all duration-300 group/card">
+            <p className="text-[10px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
               <Zap className="w-3.5 h-3.5" /> Demanda das Skills
             </p>
-            <p className="text-xl font-black text-slate-100 group-hover/card:text-amber-300 transition-colors">{demandScore}</p>
-            <p className="text-[10px] text-amber-400 mt-1.5 flex items-center gap-1">
+            <p className="text-xl font-black text-slate-900 dark:text-zinc-100 group-hover/card:text-amber-600 dark:group-hover/card:text-amber-300 transition-colors">{demandScore}</p>
+            <p className="text-[10px] text-amber-600 dark:text-amber-400 mt-1.5 flex items-center gap-1">
               <Users className="w-3 h-3" /> {competition}
             </p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-slate-950/50 border border-slate-800/60 backdrop-blur-sm hover:border-slate-700 hover:bg-slate-900/50 transition-all duration-300 group/card">
-            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+          <div className="p-4 rounded-2xl bg-slate-50 dark:bg-zinc-900/50 border border-slate-200/80 dark:border-zinc-800 hover:border-slate-300 dark:hover:border-zinc-700 transition-all duration-300 group/card">
+            <p className="text-[10px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
               <Award className="w-3.5 h-3.5" /> Atratividade
             </p>
-            <p className="text-xl font-black text-slate-100 group-hover/card:text-emerald-300 transition-colors">Competitiva</p>
-            <p className="text-[10px] text-slate-400 mt-1.5">Baseado na faixa salarial</p>
+            <p className="text-xl font-black text-slate-900 dark:text-zinc-100 group-hover/card:text-emerald-600 dark:group-hover/card:text-emerald-300 transition-colors">Competitiva</p>
+            <p className="text-[10px] text-slate-500 dark:text-zinc-400 mt-1.5">Baseado na faixa salarial</p>
           </div>
         </div>
 
         {/* Mini trend */}
-        <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-950/40 border border-slate-800/40">
-          <ArrowUpRight className="w-4 h-4 text-emerald-400 shrink-0" />
-          <p className="text-[11px] text-slate-400">
-            <strong className="text-slate-200">Tendencia:</strong> A demanda por profissionais com este perfil cresceu <strong className="text-emerald-400">23%</strong> nos ultimos 3 meses na regiao.
+        <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 dark:bg-zinc-900/40 border border-slate-200/80 dark:border-zinc-800/40">
+          <ArrowUpRight className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
+          <p className="text-[11px] text-slate-600 dark:text-zinc-400">
+            <strong className="text-slate-800 dark:text-zinc-200">Tendência:</strong> A demanda por profissionais com este perfil cresceu <strong className="text-emerald-600 dark:text-emerald-400">23%</strong> nos últimos 3 meses na região.
           </p>
         </div>
       </div>
@@ -1412,37 +1404,37 @@ interface HiringFunnelProps {
 
 export function HiringFunnel({ totalCandidates, highMatches, inReview, approved }: HiringFunnelProps) {
   const steps = [
-    { label: 'Total Candidatos', value: totalCandidates, color: 'from-blue-600 to-blue-400', textColor: 'text-blue-400' },
-    { label: 'Compativeis', value: highMatches, color: 'from-purple-600 to-purple-400', textColor: 'text-purple-400' },
-    { label: 'Em Revisao', value: inReview, color: 'from-amber-600 to-amber-400', textColor: 'text-amber-400' },
-    { label: 'Aprovados', value: approved, color: 'from-emerald-600 to-emerald-400', textColor: 'text-emerald-400' },
+    { label: 'Total Candidatos', value: totalCandidates, color: 'from-blue-600 to-blue-400', textColor: 'text-blue-600 dark:text-blue-400' },
+    { label: 'Compatíveis', value: highMatches, color: 'from-purple-600 to-purple-400', textColor: 'text-purple-600 dark:text-purple-400' },
+    { label: 'Em Revisão', value: inReview, color: 'from-amber-600 to-amber-400', textColor: 'text-amber-600 dark:text-amber-400' },
+    { label: 'Aprovados', value: approved, color: 'from-emerald-600 to-emerald-400', textColor: 'text-emerald-600 dark:text-emerald-400' },
   ];
 
   const maxVal = Math.max(totalCandidates, 1);
 
   return (
-    <div className="p-5 rounded-2xl bg-gradient-to-br from-slate-900/90 to-slate-950/90 border border-slate-800/80 backdrop-blur-sm space-y-4 relative overflow-hidden">
-      <div className="absolute -bottom-10 -right-10 w-24 h-24 bg-purple-500/5 rounded-full blur-3xl" />
-      <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5 relative z-10">
-        <Filter className="w-3.5 h-3.5 text-purple-400" />
-        Funil de Contratacao
+    <div className="p-5 rounded-2xl bg-white dark:bg-[#121215] border border-slate-200/80 dark:border-zinc-800 shadow-sm space-y-4 relative overflow-hidden">
+      <div className="absolute -bottom-10 -right-10 w-24 h-24 bg-purple-500/5 rounded-full blur-3xl pointer-events-none" />
+      <p className="text-[11px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider flex items-center gap-1.5 relative z-10">
+        <Filter className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
+        Funil de Contratação
       </p>
       <div className="space-y-3 relative z-10">
-        {steps.map((step, i) => {
+        {steps.map((step) => {
           const widthPct = maxVal > 0 ? Math.max((step.value / maxVal) * 100, 8) : 8;
           return (
             <div key={step.label} className="space-y-1">
               <div className="flex items-center justify-between text-xs">
-                <span className="text-slate-400 font-medium">{step.label}</span>
+                <span className="text-slate-600 dark:text-zinc-400 font-medium">{step.label}</span>
                 <span className={`font-black ${step.textColor}`}>{step.value}</span>
               </div>
-              <div className="h-6 bg-slate-800/50 rounded-lg overflow-hidden relative">
+              <div className="h-6 bg-slate-100 dark:bg-zinc-800/50 rounded-lg overflow-hidden relative">
                 <div
                   className={`h-full rounded-lg bg-gradient-to-r ${step.color} transition-all duration-700 flex items-center justify-end pr-2`}
                   style={{ width: `${widthPct}%` }}
                 >
                   {step.value > 0 && (
-                    <span className="text-[9px] font-bold text-white/80">{Math.round((step.value / maxVal) * 100)}%</span>
+                    <span className="text-[9px] font-bold text-white">{Math.round((step.value / maxVal) * 100)}%</span>
                   )}
                 </div>
               </div>
@@ -1452,11 +1444,11 @@ export function HiringFunnel({ totalCandidates, highMatches, inReview, approved 
       </div>
       {/* Conversion rate */}
       {totalCandidates > 0 && (
-        <div className="pt-3 border-t border-slate-800/60 relative z-10">
+        <div className="pt-3 border-t border-slate-100 dark:border-zinc-800 relative z-10">
           <div className="flex items-center justify-between text-[11px]">
-            <span className="text-slate-500">Taxa de conversao</span>
-            <span className="font-bold text-emerald-400">
-              {Math.round((highMatches / totalCandidates) * 100)}% compativeis
+            <span className="text-slate-500 dark:text-zinc-400">Taxa de conversão</span>
+            <span className="font-bold text-emerald-600 dark:text-emerald-400">
+              {Math.round((highMatches / totalCandidates) * 100)}% compatíveis
             </span>
           </div>
         </div>
@@ -1484,7 +1476,6 @@ interface ActivityFeedProps {
 }
 
 export function ActivityFeed({ jobTitle, candidatesCount, highMatches, requiresReview }: ActivityFeedProps) {
-  // Generate mock activities based on real data
   const activities: ActivityItem[] = useMemo(() => {
     const items: ActivityItem[] = [];
     if (candidatesCount > 0) {
@@ -1507,45 +1498,45 @@ export function ActivityFeed({ jobTitle, candidatesCount, highMatches, requiresR
       items.push({
         id: '3',
         type: 'review_completed',
-        message: `${requiresReview} candidato(s) aguardando revisao humana`,
+        message: `${requiresReview} candidato(s) aguardando revisão humana`,
         timestamp: 'Pendente',
       });
     }
     items.push({
       id: '4',
       type: 'job_approved',
-      message: `Vaga "${jobTitle}" esta ativa no sistema de matching`,
+      message: `Vaga "${jobTitle}" está ativa no sistema de matching`,
       timestamp: 'Ativo',
     });
     return items;
   }, [jobTitle, candidatesCount, highMatches, requiresReview]);
 
   const iconMap: Record<ActivityItem['type'], { icon: React.ReactNode; color: string }> = {
-    candidate_applied: { icon: <Users className="w-3.5 h-3.5" />, color: 'text-blue-400 bg-blue-950/50 border-blue-800/40' },
-    review_completed: { icon: <Eye className="w-3.5 h-3.5" />, color: 'text-amber-400 bg-amber-950/50 border-amber-800/40' },
-    score_updated: { icon: <TrendingUp className="w-3.5 h-3.5" />, color: 'text-emerald-400 bg-emerald-950/50 border-emerald-800/40' },
-    job_approved: { icon: <CheckCircle2 className="w-3.5 h-3.5" />, color: 'text-purple-400 bg-purple-950/50 border-purple-800/40' },
+    candidate_applied: { icon: <Users className="w-3.5 h-3.5" />, color: 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50 border-blue-200 dark:border-blue-800/40' },
+    review_completed: { icon: <Eye className="w-3.5 h-3.5" />, color: 'text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/50 border-amber-200 dark:border-amber-800/40' },
+    score_updated: { icon: <TrendingUp className="w-3.5 h-3.5" />, color: 'text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 border-emerald-200 dark:border-emerald-800/40' },
+    job_approved: { icon: <CheckCircle2 className="w-3.5 h-3.5" />, color: 'text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-950/50 border-purple-200 dark:border-purple-800/40' },
   };
 
   return (
-    <div className="p-5 rounded-2xl bg-gradient-to-br from-slate-900/90 to-slate-950/90 border border-slate-800/80 backdrop-blur-sm space-y-3 relative overflow-hidden">
-      <div className="absolute -top-10 -left-10 w-20 h-20 bg-blue-500/5 rounded-full blur-3xl" />
-      <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5 relative z-10">
-        <Activity className="w-3.5 h-3.5 text-blue-400" />
+    <div className="p-5 rounded-2xl bg-white dark:bg-[#121215] border border-slate-200/80 dark:border-zinc-800 shadow-sm space-y-3 relative overflow-hidden">
+      <div className="absolute -top-10 -left-10 w-20 h-20 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
+      <p className="text-[11px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider flex items-center gap-1.5 relative z-10">
+        <Activity className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
         Atividade Recente
-        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
       </p>
       <div className="space-y-2 relative z-10">
         {activities.map((item) => {
           const { icon, color } = iconMap[item.type];
           return (
-            <div key={item.id} className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-slate-800/30 transition-colors">
+            <div key={item.id} className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-zinc-800/40 transition-colors">
               <div className={`w-7 h-7 rounded-lg flex items-center justify-center border shrink-0 ${color}`}>
                 {icon}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-[11px] text-slate-300 leading-relaxed">{item.message}</p>
-                <p className="text-[10px] text-slate-600 mt-0.5">{item.timestamp}</p>
+                <p className="text-[11px] text-slate-700 dark:text-zinc-300 leading-relaxed">{item.message}</p>
+                <p className="text-[10px] text-slate-400 dark:text-zinc-500 mt-0.5">{item.timestamp}</p>
               </div>
             </div>
           );

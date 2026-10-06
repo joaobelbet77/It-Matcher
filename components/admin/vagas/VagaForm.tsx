@@ -161,21 +161,21 @@ export const JobForm: React.FC = () => {
       </Alert>
 
       {/* Dados da Empresa / Organização Contratante (ACRÉSCIMO) */}
-      <div className="bg-slate-900/90 p-6 rounded-2xl border border-slate-800 shadow-xs space-y-4">
-        <h3 className="text-base font-bold text-slate-100 flex items-center gap-2 pb-2 border-b border-slate-800">
-          <Building2 className="w-5 h-5 text-blue-400" />
+      <div className="bg-white dark:bg-[#121215] p-6 rounded-2xl border border-slate-200/80 dark:border-zinc-800 shadow-sm space-y-4">
+        <h3 className="text-base font-bold text-slate-900 dark:text-zinc-100 flex items-center gap-2 pb-2 border-b border-slate-100 dark:border-zinc-800">
+          <Building2 className="w-5 h-5 text-blue-600 dark:text-blue-400" />
           Dados da Empresa / Organização Contratante
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1">
               Tipo de Organização
             </label>
             <select
               value={companyType}
               onChange={(e) => setCompanyType(e.target.value)}
-              className="w-full px-3.5 py-2.5 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100"
+              className="w-full px-3.5 py-2.5 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100"
             >
               {COMPANY_TYPES.map((type) => (
                 <option key={type} value={type}>
@@ -186,13 +186,13 @@ export const JobForm: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1">
               Área de Atuação da Organização
             </label>
             <select
               value={companyIndustry}
               onChange={(e) => setCompanyIndustry(e.target.value)}
-              className="w-full px-3.5 py-2.5 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100"
+              className="w-full px-3.5 py-2.5 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100"
             >
               {COMPANY_INDUSTRIES.map((ind) => (
                 <option key={ind} value={ind}>
@@ -203,13 +203,13 @@ export const JobForm: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1">
               Tamanho da Empresa
             </label>
             <select
               value={companySize}
               onChange={(e) => setCompanySize(e.target.value)}
-              className="w-full px-3.5 py-2.5 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100"
+              className="w-full px-3.5 py-2.5 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100"
             >
               {COMPANY_SIZES.map((sz) => (
                 <option key={sz} value={sz}>
@@ -220,7 +220,7 @@ export const JobForm: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1">
               Site da Empresa
             </label>
             <input
@@ -228,13 +228,13 @@ export const JobForm: React.FC = () => {
               placeholder="Ex: https://suaempresa.com.br"
               value={companyWebsite}
               onChange={(e) => setCompanyWebsite(e.target.value)}
-              className="w-full px-3.5 py-2.5 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+              className="w-full px-3.5 py-2.5 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
             />
           </div>
 
           {/* Localização da Empresa: Cidade, Estado, País */}
           <div className="md:col-span-2 space-y-2">
-            <span className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">
+            <span className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">
               Localização da Empresa
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -244,7 +244,7 @@ export const JobForm: React.FC = () => {
                   placeholder="Cidade (ex: São Paulo)"
                   value={companyCity}
                   onChange={(e) => setCompanyCity(e.target.value)}
-                  className="w-full px-3.5 py-2 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+                  className="w-full px-3.5 py-2 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
                 />
               </div>
               <div>
@@ -253,7 +253,7 @@ export const JobForm: React.FC = () => {
                   placeholder="Estado (ex: SP)"
                   value={companyState}
                   onChange={(e) => setCompanyState(e.target.value)}
-                  className="w-full px-3.5 py-2 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+                  className="w-full px-3.5 py-2 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
                 />
               </div>
               <div>
@@ -262,14 +262,14 @@ export const JobForm: React.FC = () => {
                   placeholder="País (ex: Brasil)"
                   value={companyCountry}
                   onChange={(e) => setCompanyCountry(e.target.value)}
-                  className="w-full px-3.5 py-2 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+                  className="w-full px-3.5 py-2 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
                 />
               </div>
             </div>
           </div>
 
           <div className="md:col-span-2">
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1">
               Descrição da Empresa
             </label>
             <textarea
@@ -277,22 +277,22 @@ export const JobForm: React.FC = () => {
               placeholder="Breve resumo sobre a cultura, produto e segmento da organização..."
               value={companyDescription}
               onChange={(e) => setCompanyDescription(e.target.value)}
-              className="w-full px-3.5 py-2.5 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+              className="w-full px-3.5 py-2.5 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
             />
           </div>
         </div>
       </div>
 
       {/* Dados Gerais da Vaga */}
-      <div className="bg-slate-900/90 p-6 rounded-2xl border border-slate-800 shadow-xs space-y-4">
-        <h3 className="text-base font-bold text-slate-100 flex items-center gap-2 pb-2 border-b border-slate-800">
-          <Briefcase className="w-5 h-5 text-blue-400" />
+      <div className="bg-white dark:bg-[#121215] p-6 rounded-2xl border border-slate-200/80 dark:border-zinc-800 shadow-sm space-y-4">
+        <h3 className="text-base font-bold text-slate-900 dark:text-zinc-100 flex items-center gap-2 pb-2 border-b border-slate-100 dark:border-zinc-800">
+          <Briefcase className="w-5 h-5 text-blue-600 dark:text-blue-400" />
           Informações Básicas e Condições da Posição
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="md:col-span-2">
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1">
               Nome da Vaga *
             </label>
             <input
@@ -301,18 +301,18 @@ export const JobForm: React.FC = () => {
               placeholder="Ex: Desenvolvedor Full Stack Sênior"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-3.5 py-2.5 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+              className="w-full px-3.5 py-2.5 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1">
               Área de Atuação *
             </label>
             <select
               value={area}
               onChange={(e) => setArea(e.target.value as JobArea)}
-              className="w-full px-3.5 py-2.5 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100"
+              className="w-full px-3.5 py-2.5 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100"
             >
               {JOB_AREAS.map((a) => (
                 <option key={a} value={a}>
@@ -323,13 +323,13 @@ export const JobForm: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1">
               Nível Profissional Desejado *
             </label>
             <select
               value={level}
               onChange={(e) => setLevel(e.target.value as ProfessionalLevel)}
-              className="w-full px-3.5 py-2.5 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100"
+              className="w-full px-3.5 py-2.5 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100"
             >
               {ProfessionalLevels.map((lvl) => (
                 <option key={lvl} value={lvl}>
@@ -340,13 +340,13 @@ export const JobForm: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1">
               Modelo de Trabalho
             </label>
             <select
               value={workModel}
               onChange={(e) => setWorkModel(e.target.value)}
-              className="w-full px-3.5 py-2.5 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100"
+              className="w-full px-3.5 py-2.5 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100"
             >
               {WORK_MODELS.map((m) => (
                 <option key={m} value={m}>
@@ -357,13 +357,13 @@ export const JobForm: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1">
               Tipo de Contratação
             </label>
             <select
               value={contractType}
               onChange={(e) => setContractType(e.target.value)}
-              className="w-full px-3.5 py-2.5 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100"
+              className="w-full px-3.5 py-2.5 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100"
             >
               {CONTRACT_TYPES.map((c) => (
                 <option key={c} value={c}>
@@ -374,7 +374,7 @@ export const JobForm: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1">
               Local da Vaga
             </label>
             <input
@@ -382,13 +382,13 @@ export const JobForm: React.FC = () => {
               placeholder="Ex: Rio de Janeiro, RJ (ou Remoto)"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="w-full px-3.5 py-2.5 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+              className="w-full px-3.5 py-2.5 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
             />
           </div>
 
           {/* Faixa Salarial: Mínimo e Máximo */}
           <div className="space-y-1">
-            <span className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">
+            <span className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">
               Faixa Salarial (Mínimo e Máximo)
             </span>
             <div className="grid grid-cols-2 gap-2">
@@ -397,20 +397,20 @@ export const JobForm: React.FC = () => {
                 placeholder="Salário mínimo (ex: R$ 8.000)"
                 value={salaryMin}
                 onChange={(e) => setSalaryMin(e.target.value)}
-                className="w-full px-3.5 py-2.5 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+                className="w-full px-3.5 py-2.5 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
               />
               <input
                 type="text"
                 placeholder="Salário máximo (ex: R$ 12.000)"
                 value={salaryMax}
                 onChange={(e) => setSalaryMax(e.target.value)}
-                className="w-full px-3.5 py-2.5 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+                className="w-full px-3.5 py-2.5 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
               />
             </div>
           </div>
 
           <div className="md:col-span-2">
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1">
               Experiência Mínima Necessária (Anos) *
             </label>
             <input
@@ -420,12 +420,12 @@ export const JobForm: React.FC = () => {
               required
               value={minExperienceYears}
               onChange={(e) => setMinExperienceYears(Number(e.target.value))}
-              className="w-full px-3.5 py-2.5 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100"
+              className="w-full px-3.5 py-2.5 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100"
             />
           </div>
 
           <div className="md:col-span-2">
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1">
               Descrição Geral da Vaga *
             </label>
             <textarea
@@ -434,12 +434,12 @@ export const JobForm: React.FC = () => {
               placeholder="Descreva o contexto da posição, os desafios e objetivos do projeto..."
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full px-3.5 py-2.5 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+              className="w-full px-3.5 py-2.5 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
             />
           </div>
 
           <div className="md:col-span-2">
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1">
               Requisitos Obrigatórios
             </label>
             <textarea
@@ -447,12 +447,12 @@ export const JobForm: React.FC = () => {
               placeholder="Liste certificações, diplomas ou experiências prévias fundamentais..."
               value={mandatoryRequirements}
               onChange={(e) => setMandatoryRequirements(e.target.value)}
-              className="w-full px-3.5 py-2.5 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+              className="w-full px-3.5 py-2.5 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
             />
           </div>
 
           <div className="md:col-span-2">
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1">
               Requisitos Desejáveis
             </label>
             <textarea
@@ -460,12 +460,12 @@ export const JobForm: React.FC = () => {
               placeholder="Diferenciais que agregarão valor ao candidato..."
               value={desirableRequirements}
               onChange={(e) => setDesirableRequirements(e.target.value)}
-              className="w-full px-3.5 py-2.5 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+              className="w-full px-3.5 py-2.5 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
             />
           </div>
 
           <div className="md:col-span-2">
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 uppercase tracking-wider mb-1">
               Benefícios Oferecidos
             </label>
             <textarea
@@ -473,14 +473,14 @@ export const JobForm: React.FC = () => {
               placeholder="Ex: VR/VA, Plano de Saúde, Auxílio Home Office, PLR..."
               value={benefits}
               onChange={(e) => setBenefits(e.target.value)}
-              className="w-full px-3.5 py-2.5 text-sm border border-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-950 text-slate-100 placeholder-slate-500"
+              className="w-full px-3.5 py-2.5 text-sm border border-slate-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
             />
           </div>
         </div>
       </div>
 
       {/* Configurador de Competências e Pesos */}
-      <div className="bg-slate-900/90 p-6 rounded-2xl border border-slate-800 shadow-xs">
+      <div className="bg-white dark:bg-[#121215] p-6 rounded-2xl border border-slate-200/80 dark:border-zinc-800 shadow-sm">
         <SkillWeightConfigurator skills={skills} onChange={setSkills} />
       </div>
 

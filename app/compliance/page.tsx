@@ -97,11 +97,11 @@ export default function CompliancePage() {
 
       <div className="space-y-6 max-w-6xl mx-auto">
         {/* Banner Central */}
-        <div className="p-6 bg-gradient-to-r from-slate-950 via-blue-950 to-slate-950 text-white rounded-2xl border border-blue-900/60 shadow-md space-y-2">
+        <div className="p-6 bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 text-white rounded-2xl border border-blue-800/40 shadow-md space-y-2">
           <div className="flex items-center gap-3">
-            <ShieldCheck className="w-8 h-8 text-emerald-400" />
+            <ShieldCheck className="w-8 h-8 text-emerald-400 shrink-0" />
             <div>
-              <h2 className="text-xl font-bold">Conformidade com Guardrails RG01 a RG10</h2>
+              <h2 className="text-xl font-bold font-heading">Conformidade com Guardrails RG01 a RG10</h2>
               <p className="text-xs text-blue-200">
                 Sistema auditado para triagem ética, transparente e sem discriminação em processos seletivos de TI.
               </p>
@@ -114,18 +114,18 @@ export default function CompliancePage() {
           {GUARDRAILS.map((gr) => {
             const Icon = gr.icon;
             return (
-              <Card key={gr.code} className="bg-slate-900/90 border-slate-800 hover:border-blue-700/60 transition-all">
+              <Card key={gr.code} className="hover:border-blue-500/50 dark:hover:border-zinc-700 transition-all hover:shadow-md">
                 <CardContent className="p-5 space-y-3">
                   <div className="flex items-start justify-between gap-2">
                     <div className="flex items-center gap-2.5">
-                      <div className="p-2 bg-blue-950/80 text-blue-400 border border-blue-800/50 rounded-lg">
+                      <div className="p-2 bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800/50 rounded-xl">
                         <Icon className="w-5 h-5" />
                       </div>
                       <div>
-                        <span className="text-[11px] font-bold text-blue-400 uppercase tracking-wider block">
+                        <span className="text-[11px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider block font-heading">
                           {gr.code}
                         </span>
-                        <h4 className="font-bold text-slate-100 text-sm">{gr.name}</h4>
+                        <h4 className="font-bold text-slate-900 dark:text-white text-sm font-heading">{gr.name}</h4>
                       </div>
                     </div>
 
@@ -135,12 +135,12 @@ export default function CompliancePage() {
                     </Badge>
                   </div>
 
-                  <p className="text-xs text-slate-300 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-zinc-300 leading-relaxed">
                     {gr.desc}
                   </p>
 
-                  <div className="pt-2 border-t border-slate-800 text-[11px] text-slate-400">
-                    <strong className="text-slate-300">Implementação Técnica:</strong> {gr.implementation}
+                  <div className="pt-2 border-t border-slate-100 dark:border-zinc-800 text-[11px] text-slate-500 dark:text-zinc-400">
+                    <strong className="text-slate-700 dark:text-zinc-300 font-semibold">Implementação Técnica:</strong> {gr.implementation}
                   </div>
                 </CardContent>
               </Card>
